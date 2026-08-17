@@ -1,0 +1,158 @@
+---
+import Button from "../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../constants/buttonClasses";
+type Translations = typeof import("../i18n/en").default;
+type ProcessContent = Translations["howItWorks"]["process"];
+interface Props {
+  content: ProcessContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section
+  class="flex container-full justify-center items-center gap-12 py-20 flex-col text-paragraph"
+>
+  <div class="flex flex-col justify-center items-center gap-10">
+    <div class="flex flex-col justify-center items-center gap-4">
+      <h2 set:html={content.title} class="title text-center" />
+      <p class="paragraph text-center" set:html={content.description} />
+    </div>
+    <Button
+      text={content.button.label}
+      textClass={BUTTON_COLOR_CLASSES.text1}
+      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+      href={content.button.href}
+    />
+  </div>
+  <div
+    class="grid grid-cols-5 grid-rows-2 gap-6 w-full h-full min-h-[400px] max-w-[1090px]"
+  >
+    <!-- Fila 1 -->
+    <div
+      class="col-span-2 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex flex-col justify-center items-start gap-6"
+    >
+      <p
+        class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
+      >
+        {content.items[0].step}
+      </p>
+      <h3 class="subtitle">{content.items[0].title}</h3>
+      <p class="paragraph">{content.items[0].description}</p>
+      <div
+        class="w-full flex justify-center items-center bg-white rounded-lg p-4 gap-6"
+      >
+        <div
+          class="relative w-full h-auto flex justify-center items-center max-w-[58px]"
+        >
+          <img
+            src={`/images/icons/loader-2.svg`}
+            alt="Loader"
+            width="63"
+            height="63"
+            class="inline-block w-[58px] h-[58px]"
+            decoding="async"
+            loading="lazy"
+          />
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-center z-4"
+          >
+            <span
+              class="text-[12.5px] font-semibold leading-[100%] text-paragraph"
+            >
+              82%
+            </span>
+          </div>
+        </div>
+        <img
+          src={`/images/icons/process-1.svg`}
+          alt="Process"
+          width="225"
+          height="56"
+          decoding="async"
+          loading="lazy"
+          class="flex-1 h-auto"
+        />
+      </div>
+    </div>
+    <div
+      class="col-span-3 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex justify-center items-start gap-6"
+    >
+      <div class="flex flex-col justify-center items-start gap-6">
+        <p
+          class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
+        >
+          {content.items[1].step}
+        </p>
+        <h3 class="subtitle">{content.items[1].title}</h3>
+        <p class="paragraph">{content.items[1].description}</p>
+      </div>
+      <div
+        class="w-auto h-full bg-white p-7 flex justify-center items-center rounded-lg"
+        style="aspect-ratio: 305/293;"
+      >
+        <img
+          src={`/images/icons/process-2.svg`}
+          alt="Process"
+          width="305"
+          height="293"
+          decoding="async"
+          loading="lazy"
+          class="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+
+    <!-- Fila 2 -->
+    <div
+      class="col-span-3 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex justify-center items-start gap-6"
+    >
+      <div class="flex flex-col justify-center items-start gap-6">
+        <p
+          class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
+        >
+          {content.items[2].step}
+        </p>
+        <h3 class="subtitle">{content.items[2].title}</h3>
+        <p class="paragraph">{content.items[2].description}</p>
+      </div>
+      <div
+        class="w-auto h-full bg-white p-7 flex justify-center items-center rounded-lg"
+        style="aspect-ratio: 305/293;"
+      >
+        <img
+          src={`/images/icons/process-3.svg`}
+          alt="Process"
+          width="305"
+          height="293"
+          decoding="async"
+          loading="lazy"
+          class="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+    <div
+      class="col-span-2 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex flex-col justify-center items-start gap-6"
+    >
+      <p
+        class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
+      >
+        {content.items[3].step}
+      </p>
+      <h3 class="subtitle">{content.items[3].title}</h3>
+      <p class="paragraph">{content.items[3].description}</p>
+      <div
+        class="w-full flex justify-center items-center bg-white rounded-lg p-4 gap-6"
+      >
+        <img
+          src={`/images/icons/process-4.svg`}
+          alt="Process 4"
+          width="316"
+          height="14"
+          class="w-full h-auto"
+          decoding="async"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type FundableContent = Translations["main"]["fundable"];
+import Button from "../../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+interface Props {
+  content: FundableContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section
+  class="w-full flex flex-col justify-center items-center relative z-0 pt-20 pb-10"
+>
+  <div
+    class="container-full bg-[#001C07] grid grid-cols-2 justify-center items-center overflow-hidden rounded-xl"
+  >
+    <div class="w-full flex flex-col justify-center items-start gap-8 px-12">
+      <h2 set:html={content.title} class="title-sm text-white" />
+      <div class="flex flex-col justify-center items-start gap-4 text-white">
+        {
+          content.items.map((item) => (
+            <div class="flex justify-center items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-secondary" />
+              <p class="paragraph">{item}</p>
+            </div>
+          ))
+        }
+      </div>
+      <Button
+        text={content.button.label}
+        textClass={BUTTON_COLOR_CLASSES.text1}
+        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+        href={content.button.href}
+      />
+    </div>
+    <div class="w-full h-auto relative overflow-hidden" aspect-ratio="1/1">
+      <img
+        src={`/images/home/fundable.webp`}
+        alt={content.title}
+        width="800"
+        height="600"
+        decoding="async"
+        loading="lazy"
+        class="h-full w-full object-cover"
+      />
+    </div>
+  </div>
+</section>

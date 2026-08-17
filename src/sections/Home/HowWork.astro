@@ -1,0 +1,98 @@
+---
+import { MoveRight } from "@lucide/astro";
+
+type Translations = typeof import("../../i18n/en").default;
+type HowWorkContent = Translations["main"]["howWroks"];
+interface Props {
+  content: HowWorkContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="container-full flex flex-col justify-center items-center gap-12 py-15">
+  <h2 set:html={content.title} class='title text-paragraph'></h2>
+  <div class='w-full grid grid-cols-3 gap-6 justify-center items-center'>
+    {
+      content.items.map((item,index)=>( 
+        <div class='flex flex-col justify-center items-start gap-6 p-8 bg-[#F6F6F6] rounded-[12px] self-stretch'>
+          <p class='text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase'>{item.step}</p>
+          <h3 class='subtitle text-paragraph'>{item.title}</h3>
+          <p class="paragraph text-paragraph">{item.description}</p>
+          <div class="w-full bg-white py-8 px-5.5 rounded-[8px] grow flex justify-center items-center">
+            {
+              index === 0 ? (
+                <div class="flex justify-between gap-5.75 w-full items-center relative ">
+                  <div class='relative w-full h-auto flex justify-center items-center max-w-[153px] '> 
+                    <img src={`/images/icons/loader.svg`} alt="Loader" width="153" height="153" class="inline-block w-full h-full" decoding="async" loading="lazy" />
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-4 ">
+                      <span class="title-2 text-paragraph">
+                        80%
+                      </span>
+                      <span class="text-[12px] font-normal leading-[150%] text-paragraph">
+                        {content.item1.funding}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-2.25 flex-1">
+                    {
+                      content.item1.items.map((i1, index)=>( 
+                        <>
+                          <div class='flex justify-center items-center gap-2'>
+                            <img src={`/images/icons/check-green.svg`} alt={i1} width="24" height="24" class="inline-block" decoding="async" loading="lazy" />
+                            <p class="paragraph-xs text-paragraph  whitespace-nowrap">{i1}</p>
+                          </div>
+                          <div class='w-full h-[1px] bg-paragraph/10 last:hidden'></div>
+                        </>
+                      ))
+                    }
+                  </div>
+                </div>
+              ) : index === 1 ? (
+                <div class='w-full flex flex-col justify-center items-start gap-6 text-paragraph'>
+                  <p class='paragraph '>
+                    {content.item2.business}
+                  </p>
+                  <div class='w-full h-[1px] bg-paragraph/10'></div>
+                  <div class='w-full flex justify-between items-center gap-6'>
+                    <div class='flex flex-col justify-center items-start gap-2'>
+                      <span class="title-2 text-paragraph">
+                        $1M
+                      </span>
+                      <p class="paragraph-xs">
+                        {content.item2.funding}
+                      </p>
+                    </div>
+                    <img src={`/images/icons/bank.svg`} alt="Business" width="100" height="100" class="inline-block w-10 h-10" decoding="async" loading="lazy"/>
+                  </div>
+                  <div class="bg-accent px-2 py-1 flex justify-center items-center gap-1 rounded-full">
+                    <img src={`/images/icons/check-white.svg`} alt="Check" width="24" height="24" class="inline-block w-4 h-4" decoding="async" loading="lazy"/>
+                    <p class="paragraph-xs text-white">
+                      {content.item2.qualified}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div class='w-full flex justify-between items-center gap-2 '>
+                  <div class='flex flex-col justify-center items-start gap-6 text-paragraph'>
+                    <p class='paragraph-xs uppercase'>{content.item3.before}</p>
+                    <span class="title-2">
+                      $150K
+                    </span>
+                    <img src={`/images/icons/bars.svg`} alt="Bars" width="100" height="100" class="inline-block w-12 h-12" decoding="async" loading="lazy"/>
+                  </div>
+                  <MoveRight class='w-10 h-10 text-paragraph'/>
+                  <div class='flex flex-col justify-center items-start gap-6 text-accent'>
+                    <p class='paragraph-xs uppercase'>{content.item3.after}</p>
+                    <span class="title-2">
+                      $1M
+                    </span>
+                    <img src={`/images/icons/bars-green.svg`} alt="Bars" width="100" height="100" class="inline-block w-12 h-12" decoding="async" loading="lazy"/>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

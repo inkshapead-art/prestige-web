@@ -1,0 +1,63 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type NeedContent = Translations["main"]["need"];
+import Button from "../../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+interface Props {
+  content: NeedContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section
+  class="container-full flex flex-col justify-center items-start gap-12 relative z-0 py-20"
+>
+  <div class="flex flex-col justify-center items-center gap-6 text-paragraph">
+    <h2 set:html={content.title} class="title" />
+    <p class="paragraph w-[63%] text-center">{content.description}</p>
+  </div>
+  <div
+    class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 justify-center items-start"
+  >
+    {
+      content.list.map((item) => (
+        <div class="flex flex-col justify-center items-start gap-10 bg-[#F6F6F6] rounded-xl p-8 ">
+          <div class="flex flex-col justify-center items-start gap-4 text-paragraph">
+            <img
+              src={`/images/icons/${item.icon}.svg`}
+              alt={item.title}
+              width="48"
+              height="48"
+              decoding="async"
+              loading="lazy"
+            />
+            <h3 class="subtitle">{item.title}</h3>
+            <p class="paragraph">{item.description}</p>
+            <div class="flex flex-col justify-center items-start gap-4">
+              {item.items.map((i, index) => (
+                <div class="flex justify-center items-center gap-2">
+                  <img
+                    src={`/images/icons/check-green.svg`}
+                    alt={i}
+                    width="32"
+                    height="32"
+                    class="w-8 h-8"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <p set:html={i} class="paragraph " />
+                </div>
+              ))}
+            </div>
+          </div>
+          <Button
+            text={item.button.label}
+            href={item.button.href}
+            extraBtnClass={BUTTON_COLOR_CLASSES.bg2}
+            textClass={BUTTON_COLOR_CLASSES.text2}
+          />
+        </div>
+      ))
+    }
+  </div>
+</section>

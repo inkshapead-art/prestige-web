@@ -1,0 +1,496 @@
+---
+const content = {
+  ingresos: "Verified income",
+  title:
+    'Invest $30K and qualify <br class="hidden md:block"/> <span class="text-secondary font-georgia">for <br class="md:hidden"/> up to $1M in capital.</span>',
+  pausa: "Hover to pause",
+  credito: "Credit",
+};
+const contentInfluencers = [
+  {
+    name: "Joe Cury",
+    image: "person-1",
+    mount: "+460.000€",
+    img: "bar-1",
+  },
+  {
+    name: "Rudy Trevino",
+    image: "person-4",
+    mount: "+460.000€",
+    img: "bar-2",
+  },
+  {
+    name: "JESSI MITCHEL",
+    image: "person-7",
+    mount: "+184.000€",
+    img: "bar-1",
+  },
+  {
+    name: "Martha Green",
+    image: "person-2",
+    mount: "+460.000€",
+    img: "bar-2",
+  },
+  {
+    name: "Sara Mendel",
+    image: "person-5",
+    mount: "+138.000€",
+    img: "bar-3",
+  },
+  {
+    name: "RICH ALVEAR",
+    image: "person-8",
+    mount: "+101.200€",
+    img: "bar-1",
+  },
+  {
+    name: "Madleidy Alvarez",
+    image: "person-3",
+    mount: "+101.200€",
+    img: "bar-1",
+  },
+  {
+    name: "Luis Perez",
+    image: "person-6",
+    mount: "+87.400€",
+    img: "bar-1",
+  },
+  {
+    name: "Sara Mendel",
+    image: "person-5",
+    mount: "+138.000€",
+    img: "bar-3",
+  },
+];
+---
+
+<section
+  class="w-full flex justify-center items-center overflow-hidden relative"
+  style="background-image: url('/images/scheduling/fondo-sistema.webp'); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;"
+>
+  <div class="w-full h-full bg-[#000700E5] absolute inset-0 z-0 top-0"></div>
+  <div
+    class="container-full flex flex-col justify-center items-center gap-10 pb-10 pt-[110px] md:py-20 relative z-10"
+  >
+    <div class="flex flex-col justify-center items-center gap-3 md:gap-6">
+      <p
+        class="text-[8px] md:text-[9px] font-light tracking-[2.34px] uppercase text-white text-center"
+      >
+        {content.ingresos}
+      </p>
+      <h2
+        class="text-[25px] md:text-[48px] lg:text-[68px] leading-[100%] text-white text-center font-normal tracking-[-0.68px]"
+        set:html={content.title}
+      />
+      <p
+        class="text-[8px] md:text-[10px] font-light text-white text-center uppercase tracking-[1px] hidden md:block"
+      >
+        {content.pausa}
+      </p>
+    </div>
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 justify-center items-center gap-2 w-full lg:w-[70%] h-auto"
+    >
+      <style>
+        .carousel-track-vertical {
+          gap: 8px;
+          align-items: center;
+        }
+        .carousel-slide-vertical {
+          flex: 0 0 auto;
+        }
+        .carousel-vertical {
+          overflow-y: hidden;
+        }
+      </style>
+
+      <!-- Columna 1: Forward (arriba) -->
+      <div class="carousel-vertical overflow-hidden w-full">
+        <div class="carousel-track-vertical flex flex-col w-full">
+          <!-- Group A (original 3 items) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(0, 3).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <!-- Group B (duplicate 3 items for infinite loop) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(0, 3).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 2: Backward (abajo) -->
+      <div
+        class="carousel-vertical overflow-hidden w-full"
+        data-direction="backward"
+      >
+        <div class="carousel-track-vertical flex flex-col w-full">
+          <!-- Group B (duplicate 3 items - debe estar primero para ir hacia atrás) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(3, 6).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <!-- Group A (original 3 items) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(3, 6).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 3: Forward (arriba) -->
+      <div
+        class="carousel-vertical overflow-hidden w-full hidden md:block"
+        data-direction="forward"
+      >
+        <div class="carousel-track-vertical flex flex-col w-full">
+          <!-- Group A (original 3 items) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(6, 9).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <!-- Group B (duplicate 3 items for infinite loop) -->
+          <div
+            class="carousel-slide-vertical w-full flex flex-col justify-center items-center gap-2"
+          >
+            {
+              contentInfluencers.slice(6, 9).map((influencer) => (
+                <div class="flex flex-col justify-center items-start gap-2 bg-[#111111] rounded-xs border border-white/5 py-8 px-4.5 w-full hover:scale-101 transition-all duration-300">
+                  <img
+                    src={`/images/scheduling/${influencer.image}.png`}
+                    alt={influencer.name}
+                    class="w-[34px] h-[34px] rounded-full grayscale-100"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <h3 class="text-[12px] text-[#F5F5F5] tracking-[0.12px] font-normal uppercase">
+                      {influencer.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-col justify-center items-start gap-1">
+                    <div class="flex justify-start items-center gap-[7px]">
+                      <p class="text-[22px] font-normal leading-[100%] text-[#F5F5F5] font-georgia">
+                        {influencer.mount}
+                      </p>
+                      <div class="flex justify-center items-center py-0.5 px-[7px] border border-[#D3AE6AD3] rounded-[2px]">
+                        <p class="text-[8px] font-semibold  tracking-[1.12px] leading-[100%] text-[#D3AE6A] uppercase">
+                          {content.credito}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src={`/images/scheduling/${influencer.img}.svg`}
+                    alt={`Bar for ${influencer.name}`}
+                    class="w-full h-auto"
+                    width="189"
+                    height="2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousels = document.querySelectorAll(".carousel-vertical");
+
+        carousels.forEach((carouselElement) => {
+          const carouselContainer = carouselElement as HTMLElement;
+          const track = carouselContainer.querySelector(
+            ".carousel-track-vertical",
+          ) as HTMLElement;
+          if (!track) return;
+
+          const slides = Array.from(
+            track.querySelectorAll<HTMLElement>(".carousel-slide-vertical"),
+          );
+
+          if (slides.length < 2) return;
+
+          let anim: Animation | null = null;
+          const speedPxPerSec = 15;
+          const direction =
+            carouselContainer.getAttribute("data-direction") || "forward";
+
+          function startAnim() {
+            if (anim) anim.cancel();
+
+            const first = slides[0];
+            const slideRect = first.getBoundingClientRect();
+            const slideHeight = Math.round(slideRect.height);
+
+            if (!slideHeight) return;
+
+            // Establecer la altura del contenedor carousel igual a la altura de un slide
+            carouselContainer.style.height = slideHeight + "px";
+
+            const trackStyle = getComputedStyle(track);
+            const gap = parseFloat(trackStyle.gap || "0") || 0;
+            const distance = slideHeight + gap;
+
+            const duration = Math.max(3000, (distance / speedPxPerSec) * 1000);
+
+            if (direction === "backward") {
+              anim = track.animate(
+                [
+                  { transform: `translateY(-${distance}px)` },
+                  { transform: "translateY(0px)" },
+                ],
+                { duration, iterations: Infinity, easing: "linear" },
+              );
+            } else {
+              anim = track.animate(
+                [
+                  { transform: "translateY(0px)" },
+                  { transform: `translateY(-${distance}px)` },
+                ],
+                { duration, iterations: Infinity, easing: "linear" },
+              );
+            }
+
+            // Pausa/reproduce al pasar mouse
+            if (carouselContainer.dataset.carouselHoverBound !== "1") {
+              carouselContainer.addEventListener("mouseenter", () =>
+                anim?.pause(),
+              );
+              carouselContainer.addEventListener("mouseleave", () =>
+                anim?.play(),
+              );
+              carouselContainer.dataset.carouselHoverBound = "1";
+            }
+          }
+
+          startAnim();
+
+          // Re-inicializa la animación al cambiar tamaño de ventana
+          window.addEventListener("resize", () => {
+            if (anim) anim.cancel();
+
+            const newSlides = Array.from(
+              track.querySelectorAll<HTMLElement>(".carousel-slide-vertical"),
+            );
+
+            if (newSlides.length >= 2) {
+              startAnim();
+            }
+          });
+        });
+      });
+    </script>
+  </div>
+</section>

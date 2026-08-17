@@ -1,0 +1,61 @@
+---
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+import Instrucctions from "../../sections/Scheduling/Instrucctions.astro";
+---
+
+<LayoutScheduling>
+  <section
+    class="w-full h-[65vh] md:h-[70vh] lg:h-[70vh] xl:h-screen flex flex-col justify-end items-center pb-16 bg-gradient-to-b from-[#002D15] to-transparent bg-[#000700]"
+  >
+    <div
+      class="container-full flex flex-col justify-end md:justify-center xl:justify-end 3xl:justify-center items-center gap-4 md:gap-6 lg:gap-3 3xl:gap-8 text-white h-full translate-y-0 md:translate-y-[5%] xl:translate-y-0 3xl:translate-y-[5%]"
+    >
+      <div class="flex justify-center items-center gap-[9px]">
+        <div
+          class="w-[22px] h-[22px] rounded-full bg-secondary flex justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            class="w-3 h-3"
+          >
+            <path
+              d="M4.50008 8.08492L2.41508 5.99992L1.70508 6.70492L4.50008 9.49992L10.5001 3.49992L9.79508 2.79492L4.50008 8.08492Z"
+              fill="black"></path>
+          </svg>
+        </div>
+        <p class="text-[14px] font-normal leading-[100%] tracking-[0.147px]">
+          Your call is confirmed — check your email
+        </p>
+      </div>
+
+      <h1
+        class="text-[32px] md:text-[36px] lg:text-[44px] font-normal leading-[100%] tracking-[-1.1px] text-white text-center"
+      >
+        Before we talk, <br />
+        <span class="text-secondary font-georgia">you need to see this.</span>
+      </h1>
+      <p class="text-[14px] font-normal leading-[100%]">
+        Directly impacts your business. 8 minutes.
+      </p>
+      <div
+        class="relative w-full h-auto md:w-[530px] lg:w-[710px] overflow-hidden rounded-3xl border-2 border-white/20 mt-10 md:mt-0"
+        style="aspect-ratio: 137 / 77"
+      >
+        <img
+          alt="Viralidad Cover"
+          class="h-full w-full object-cover"
+          src="/images/scheduling/hero-image.webp"
+          loading="eager"
+          decoding="async"
+          width="1376"
+          height="768"
+        />
+      </div>
+    </div>
+  </section>
+  <Instrucctions />
+</LayoutScheduling>

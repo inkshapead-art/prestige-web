@@ -1,0 +1,28 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type InformationContent =
+  Translations["solutions"]["business-consulting"]["information"];
+interface Props {
+  content: InformationContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section
+  class="bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000700]/0 flex justify-center items-center relative overflow-hidden w-full"
+>
+  <div
+    class="container-full grid grid-cols-2 justify-center items-start gap-5 py-25"
+  >
+    <div>
+      <div>
+        <h2 set:html={content.title} class="title text-white" />
+        <p set:html={content.description} class="paragraph text-white" />
+      </div>
+    </div>
+    <div>
+      {content.items.map((item) => <div />)}
+    </div>
+  </div>
+  <div></div>
+</section>

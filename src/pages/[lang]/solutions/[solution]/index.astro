@@ -1,0 +1,40 @@
+---
+import en from "../../../../i18n/en";
+import es from "../../../../i18n/es";
+import Layout from "../../../../layouts/Layout.astro";
+import type { Language } from "../../../../types/language.type";
+import Hero from "../../../../sections/Solutions/Hero.astro";
+import Stadistics from "../../../../sections/Solutions/Stadistics.astro";
+import Fundable from "../../../../sections/Home/Fundable.astro";
+import Information from "../../../../sections/Solutions/Information.astro";
+export function getStaticPaths() {
+  const solutions = [
+    "business-funding",
+    "credit-optimization",
+    "lender-ready-growth-system",
+    "flow-optimization",
+    "business-consulting",
+  ];
+  const languages = ["es", "en"];
+
+  return languages.flatMap((lang) =>
+    solutions.map((solution) => ({
+      params: { lang, solution },
+    })),
+  );
+}
+
+export const defaultRedirect = "/en";
+
+const { lang, solution } = Astro.params as { lang: Language; solution: string };
+const translations = { es, en };
+const t = translations[lang];
+const solutionData = (t.solutions as Record<string, any>)[solution] ?? {};
+---
+
+<Layout lang={lang} t={t}>
+  <Hero content={solutionData.hero} />
+  <Stadistics content={solutionData.statistics} />
+  <Information content={solutionData.information} />
+  <Fundable content={solutionData.fundable} />
+</Layout>

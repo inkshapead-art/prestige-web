@@ -1,0 +1,37 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type BusinessContent = Translations["main"]["business"];
+import Button from "../../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+interface Props {
+  content: BusinessContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class='back-gradient w-full flex justify-center items-center relative overflow-hidden h-auto' style='aspect-ratio: 1440/600;'>
+  <img class="w-auto h-full absolute z-5 right-0" src="/images/home/business.webp" width="1500" height="1200" alt="Business" decoding="async" loading="lazy"/>
+  <div class='container-full flex flex-col justify-center items-start relative z-0'>
+    <div class='flex flex-col justify-center items-start gap-10'>
+      <div class='flex flex-col justify-center items-start gap-6'> 
+        <h2 set:html={content.title} class="title text-white"></h2>
+        <p class='paragraph text-white w-[36%]'>{content.description}</p>
+      </div>
+      <div class='flex flex-col justify-center items-start gap-4'>
+        {
+          content.items.map((item,index)=>( 
+            <div class='flex justify-center items-center gap-2'>
+                <img src={`/images/icons/check-green.svg`} alt={item} width="32" height="32" class='w-8 h-8' decoding="async" loading="lazy"/>
+                <p set:html={item} class='paragraph text-white'></p>
+              </div>
+          ))
+        }
+      </div>
+      <Button
+          text={content.button.label}
+          textClass={BUTTON_COLOR_CLASSES.text1}
+          extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+          href={content.button.href}
+        />
+    </div>
+  </div>
+</section>

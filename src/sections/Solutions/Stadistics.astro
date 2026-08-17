@@ -1,0 +1,41 @@
+---
+import Button from "../../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+type Translations = typeof import("../../i18n/en").default;
+type HeroContent =
+  Translations["solutions"]["business-consulting"]["statistics"];
+interface Props {
+  content: HeroContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section class="bg-white container-full flex justify-between items-center py-26">
+  <div
+    class="w-[50%] h-auto bg-[#F6F6F6] rounded-[12px] overflow-hidden"
+    style="aspect-ratio: 682/420;"
+  >
+  </div>
+  <div class="flex flex-col justify-center items-start gap-10">
+    <div class="flex flex-col justify-center items-start gap-5 text-paragraph">
+      <h2 class="title" set:html={content.title} />
+      <p class="paragraph">{content.description}</p>
+      <div class="flex flex-col justify-center items-start gap-2">
+        {
+          content.items.map((item) => (
+            <div class="flex justify-center items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-accent" />
+              <p class="paragraph">{item}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <Button
+      text={content.button.label}
+      textClass={BUTTON_COLOR_CLASSES.text1}
+      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+      href={content.button.href}
+    />
+  </div>
+</section>

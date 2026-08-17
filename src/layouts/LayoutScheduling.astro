@@ -1,0 +1,124 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en" class="overflow-x-clip">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>Scheduling - Prestige Growth Partners</title>
+    <meta
+      name="description"
+      content="Prestige Growth Partners is a leading provider of innovative solutions for businesses, helping them achieve sustainable growth and success."
+    />
+    <meta
+      name="keywords"
+      content="Concrete Solutions, Construction, Building Materials"
+    />
+    <meta name="author" content="Prestige" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.advancerockgroup.com/" />
+
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.advancerockgroup.com/en/"
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href="https://www.advancerockgroup.com/es/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.advancerockgroup.com/en/"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Prestige Growth Partners - The Ultimate Solution"
+    />
+    <meta
+      property="og:description"
+      content="Prestige Growth Partners is a leading provider of innovative solutions for businesses, helping them achieve sustainable growth and success."
+    />
+    <meta property="og:url" content="https://www.advancerockgroup.com/" />
+    <meta property="og:image" content="/images/fondo.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@AdvanceRock" />
+    <meta
+      name="twitter:title"
+      content="Advance Rock Concrete - The Ultimate Solution"
+    />
+    <meta
+      name="twitter:description"
+      content="Advance Rock Concrete provides the best concrete solutions for your construction needs."
+    />
+    <meta name="twitter:image" content="/images/fondo.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Advance Rock Concrete",
+        "url": "https://www.advancerockgroup.com/",
+        "logo": "https://www.advancerockgroup.com/favicon.svg"
+      }
+    </script>
+  </head>
+
+  <body
+    class="font-family-scheduling antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
+  >
+    <heaer
+      class="w-full absolute top-0 left-0 flex justify-center items-center pt-11 md:pt-[54px] pb-6 md:pb-3 z-10"
+    >
+      <img
+        src="/images/logo.svg"
+        alt="Logo"
+        width="190"
+        height="40"
+        class="w-[147px] md:w-[190px] h-auto"
+        decoding="async"
+        loading="eager"
+      />
+    </heaer>
+    <main class="flex flex-col w-full items-center">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const animationElements = document.querySelectorAll(
+      ".animation-up-fast, .animation-fade-down, .animation-fade-left, .animation-fade-right",
+    );
+
+    const animationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    animationElements.forEach((element) => {
+      animationObserver.observe(element);
+    });
+  });
+</script>

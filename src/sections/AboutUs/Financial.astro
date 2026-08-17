@@ -1,0 +1,37 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type FinancialContent = Translations["aboutUs"]["financial"];
+interface Props {
+  content: FinancialContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section class="container-full py-10 flex justify-center items-center">
+  <div
+    class="w-full bg-primary flex justify-start items-center rounded-xl overflow-hidden relative px-16 h-auto"
+    style="aspect-ratio: 1312/747;"
+  >
+    <div class="flex flex-col justify-center items-start gap-10">
+      <div class="flex flex-col justify-center items-start gap-6 text-white">
+        <h2 set:html={content.title} class="title" />
+        <p class="paragraph w-[40%]">{content.description}</p>
+      </div>
+      <a
+        class="text-[16px] text-secondary font-semibold leading-[100%] hover:text-white transition-all duration-300 ease-in-out"
+        href={content.link.href}
+      >
+        {content.link.label}
+      </a>
+    </div>
+    <img
+      src="/images/home/financial.webp"
+      alt="Financial"
+      class="absolute w-auto h-full right-0"
+      width="1400"
+      height="1400"
+      decoding="async"
+      loading="lazy"
+    />
+  </div>
+</section>

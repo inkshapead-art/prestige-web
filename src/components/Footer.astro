@@ -1,0 +1,224 @@
+---
+import {
+  emailAddress,
+  facebookLink,
+  instagramLink,
+  phoneNumber,
+  phoneNumberLink,
+  tikTokLink,
+  youtubeLink,
+} from "../constants/info";
+import Button from "./Button.astro";
+
+type Translations = typeof import("../i18n/en").default;
+type FooterContent = Translations["footer"];
+interface Props {
+  content?: FooterContent;
+}
+const { content } = Astro.props as Props;
+
+// Obtener la ruta actual y normalizar el path sin prefijo de idioma
+const currentPath = Astro.url.pathname;
+// Normalizar: remover idioma y trailing slash
+const normalized =
+  currentPath.replace(/^\/(en|es)/, "").replace(/\/$/, "") || "/";
+// Detectar el idioma actual ('en' o 'es')
+const match = currentPath.match(/^\/(en|es)/);
+const lang = match ? match[1] : "en";
+
+const infoContacts = [
+  {
+    icon: "whatsapp",
+    label: phoneNumber,
+    href: phoneNumberLink,
+  },
+  {
+    icon: "mail",
+    label: emailAddress,
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}`,
+  },
+  {
+    icon: "pin",
+    label: "4711 NW 79 Ave. Doral, FL 33166",
+    href: "#",
+  },
+];
+const socialMedia = [
+  {
+    icon: "facebook",
+    href: facebookLink,
+  },
+  {
+    icon: "instagram",
+    href: instagramLink,
+  },
+  {
+    icon: "tiktok",
+    href: tikTokLink,
+  },
+  {
+    icon: "youtube",
+    href: youtubeLink,
+  },
+];
+---
+
+<footer class="flex flex-col justify-center items-center w-full">
+  <div class="bg-white w-full flex justify-center items-center">
+    <div
+      class="container-full flex flex-col justify-center items-center py-10 gap-14"
+    >
+      <div
+        class="w-full flex justify-between items-center pb-8 border-b border-black/10"
+      >
+        <a
+          href={`/${lang}`}
+          aria-label="Ir a la página principal"
+          title="Prestige Growth Partners - Inicio"
+        >
+          <img
+            src="/images/logo-color.svg"
+            alt="Logo de Prestige Growth Partners"
+            width="269"
+            height="56"
+            class="cursor-pointer w-[269px] h-auto block"
+          />
+        </a>
+        <p class="text-[20px] leading-[150%] font-normal text-paragraph">
+          {content?.help}
+        </p>
+      </div>
+      <div
+        class="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-stretch h-full gap-6 lg:gap-0 w-full"
+      >
+        <div
+          class="flex flex-col justify-center items-center lg:items-start gap-4 lg:gap-6 w-full lg:w-[385px] self-start"
+        >
+          <p class="text-[15px] leading-[170%] font-normal text-paragraph">
+            {content?.description}
+          </p>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center lg:items-start gap-6 self-start w-full lg:w-auto"
+        >
+          <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
+            {content?.quickLinks.title}
+          </h3>
+          <ul
+            class="flex flex-col justify-center items-center lg:items-start gap-6"
+          >
+            {
+              content?.quickLinks.links.map((item) => (
+                <li>
+                  <a
+                    href={`/${lang}/solutions${item.href}`}
+                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center lg:items-start gap-6 self-start w-full lg:w-auto"
+        >
+          <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
+            {content?.company.title}
+          </h3>
+          <ul
+            class="flex flex-col justify-center items-center lg:items-start gap-6"
+          >
+            {
+              content?.company.links.map((item) => (
+                <li>
+                  <a
+                    href={`/${lang}${item.href}`}
+                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center lg:items-start gap-8 self-start w-full lg:w-auto"
+        >
+          <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
+            {content?.touch.title}
+          </h3>
+          <div
+            class="flex flex-col justify-center items-center lg:items-start gap-8"
+          >
+            {
+              infoContacts.map((item) => (
+                <div class="flex justify-start items-start gap-2">
+                  <img
+                    src={`/images/icons/${item.icon}.svg`}
+                    width="24"
+                    height="24"
+                    class="w-6 h-6"
+                    decoding="async"
+                    loading="lazy"
+                    alt={item.icon}
+                  />
+                  <a href={item.href}>
+                    <p
+                      set:html={item.label}
+                      class="text-[15px] font-normal leading-[150%] text-paragraph hover:font-semibold transition-all duration-300 ease-in-out"
+                    />
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-start items-center gap-4 w-full">
+        {
+          socialMedia.map((item) => (
+            <a href={item.href}>
+              <img
+                src={`/images/icons/${item.icon}.svg`}
+                width="24"
+                height="24"
+                class="w-8 h-8"
+                decoding="async"
+                loading="lazy"
+                alt={item.icon}
+              />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <div
+    class="bg-[#E5E5E5] w-full py-3.5 lg:py-4.5 flex justify-center items-center px-5 xl:px-0"
+  >
+    <div
+      class="w-full max-w-screen lg:max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6"
+    >
+      <a href="https://inkshapegroup.com/en/">
+        <img
+          src="/images/icons/inkshape.svg"
+          alt=" Logo de Inkshape Group"
+          width="208"
+          height="40"
+          class="w-27.5 lg:w-34 h-auto block dark:hidden"
+        />
+      </a>
+      <p
+        class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
+      >
+        Copyright © 2026 by <a href="https://inkshapegroup.com"
+          >Inkshape Group</a
+        > | Privacy | <a href="/">Prestige Growth Partners </a> | Greenville & Charlotte
+        | Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
+      </p>
+    </div>
+  </div>
+</footer>

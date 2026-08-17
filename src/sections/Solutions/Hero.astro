@@ -1,0 +1,39 @@
+---
+import Button from "../../components/Button.astro";
+import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+type Translations = typeof import("../../i18n/en").default;
+type HeroContent = Translations["solutions"]["business-consulting"]["hero"];
+interface Props {
+  content: HeroContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section
+  class="w-full flex justify-center items-center relative overflow-hidden h-[calc(100vh-var(--header-height))] bg-[#000800] bg-gradient-to-b from-[#002D15] to-[#000800]/0"
+>
+  <img
+    src="/images/hero-solutions.webp"
+    alt="Hero Solutions Prestige"
+    class="w-full h-auto object-cover absolute object-center z-0 right-0 bottom-0"
+    width="2752"
+    height="1391"
+    decoding="async"
+    loading="eager"
+  />
+  <div class="container-full flex justify-start items-center z-10">
+    <div class="flex flex-col justify-center items-start gap-10">
+      <div class="flex flex-col justify-center items-start gap-6">
+        <h1 set:html={content.title} class="title text-white" />
+        <p class="paragraph text-white" set:html={content.description} />
+      </div>
+
+      <Button
+        text={content.button.label}
+        textClass={BUTTON_COLOR_CLASSES.text1}
+        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+        href={content.button.href}
+      />
+    </div>
+  </div>
+</section>

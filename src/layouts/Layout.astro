@@ -1,0 +1,107 @@
+---
+import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Chatbot from "../components/Chatbot.astro";
+
+type Translations = typeof import("../i18n/en").default;
+
+export interface Props {
+  lang: string;
+  t?: Translations;
+  showLoader?: boolean; 
+}
+
+const { lang, t, showLoader = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="overflow-x-clip ">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="geo.region" content="US-FL" />
+    <meta name="geo.placename" content="Orlando" />
+    <meta name="geo.position" content="28.5383;-81.3792" />
+    <meta name="ICBM" content="28.5383, -81.3792" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://widgets.leadconnectorhq.com" />
+    <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>Prestige Growth Partners</title>
+    <meta name="description" content="Advance Rock Concrete provides the best concrete solutions for your construction needs." />
+    <meta name="keywords" content="Concrete Solutions, Construction, Building Materials" />
+    <meta name="author" content="Prestige" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.advancerockgroup.com/" />
+
+    <link rel="alternate" hreflang="en" href="https://www.advancerockgroup.com/en/" />
+    <link rel="alternate" hreflang="es" href="https://www.advancerockgroup.com/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.advancerockgroup.com/en/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Advance Rock Concrete - The Ultimate Solution" />
+    <meta property="og:description" content="Advance Rock Concrete provides the best concrete solutions for your construction needs." />
+    <meta property="og:url" content="https://www.advancerockgroup.com/" />
+    <meta property="og:image" content="/images/fondo.png" />
+    <meta property="og:locale" content={lang === "es" ? "es_US" : "en_US"} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@AdvanceRock" />
+    <meta name="twitter:title" content="Advance Rock Concrete - The Ultimate Solution" />
+    <meta name="twitter:description" content="Advance Rock Concrete provides the best concrete solutions for your construction needs." />
+    <meta name="twitter:image" content="/images/fondo.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Advance Rock Concrete",
+        "url": "https://www.advancerockgroup.com/",
+        "logo": "https://www.advancerockgroup.com/favicon.svg"
+      }
+    </script>
+  </head>
+  
+  <body
+    class="font-family antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
+    data-show-loader={showLoader ? 'true' : 'false'}
+  >
+    <Header content={t?.header} />
+    <main class="flex flex-col w-full items-center pt-(--header-height)">
+      <slot />
+    </main>
+    <Footer content={t?.footer} />
+    <Chatbot />
+  </body>
+</html>
+
+<script is:inline >
+  document.addEventListener("DOMContentLoaded", () => {
+    const animationElements = document.querySelectorAll(
+      ".animation-up-fast, .animation-fade-down, .animation-fade-left, .animation-fade-right"
+    );
+
+    const animationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    animationElements.forEach((element) => {
+      animationObserver.observe(element);
+    });
+  });
+</script>
