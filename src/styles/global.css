@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 @import "tailwindcss";
 
@@ -53,7 +54,7 @@
 
 @theme {
   --font-family: "IBM Plex Sans", sans-serif;
-  --font-georgia: "Gelasio", sans-serif;
+  --font-georgia: "Alike", sans-serif;
   --font-family-scheduling: "DIN Next Lt Pro", sans-serif;
   --font-family-times: "Times New Roman", serif;
   --color-primary: #002d15;
