@@ -3,7 +3,7 @@ export default {
     nav: [
       {
         label: "Solutions ",
-        href: "#",
+        href: "/scheduling",
       },
       {
         label: "How it works",
@@ -43,7 +43,7 @@ export default {
     buttons: [
       {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     ],
   },
@@ -69,7 +69,7 @@ export default {
       ],
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
     howWroks: {
@@ -126,7 +126,7 @@ export default {
       ],
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
     need: {
@@ -147,7 +147,7 @@ export default {
           ],
           button: {
             label: "Schedule My Meeting",
-            href: "#",
+            href: "/scheduling",
           },
         },
         {
@@ -162,7 +162,7 @@ export default {
           ],
           button: {
             label: "Schedule My Meeting",
-            href: "#",
+            href: "/scheduling",
           },
         },
         {
@@ -177,7 +177,7 @@ export default {
           ],
           button: {
             label: "Schedule My Meeting",
-            href: "#",
+            href: "/scheduling",
           },
         },
       ],
@@ -265,7 +265,7 @@ export default {
       ],
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
     nextLevel: {
@@ -275,7 +275,7 @@ export default {
         "Let's build a funding strategy that positions your business for sustainable growth.",
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
   },
@@ -288,7 +288,7 @@ export default {
           "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
         components: ["Hero1", "Hero2"],
       },
@@ -307,7 +307,7 @@ export default {
         component: "Statistics1",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
       information: {
@@ -363,125 +363,123 @@ export default {
         ],
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
     },
     "credit-optimization": {
       hero: {
         title:
-          'Access Business <br/> Capital <span class="text-secondary font-georgia">Without Guesswork</span>',
+          'Strong Credit  <br/> Creates <span class="text-secondary font-georgia">Better <br/> Opportunities</span>',
         description:
-          "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
+          "We optimize personal and business credit to maximize funding <br/> opportunities, lender confidence, and better financing terms.",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
-        components: ["Hero1", "Hero2"],
+        components: ["Hero3", "Hero4"],
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br/> Your Business</span>',
-        description:
-          "We identify funding opportunities based on your business profile.",
+          'Optimize  <span class="text-secondary font-georgia">Personal <br/> Credit</span>',
+        description: "We help improve the factors lenders evaluate most.",
         items: [
-          "Business Lines of Credit",
-          "Business Credit Cards",
-          "Equipment Financing",
-          "SBA & Commercial Loans",
-          "Real Estate Funding",
+          "Credit utilization",
+          "Payment history",
+          "Credit mix",
+          "Reporting accuracy",
+          "Strategic account management",
         ],
-        component: "Statistics1",
+        component: "Statistics2",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
       information: {
         title:
-          'Approval Starts Long <br/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'Build Business Credit <br/> <span class="text-secondary font-georgia">That Works</span>',
         description:
-          "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
+          "Create a business credit profile capable of supporting future funding and long-term business growth.",
         items: [
           {
-            title: "Credit Positioning",
+            title: "Vendor Accounts",
             list: [
-              "Strengthen Credit Profiles",
-              "Identify Funding Factors",
-              "Strengthen Financial Foundation",
+              "Build Vendor Credit",
+              "Open Reporting Accounts",
+              "Strengthen Credit Foundation",
             ],
           },
           {
-            title: "Financial Documentation",
+            title: "Revolving Accounts",
             list: [
-              "Organize Funding Documents",
-              "Prepare Financial Records",
-              "Eliminate Documentation Errors",
+              "Access Business Credit",
+              "Increase Credit Availability",
+              "Demonstrate Credit Responsibility",
             ],
           },
           {
-            title: "Business Credibility",
+            title: "Net-30 Reporting",
             list: [
-              "Increase Lender Trust",
-              "Build Business Presence",
-              "Improve Business Credibility",
+              "Build Payment History",
+              "Improve Business Credit",
+              "Increase Funding Eligibility",
             ],
           },
           {
-            title: "Banking Profile",
+            title: "Credit Bureau Optimization",
             list: [
-              "Optimize Bank Evaluation",
-              "Improve Key Data",
-              "Increase Funding Opportunities",
+              "Review Credit Reports",
+              "Correct Credit Errors",
+              "Meet Lender Expectations",
             ],
           },
         ],
-        image: "information-1",
+        image: "information-2",
       },
       fundable: {
         title:
-          "Funding That Creates <br/> Growth.  <br/> <span class='text-secondary font-georgia'>Capital isn't the goal. <br/> Growth is.</span>",
+          "Better Credit. Better Terms. <br/> <span class='text-secondary font-georgia'>Higher Scores. Larger <br/> Opportunities.</span>",
         items: [
-          "Expand operations",
-          "Hire talent",
-          "Acquire competitors",
-          "Purchase commercial property",
-          "Improve cash flow",
+          "Higher approvals",
+          "Lower interest rates",
+          "Larger credit limits",
+          "Faster underwriting",
+          "Greater financial flexibility",
         ],
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
     },
     "lender-ready-growth-system": {
       hero: {
         title:
-          'Access Business <br/> Capital <span class="text-secondary font-georgia">Without Guesswork</span>',
+          'Become The <br/> Business <span class="text-secondary font-georgia">Banks <br/> Want To Fund</span>',
         description:
-          "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
+          "We prepare every aspect of your company to meet lender <br/> expectations before funding applications begin.",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
-        components: ["Hero1", "Hero2"],
+        components: ["Hero5", "Hero6"],
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br/> Your Business</span>',
-        description:
-          "We identify funding opportunities based on your business profile.",
+          'Complete Funding <br/> <span class="text-secondary font-georgia">Readiness Audit </span>',
+        description: "We evaluate every lender requirement including:",
         items: [
-          "Business Lines of Credit",
-          "Business Credit Cards",
-          "Equipment Financing",
-          "SBA & Commercial Loans",
-          "Real Estate Funding",
+          "Business structure",
+          "EIN",
+          "Address consistency",
+          "Banking",
+          "Online presence",
         ],
-        component: "Statistics1",
+        component: "Statistics3",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
       information: {
@@ -523,195 +521,193 @@ export default {
             ],
           },
         ],
-        image: "information-1",
+        image: "information-3",
       },
       fundable: {
         title:
-          "Funding That Creates <br/> Growth.  <br/> <span class='text-secondary font-georgia'>Capital isn't the goal. <br/> Growth is.</span>",
+          "Build a Business That <br/> Qualifies <span class='text-secondary font-georgia'>Again and Again. </span>",
         items: [
-          "Expand operations",
-          "Hire talent",
-          "Acquire competitors",
-          "Purchase commercial property",
-          "Improve cash flow",
+          "Sustainable Funding Growth",
+          "Higher Approval Potential",
+          "Stronger Banking Relationships",
+          "Better Lending Terms",
+          "Long-Term Scalability",
         ],
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
     },
     "flow-optimization": {
       hero: {
         title:
-          'Access Business <br/> Capital <span class="text-secondary font-georgia">Without Guesswork</span>',
+          'Improve How Money <br/> Moves <span class="text-secondary font-georgia">Through Your <br/> Business</span>',
         description:
-          "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
+          "Healthy cash flow creates stronger businesses and stronger <br/> funding opportunities.",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
-        components: ["Hero1", "Hero2"],
+        components: ["Hero7", "Hero8"],
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br/> Your Business</span>',
-        description:
-          "We identify funding opportunities based on your business profile.",
+          'Optimize <span class="text-secondary font-georgia">Cash Flow </span>',
+        description: "We help improve",
         items: [
-          "Business Lines of Credit",
-          "Business Credit Cards",
-          "Equipment Financing",
-          "SBA & Commercial Loans",
-          "Real Estate Funding",
+          "Revenue allocation",
+          "Working capital",
+          "Business reserves",
+          "Banking behavior",
+          "Payment timing",
         ],
-        component: "Statistics1",
+        component: "Statistics4",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
       information: {
         title:
-          'Approval Starts Long <br/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'Gain Complete <br/> <span class="text-secondary font-georgia">Financial Visibility</span>',
         description:
-          "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
+          "We organize your finances, delivering clear insights that support smarter decisions, lower risk, and sustainable business growth.",
         items: [
           {
-            title: "Credit Positioning",
+            title: "Cash Flow Insights",
             list: [
-              "Strengthen Credit Profiles",
-              "Identify Funding Factors",
-              "Strengthen Financial Foundation",
+              "Monitor Income Trends",
+              "Track Business Expenses",
+              "Improve Cash Flow",
             ],
           },
           {
-            title: "Financial Documentation",
+            title: "Performance Analysis",
             list: [
-              "Organize Funding Documents",
-              "Prepare Financial Records",
-              "Eliminate Documentation Errors",
+              "Evaluate Business Metrics",
+              "Identify Growth Opportunities",
+              "Improve Financial Efficiency",
             ],
           },
           {
-            title: "Business Credibility",
+            title: "Financial Reporting",
             list: [
-              "Increase Lender Trust",
-              "Build Business Presence",
-              "Improve Business Credibility",
+              "Organize Financial Records",
+              "Review Performance Reports",
+              "Maintain Accurate Data",
             ],
           },
           {
-            title: "Banking Profile",
+            title: "Credit Bureau Optimization",
             list: [
-              "Optimize Bank Evaluation",
-              "Improve Key Data",
-              "Increase Funding Opportunities",
+              "Support Growth Decisions",
+              "Reduce Financial Risks",
+              "Plan Future Investments",
             ],
           },
         ],
-        image: "information-1",
+        image: "information-4",
       },
       fundable: {
         title:
-          "Funding That Creates <br/> Growth.  <br/> <span class='text-secondary font-georgia'>Capital isn't the goal. <br/> Growth is.</span>",
+          "Scale Without <br/> <span class='text-secondary font-georgia'>Financial Barriers. </span>",
         items: [
-          "Expand operations",
-          "Hire talent",
-          "Acquire competitors",
-          "Purchase commercial property",
-          "Improve cash flow",
+          "Healthy Cash Flow",
+          "Scalable Financial Systems",
+          "Operational Efficiency",
+          "Sustainable Business Growth",
+          "Long-Term Stability",
         ],
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
     },
     "business-consulting": {
       hero: {
         title:
-          'Access Business <br/> Capital <span class="text-secondary font-georgia">Without Guesswork</span>',
+          'Strategic Financial <br/> Guidance <span class="text-secondary font-georgia">For <br/> Growing Businesses</span>',
         description:
-          "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
+          "Beyond funding, we help business owners make smarter <br/> financial decisions for long-term expansion",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
-        components: ["Hero1", "Hero2"],
+        components: ["Hero9", "Hero10"],
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br/> Your Business</span>',
-        description:
-          "We identify funding opportunities based on your business profile.",
+          'Build A Scalable <br/> <span class="text-secondary font-georgia">Growth Plan </span>',
+        description: "Together we create a roadmap focused on:",
         items: [
-          "Business Lines of Credit",
-          "Business Credit Cards",
-          "Equipment Financing",
-          "SBA & Commercial Loans",
-          "Real Estate Funding",
+          "Expansion",
+          "Capital allocation",
+          "Business acquisitions",
+          "Market opportunities",
+          "Financial leverage",
         ],
-        component: "Statistics1",
+        component: "Statistics5",
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
       information: {
         title:
-          'Approval Starts Long <br/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'Expert Guidance Backed by <br/> <span class="text-secondary font-georgia">Real Funding Experience</span>',
         description:
-          "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
+          "Our specialists provide strategic funding guidance, helping businesses meet lender requirements and secure capital confidently.",
         items: [
           {
-            title: "Credit Positioning",
+            title: "Funding Strategy",
             list: [
-              "Strengthen Credit Profiles",
-              "Identify Funding Factors",
-              "Strengthen Financial Foundation",
+              "Growth-Focused Planning",
+              "Capital Allocation",
+              "Funding Roadmap",
             ],
           },
           {
-            title: "Financial Documentation",
+            title: "Business Advisory",
             list: [
-              "Organize Funding Documents",
-              "Prepare Financial Records",
-              "Eliminate Documentation Errors",
+              "Business Assessments",
+              "Financial Direction",
+              "Strategic Recommendations",
             ],
           },
           {
-            title: "Business Credibility",
+            title: "Lender Expertise",
             list: [
-              "Increase Lender Trust",
-              "Build Business Presence",
-              "Improve Business Credibility",
+              "Lending Requirements",
+              "Approval Strategies",
+              "Risk Reduction",
             ],
           },
           {
-            title: "Banking Profile",
+            title: "Ongoing Support",
             list: [
-              "Optimize Bank Evaluation",
-              "Improve Key Data",
-              "Increase Funding Opportunities",
+              "Continuous Guidance",
+              "Progress Monitoring",
+              "Growth Planning",
             ],
           },
         ],
-        image: "information-1",
+        image: "information-5",
       },
       fundable: {
         title:
-          "Funding That Creates <br/> Growth.  <br/> <span class='text-secondary font-georgia'>Capital isn't the goal. <br/> Growth is.</span>",
+          "Grow With a <br/> <span class='text-secondary font-georgia'>Long-Term Partner. </span>",
         items: [
-          "Expand operations",
-          "Hire talent",
-          "Acquire competitors",
-          "Purchase commercial property",
-          "Improve cash flow",
+          "Ongoing Expert Support",
+          "Future Funding Opportunities",
+          "Continuous Business Growth",
+          "Strategic Financial Guidance",
+          "Long-Term Success",
         ],
         button: {
           label: "Schedule My Meeting",
-          href: "#",
+          href: "/scheduling",
         },
       },
     },
@@ -725,7 +721,7 @@ export default {
       list: [],
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
     process: {
@@ -735,7 +731,7 @@ export default {
         "A step-by-step system that prepares your business, secures funding, and <br/> supports long-term growth.",
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
       items: [
         {
@@ -837,7 +833,7 @@ export default {
         "Prestige Growth Partners helps established businesses improve their financial profile, optimize lender readiness, and access growth capital through proven systems.",
       button: {
         label: "Schedule My Meeting",
-        href: "#",
+        href: "/scheduling",
       },
     },
     financial: {
@@ -847,7 +843,7 @@ export default {
         "We believe businesses shouldn't rely on luck when seeking funding. They should rely on preparation, strategy, and strong financial fundamentals.",
       link: {
         label: "Meet an Expert >",
-        href: "#",
+        href: "/scheduling",
       },
     },
     founding: {

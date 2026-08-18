@@ -21,7 +21,7 @@ const { content } = Astro.props as Props;
     decoding="async"
     loading="eager"
   />
-  <div class="container-full flex justify-start items-center z-10">
+  <div class="container-full flex justify-start items-center z-10 translate-y-[-10%]">
     <div class="flex flex-col justify-center items-start gap-10">
       <div class="flex flex-col justify-center items-start gap-6">
         <h1 set:html={content.title} class="title text-white" />

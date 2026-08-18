@@ -12,17 +12,47 @@ const { content } = Astro.props as Props;
   class="bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000700]/0 flex justify-center items-center relative overflow-hidden w-full"
 >
   <div
-    class="container-full grid grid-cols-2 justify-center items-start gap-5 py-25"
+    class="container-full grid grid-cols-2 justify-center items-center gap-5 py-25"
   >
-    <div>
-      <div>
+    <div class='w-full flex flex-col justify-center items-start gap-10'>
+      <div class="flex flex-col justify-center items-start gap-6">
         <h2 set:html={content.title} class="title text-white" />
         <p set:html={content.description} class="paragraph text-white" />
       </div>
+      <div
+        class="w-full grid grid-cols-2 justify-start items-start gap-x-6 gap-y-12"
+      >
+        {
+          content.items.map((item) => (
+            <div class="flex flex-col justify-center items-start gap-4 text-white">
+              <h3 class="subtitle">{item.title}</h3>
+              <ul class="flex flex-col justify-center items-start gap-4">
+                {item.list.map((listItem) => (
+                  <li class="flex justify-center items-center gap-1">
+                    <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-secondary" />
+                    <p class="paragraph" set:html={listItem} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
     </div>
-    <div>
-      {content.items.map((item) => <div />)}
+
+    <div
+      class="w-full h-auto overflow-hidden relative rounded-xl"
+      style="aspect-ratio:644/720"
+    >
+      <img
+        src={`/images/solutions/${content.image}.webp`}
+        alt={content.title}
+        width="900"
+        height="1117"
+        class="object-cover w-full h-full object-center absolute"
+        decoding="async"
+        loading="lazy"
+      />
     </div>
   </div>
-  <div></div>
 </section>
