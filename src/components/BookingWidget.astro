@@ -1,0 +1,129 @@
+---
+// src/components/BookingWidget.astro
+export interface Props {
+  widgetId?: string;
+  minHeight?: string;
+}
+
+const {
+  widgetId = "rmSiScvpkyHytIZn7X06",
+  minHeight = "500px", // ajusta según el alto real de tu widget
+} = Astro.props;
+---
+
+<div
+  class="booking-widget-wrapper h-[70%]"
+  style={`min-height: ${minHeight};`}
+  data-widget-src={`https://link.inkshapecrm.com/widget/booking/${widgetId}`}
+  data-widget-id={widgetId}
+>
+  <!-- Skeleton mientras carga -->
+  <div class="booking-skeleton" aria-hidden="true">
+    <span>Cargando calendario de reservas…</span>
+  </div>
+</div>
+
+<style>
+  .booking-widget-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .booking-widget-wrapper iframe {
+    width: 100%;
+    border: none;
+    overflow: hidden;
+    display: block;
+  }
+
+  .booking-skeleton {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    color: #888;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .booking-widget-wrapper.is-loaded .booking-skeleton {
+    display: none;
+  }
+</style>
+
+<script>
+  // Se ejecuta una sola vez en el cliente, después de la hidratación de Astro
+  function initBookingWidgets() {
+    const wrappers = document.querySelectorAll<HTMLElement>(
+      ".booking-widget-wrapper:not([data-initialized])",
+    );
+
+    if (wrappers.length === 0) return;
+
+    // Cargamos el script del CRM UNA sola vez, sin importar cuántos widgets haya
+    const ensureFormEmbedScript = () => {
+      if (document.querySelector('script[src*="form_embed.js"]')) return;
+      const s = document.createElement("script");
+      s.src = "https://link.inkshapecrm.com/js/form_embed.js";
+      s.async = true;
+      document.body.appendChild(s);
+    };
+
+    const loadIframe = (wrapper: HTMLElement) => {
+      if (wrapper.dataset.initialized === "true") return;
+      wrapper.dataset.initialized = "true";
+
+      const src = wrapper.dataset.widgetSrc!;
+      const id = wrapper.dataset.widgetId!;
+
+      const iframe = document.createElement("iframe");
+      iframe.src = src;
+      iframe.setAttribute("allow", "payment");
+      iframe.setAttribute("scrolling", "no");
+      iframe.id = `${id}_${Date.now()}`;
+      iframe.style.width = "100%";
+      iframe.style.border = "none";
+      iframe.style.overflow = "hidden";
+      iframe.loading = "lazy";
+
+      iframe.addEventListener("load", () => {
+        wrapper.classList.add("is-loaded");
+      });
+
+      wrapper.appendChild(iframe);
+      ensureFormEmbedScript();
+    };
+
+    // Lazy load real: solo cargamos el iframe cuando está por entrar en pantalla
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadIframe(entry.target as HTMLElement);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "300px" }, // empieza a cargar un poco antes de que sea visible
+    );
+
+    wrappers.forEach((wrapper) => observer.observe(wrapper));
+  }
+
+  // Astro con view transitions dispara este evento en cada navegación
+  document.addEventListener("astro:page-load", initBookingWidgets);
+  initBookingWidgets();
+</script>
