@@ -75,10 +75,13 @@ const isProjectPage = normalized === "/projects";
                   {isSolution && (
                     <div class="dropdown-menu absolute top-9 left-0 mt-0 w-[283px] flex-col items-center bg-primary z-40 hidden group-hover:flex opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 ease-out -translate-x-[25%] overflow-hidden">
                       {content.solutions.map((sub) => (
-                        <div class="text-[15px] leading-[150%] text-white hover:text-secondary transition-colors duration-200 ease-in-out cursor-pointer px-4 w-full text-center py-3 flex justify-between items-center hover:bg-[#001A1F] w-full font-normal font-paragraph">
-                          <a href={`/${lang}${sub.href}`}>{sub.label}</a>
+                        <a
+                          href={`/${lang}${sub.href}`}
+                          class="text-[15px] leading-[150%] text-white hover:text-secondary transition-colors duration-200 ease-in-out cursor-pointer px-4 w-full text-center py-3 flex justify-between items-center hover:bg-[#001A1F] w-full font-normal font-paragraph"
+                        >
+                          <span>{sub.label}</span>
                           <ChevronRight />
-                        </div>
+                        </a>
                       ))}
                     </div>
                   )}
