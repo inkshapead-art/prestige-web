@@ -8,7 +8,7 @@ import {
 const DRAFT_KEY = "prestige-questions-draft";
 
 // Sólo para maquetación/pruebas. Cambiar a false o eliminar este bloque antes de publicar.
-const SHOW_DEVELOPMENT_CONTROLS = true;
+const SHOW_DEVELOPMENT_CONTROLS = false;
 
 function getEntryState(): {
   answers: EstimateAnswers;
@@ -57,6 +57,8 @@ export default function EstimateForm() {
   const [stepIndex, setStepIndex] = useState(initialState.step ?? 0);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const step = estimateSteps[stepIndex];
   const isFinalStep = stepIndex === estimateSteps.length - 1;
@@ -100,7 +102,7 @@ export default function EstimateForm() {
     setStepIndex((current) => Math.min(current + 1, estimateSteps.length - 1));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!validateStep()) return;
 
@@ -109,12 +111,56 @@ export default function EstimateForm() {
       return;
     }
 
-    console.log("Estimate request", {
+    const payload = {
       ...answers,
       submittedAt: new Date().toISOString(),
-    });
-    window.sessionStorage.removeItem(DRAFT_KEY);
-    setSubmitted(true);
+    };
+
+    console.log("[EstimateForm] Enviando datos a /api/enviar-leads:", payload);
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/enviar-leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const responseData = await response.json().catch(() => ({}));
+
+      if (response.ok) {
+        console.log("[EstimateForm] Datos enviados exitosamente:", {
+          status: response.status,
+          responseData,
+          sentPayload: payload,
+        });
+
+        window.sessionStorage.removeItem(DRAFT_KEY);
+        setSubmitted(true);
+
+        // Redirigir a /scheduling/calendar
+        window.location.href = "/scheduling/calendar";
+      } else {
+        console.error("[EstimateForm] Error al enviar los datos:", {
+          status: response.status,
+          error: responseData,
+          sentPayload: payload,
+        });
+        setSubmitError("Error al enviar la información. Intente nuevamente.");
+      }
+    } catch (error) {
+      console.error("[EstimateForm] Excepción al realizar la petición:", {
+        error,
+        sentPayload: payload,
+      });
+      setSubmitError("Error de conexión al enviar el formulario.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -227,11 +273,21 @@ export default function EstimateForm() {
               </div>
             )}
 
+            {submitError && (
+              <p
+                role="alert"
+                className="text-center text-sm text-secondary font-medium"
+              >
+                {submitError}
+              </p>
+            )}
+
             <button
               type="submit"
+              disabled={isSubmitting}
               className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isFinalStep ? "Submit" : "Next"}
+              {isSubmitting ? "Sending..." : isFinalStep ? "Submit" : "Next"}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

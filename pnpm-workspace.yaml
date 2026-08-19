@@ -3,3 +3,5 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - astro@7.2.1
+  - '@astrojs/internal-helpers@0.10.3'
+  - '@astrojs/vercel@11.0.6'
