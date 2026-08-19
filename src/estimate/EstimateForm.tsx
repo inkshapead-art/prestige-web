@@ -1,4 +1,10 @@
 import { type FormEvent, useEffect, useMemo, useState } from "react";
+import PhoneInput, {
+  isValidPhoneNumber,
+  type Country,
+} from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import "./estimate-phone-input.css";
 import {
   estimateSteps,
   type EstimateAnswers,
@@ -6,6 +12,10 @@ import {
 } from "./config";
 
 const DRAFT_KEY = "prestige-questions-draft";
+
+// País que se muestra seleccionado por defecto en el selector de banderas.
+// El usuario puede cambiarlo libremente antes de escribir su número.
+const DEFAULT_COUNTRY: Country = "US";
 
 // Sólo para maquetación/pruebas. Cambiar a false o eliminar este bloque antes de publicar.
 const SHOW_DEVELOPMENT_CONTROLS = false;
@@ -45,6 +55,9 @@ function validateField(field: EstimateField, value: string | undefined) {
   if (!value?.trim()) return "This field is required.";
   if (field.type === "email" && !/^\S+@\S+\.\S+$/.test(value)) {
     return "Enter a valid email address.";
+  }
+  if (field.type === "tel" && !isValidPhoneNumber(value)) {
+    return "Enter a valid phone number.";
   }
   return undefined;
 }
@@ -167,7 +180,7 @@ export default function EstimateForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative z-[3] flex h-full w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
+      className="relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
     >
       <div className="container-full flex flex-col justify-center items-end">
         <div className="mb-2.25 flex items-center justify-between text-[16px] font-normal leading--[100%] text-white">
@@ -240,36 +253,66 @@ export default function EstimateForm() {
               </fieldset>
             ) : (
               <div className="grid w-full gap-3">
-                {step.fields.map((field) => (
-                  <label key={field.id} className="grid gap-1">
-                    <span className="sr-only">{field.label}</span>
-                    <input
-                      id={field.id}
-                      name={field.id}
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      autoComplete={field.autocomplete}
-                      value={answers[field.id] ?? ""}
-                      onChange={(event) =>
-                        setAnswer(field.id, event.target.value)
-                      }
-                      aria-invalid={Boolean(errors[field.id])}
-                      aria-describedby={
-                        errors[field.id] ? `${field.id}-error` : undefined
-                      }
-                      className="w-full rounded-lg border border-[#E3E3E3] bg-black/10 px-4 py-5.25 text-[15px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-[100%]"
-                    />
-                    {errors[field.id] && (
-                      <span
-                        id={`${field.id}-error`}
-                        role="alert"
-                        className="text-xs text-secondary"
-                      >
-                        {errors[field.id]}
-                      </span>
-                    )}
-                  </label>
-                ))}
+                {step.fields.map((field) =>
+                  field.type === "tel" ? (
+                    <label key={field.id} className="grid gap-1">
+                      <span className="sr-only">{field.label}</span>
+                      <PhoneInput
+                        id={field.id}
+                        name={field.id}
+                        placeholder={field.placeholder}
+                        autoComplete={field.autocomplete}
+                        international
+                        defaultCountry={DEFAULT_COUNTRY}
+                        value={answers[field.id] as string | undefined}
+                        onChange={(value) => setAnswer(field.id, value ?? "")}
+                        aria-invalid={Boolean(errors[field.id])}
+                        aria-describedby={
+                          errors[field.id] ? `${field.id}-error` : undefined
+                        }
+                        className="estimate-phone-input"
+                      />
+                      {errors[field.id] && (
+                        <span
+                          id={`${field.id}-error`}
+                          role="alert"
+                          className="text-xs text-secondary"
+                        >
+                          {errors[field.id]}
+                        </span>
+                      )}
+                    </label>
+                  ) : (
+                    <label key={field.id} className="grid gap-1">
+                      <span className="sr-only">{field.label}</span>
+                      <input
+                        id={field.id}
+                        name={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        autoComplete={field.autocomplete}
+                        value={answers[field.id] ?? ""}
+                        onChange={(event) =>
+                          setAnswer(field.id, event.target.value)
+                        }
+                        aria-invalid={Boolean(errors[field.id])}
+                        aria-describedby={
+                          errors[field.id] ? `${field.id}-error` : undefined
+                        }
+                        className="w-full rounded-lg border border-[#E3E3E3] bg-black/10 px-4 py-5.25 text-[15px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-[100%]"
+                      />
+                      {errors[field.id] && (
+                        <span
+                          id={`${field.id}-error`}
+                          role="alert"
+                          className="text-xs text-secondary"
+                        >
+                          {errors[field.id]}
+                        </span>
+                      )}
+                    </label>
+                  ),
+                )}
               </div>
             )}
 
