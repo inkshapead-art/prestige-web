@@ -12,23 +12,26 @@ const { content } = Astro.props as Props;
   class="bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000700]/0 flex justify-center items-center relative overflow-hidden w-full"
 >
   <div
-    class="container-full grid grid-cols-2 justify-center items-center gap-5 py-25"
+    class="container-full grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-6 md:gap-5 py-10 md:py-25"
   >
-    <div class='w-full flex flex-col justify-center items-start gap-10'>
+    <div
+      class="w-full flex flex-col justify-center items-start gap-8 md:gap-10"
+    >
       <div class="flex flex-col justify-center items-start gap-6">
         <h2 set:html={content.title} class="title text-white" />
         <p set:html={content.description} class="paragraph text-white" />
       </div>
       <div
-        class="w-full grid grid-cols-2 justify-start items-start gap-x-6 gap-y-12"
+        class="w-full grid grid-cols-1 lg:grid-cols-2 justify-start items-start gap-x-6 gap-y-6 lg:gap-y-12"
       >
         {
           content.items.map((item) => (
-            <div class="flex flex-col justify-center items-start gap-4 text-white">
+            <div class="flex flex-row lg:flex-col justify-start lg:justify-center items-center lg:items-start gap-2 md:gap-4 text-white">
+              <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-secondary lg:hidden" />
               <h3 class="subtitle">{item.title}</h3>
-              <ul class="flex flex-col justify-center items-start gap-4">
+              <ul class="lg:flex flex-col justify-center items-start gap-4 hidden ">
                 {item.list.map((listItem) => (
-                  <li class="flex justify-center items-center gap-1">
+                  <li class="flex justify-start xl:justify-center items-center gap-1">
                     <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-secondary" />
                     <p class="paragraph" set:html={listItem} />
                   </li>

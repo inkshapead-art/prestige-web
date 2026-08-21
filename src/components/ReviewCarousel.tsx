@@ -8,7 +8,6 @@ import {
 } from "react";
 
 const GAP = 24;
-const PEEK_FRACTION = 0.2;
 const AUTOPLAY_INTERVAL = 8000;
 
 type ReviewItem = {
@@ -35,6 +34,7 @@ export default function ReviewCarousel({ items }: CarouselReviewProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
   const [visibleItems, setVisibleItems] = useState(1);
+  const [peekFraction, setPeekFraction] = useState(0.2);
 
   const dragStart = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,12 +54,16 @@ export default function ReviewCarousel({ items }: CarouselReviewProps) {
       const windowWidth = window.innerWidth;
       if (windowWidth < 640) {
         setVisibleItems(1);
+        setPeekFraction(0.1);
       } else if (windowWidth < 1024) {
         setVisibleItems(2);
+        setPeekFraction(0.15);
       } else if (windowWidth < 1280) {
         setVisibleItems(3);
+        setPeekFraction(0.2);
       } else {
         setVisibleItems(4);
+        setPeekFraction(0.2);
       }
 
       measureContainerWidth();
@@ -189,15 +193,15 @@ export default function ReviewCarousel({ items }: CarouselReviewProps) {
   const itemWidth =
     containerWidth > 0
       ? (containerWidth - (visibleItems + 1) * GAP) /
-        (visibleItems + 2 * PEEK_FRACTION)
+        (visibleItems + 2 * peekFraction)
       : 0;
   const stepWidth = itemWidth + GAP;
   // Account for the outer gaps so the neighboring-card peeks match exactly.
-  const peekOffset = PEEK_FRACTION * itemWidth + GAP;
+  const peekOffset = peekFraction * itemWidth + GAP;
   const translateX = -currentIndex * stepWidth + peekOffset + dragOffset;
 
   const arrowClass =
-    "w-12 h-12 rounded-full border border-[#2D2D2D]/20 bg-white text-[#2D2D2D] flex items-center justify-center transition-colors duration-300 hover:bg-[#2D2D2D] hover:text-white cursor-pointer";
+    "w-8 h-8 rounded-full border border-white text-white flex items-center justify-center transition-colors duration-300 hover:bg-[#2D2D2D] hover:text-white cursor-pointer";
 
   return (
     <section className="w-full flex flex-col justify-center items-center">

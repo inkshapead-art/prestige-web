@@ -10,10 +10,10 @@ const { content } = Astro.props as Props;
 ---
 
 <section
-  class="flex container-full justify-center items-center gap-12 py-20 flex-col text-paragraph"
+  class="flex container-full justify-center items-center gap-12 pt-10 pb-5 md:py-20 flex-col text-paragraph"
 >
-  <div class="flex flex-col justify-center items-center gap-10">
-    <div class="flex flex-col justify-center items-center gap-4">
+  <div class="flex flex-col justify-center items-center gap-6 md:gap-10">
+    <div class="flex flex-col justify-center items-center gap-6 md:gap-4">
       <h2 set:html={content.title} class="title text-center" />
       <p class="paragraph text-center" set:html={content.description} />
     </div>
@@ -25,11 +25,11 @@ const { content } = Astro.props as Props;
     />
   </div>
   <div
-    class="grid grid-cols-5 grid-rows-2 gap-6 w-full h-full min-h-[400px] max-w-[1090px]"
+    class="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 gap-6 w-full h-full min-h-[400px] max-w-[1090px]"
   >
     <!-- Fila 1 -->
     <div
-      class="col-span-2 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex flex-col justify-center items-start gap-6"
+      class="col-span-1 md:col-span-2 bg-[#F6F6F6] text-paragraph p-6 md:p-4 lg:p-8 rounded-xl flex flex-col justify-center items-start gap-4 md:gap-6"
     >
       <p
         class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
@@ -39,7 +39,7 @@ const { content } = Astro.props as Props;
       <h3 class="subtitle">{content.items[0].title}</h3>
       <p class="paragraph">{content.items[0].description}</p>
       <div
-        class="w-full flex justify-center items-center bg-white rounded-lg p-4 gap-6"
+        class="w-full md:flex justify-center items-center bg-white rounded-lg p-4 gap-6 hidden "
       >
         <div
           class="relative w-full h-auto flex justify-center items-center max-w-[58px]"
@@ -70,12 +70,12 @@ const { content } = Astro.props as Props;
           height="56"
           decoding="async"
           loading="lazy"
-          class="flex-1 h-auto"
+          class="w-[70%] lg:flex-1 lg:h-auto"
         />
       </div>
     </div>
     <div
-      class="col-span-3 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex justify-center items-start gap-6"
+      class="col-span-1 md:col-span-3 bg-[#F6F6F6] text-paragraph p-6 md:p-4 lg:p-8 rounded-xl flex justify-center items-start gap-4 md:gap-6"
     >
       <div class="flex flex-col justify-center items-start gap-6">
         <p
@@ -87,7 +87,7 @@ const { content } = Astro.props as Props;
         <p class="paragraph">{content.items[1].description}</p>
       </div>
       <div
-        class="w-auto h-full bg-white p-7 flex justify-center items-center rounded-lg"
+        class="w-auto h-[75%] lg:h-full bg-white p-7 md:flex justify-center items-center rounded-lg hidden self-center lg:self-start"
         style="aspect-ratio: 305/293;"
       >
         <img
@@ -104,7 +104,7 @@ const { content } = Astro.props as Props;
 
     <!-- Fila 2 -->
     <div
-      class="col-span-3 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex justify-center items-start gap-6"
+      class="col-span-1 md:col-span-3 bg-[#F6F6F6] text-paragraph p-6 md:p-4 lg:p-8 rounded-xl flex justify-center items-start gap-4 md:gap-6"
     >
       <div class="flex flex-col justify-center items-start gap-6">
         <p
@@ -116,7 +116,7 @@ const { content } = Astro.props as Props;
         <p class="paragraph">{content.items[2].description}</p>
       </div>
       <div
-        class="w-auto h-full bg-white p-7 flex justify-center items-center rounded-lg"
+        class="w-auto h-[80%] lg:h-full bg-white p-7 md:flex justify-center items-center rounded-lg hidden self-center lg:self-start"
         style="aspect-ratio: 305/293;"
       >
         <img
@@ -131,7 +131,7 @@ const { content } = Astro.props as Props;
       </div>
     </div>
     <div
-      class="col-span-2 bg-[#F6F6F6] text-paragraph p-8 rounded-xl flex flex-col justify-center items-start gap-6"
+      class="col-span-1 md:col-span-2 bg-[#F6F6F6] text-paragraph p-6 md:p-4 lg:p-8 rounded-xl flex flex-col justify-center items-start gap-4 md:gap-6"
     >
       <p
         class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase"
@@ -141,7 +141,7 @@ const { content } = Astro.props as Props;
       <h3 class="subtitle">{content.items[3].title}</h3>
       <p class="paragraph">{content.items[3].description}</p>
       <div
-        class="w-full flex justify-center items-center bg-white rounded-lg p-4 gap-6"
+        class="w-full md:flex justify-center items-center bg-white rounded-lg p-4 gap-6 hidden "
       >
         <img
           src={`/images/icons/process-4.svg`}

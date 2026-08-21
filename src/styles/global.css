@@ -139,7 +139,14 @@ html {
   font-weight: 400;
   line-height: 120%;
 }
-@media (max-width: 769px) {
+
+@media (max-width: 1024px) {
+  .title-sm {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 750px) {
   .title-sm {
     font-size: 32px;
   }
@@ -152,7 +159,7 @@ html {
 }
 @media (max-width: 769px) {
   .paragraph {
-    font-size: 15px;
+    font-size: 14x;
   }
 }
 
@@ -164,7 +171,7 @@ html {
 }
 @media (max-width: 769px) {
   .paragraph-xs {
-    font-size: 15px;
+    font-size: 10px;
   }
 }
 
@@ -177,7 +184,7 @@ html {
 
 @media (max-width: 769px) {
   .subtitle {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 .subtitle-dark {
@@ -307,4 +314,8 @@ html {
 
 .shadow-button {
   box-shadow: 0 0 30px 0 #b59353;
+}
+
+.back-mobile-hero {
+  background: linear-gradient(0deg, #000 1.08%, rgba(0, 0, 0, 0) 54.37%);
 }

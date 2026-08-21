@@ -7,9 +7,11 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="container-full flex justify-between items-center py-20 gap-20">
+<section
+  class="container-full flex flex-col md:flex-row jusitfy-center md:justify-between items-center py-10 md:py-20 gap-8 lg:gap-20"
+>
   <div
-    class="w-[55%] h-auto relative rounded-xl overflow-hidden"
+    class="w-full md:w-[55%] h-auto relative rounded-xl overflow-hidden"
     style="aspect-ratio: 682/420;"
   >
     <img
@@ -23,7 +25,7 @@ const { content } = Astro.props as Props;
     />
   </div>
   <div
-    class="flex flex-col justify-center itmes-start gap-7 text-paragraph w-[45%]"
+    class="flex flex-col justify-center itmes-start gap-6 md:gap-7 text-paragraph w-full md:w-[45%]"
   >
     <h2 set:html={content.title} class="title" />
     <p class="paragraph">{content.description}</p>

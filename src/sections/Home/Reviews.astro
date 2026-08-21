@@ -9,7 +9,7 @@ const { content } = Astro.props as Props;
 ---
 
 <section
-  class="back-gradient flex flex-col justify-center items-center py-20 gap-11 w-full"
+  class="back-gradient flex flex-col justify-center items-center py-10 md:py-20 gap-8 md:gap-11 w-full"
 >
   <h2 set:html={content.title} class="title text-white text-center" />
   <ReviewCarousel items={content.items} client:load />

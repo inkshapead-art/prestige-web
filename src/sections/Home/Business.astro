@@ -8,30 +8,67 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class='back-gradient w-full flex justify-center items-center relative overflow-hidden h-auto' style='aspect-ratio: 1440/600;'>
-  <img class="w-auto h-full absolute z-5 right-0" src="/images/home/business.webp" width="1500" height="1200" alt="Business" decoding="async" loading="lazy"/>
-  <div class='container-full flex flex-col justify-center items-start relative z-0'>
-    <div class='flex flex-col justify-center items-start gap-10'>
-      <div class='flex flex-col justify-center items-start gap-6'> 
-        <h2 set:html={content.title} class="title text-white"></h2>
-        <p class='paragraph text-white w-[36%]'>{content.description}</p>
+
+<section
+  class="back-gradient w-full flex flex-col lg:flex-row justify-center items-center relative overflow-hidden h-auto aspect-auto lg:aspect-1440/600 gap-8 lg:gap-0"
+>
+  <img
+    class="w-auto h-full absolute z-5 right-0 hidden lg:block"
+    src="/images/home/business.webp"
+    width="1500"
+    height="1200"
+    alt="Business"
+    decoding="async"
+    loading="lazy"
+  />
+  <div
+    class="container-full flex flex-col justify-center items-start relative z-0 pt-10 lg:pt-0"
+  >
+    <div
+      class="flex flex-col justify-center items-start gap-8 lg:gap-2 xl:gap-10"
+    >
+      <div class="flex flex-col justify-center items-start gap-6 lg:gap-3 xl:gap-6">
+        <h2
+          set:html={content.title}
+          class="text-[32px] xl:text-[48px] font-normal leading-[120%] text-white"
+        />
+        <p class="paragraph text-white w-full lg:w-[45%] xl:w-[36%]">
+          {content.description}
+        </p>
       </div>
-      <div class='flex flex-col justify-center items-start gap-4'>
+      <div class="flex flex-col justify-center items-start gap-4 lg:gap-2 xl:gap-4">
         {
-          content.items.map((item,index)=>( 
-            <div class='flex justify-center items-center gap-2'>
-                <img src={`/images/icons/check-green.svg`} alt={item} width="32" height="32" class='w-8 h-8' decoding="async" loading="lazy"/>
-                <p set:html={item} class='paragraph text-white'></p>
-              </div>
+          content.items.map((item, index) => (
+            <div class="flex justify-center items-center gap-2">
+              <img
+                src={`/images/icons/check-green.svg`}
+                alt={item}
+                width="32"
+                height="32"
+                class="w-8 h-8"
+                decoding="async"
+                loading="lazy"
+              />
+              <p set:html={item} class="paragraph text-white" />
+            </div>
           ))
         }
       </div>
       <Button
-          text={content.button.label}
-          textClass={BUTTON_COLOR_CLASSES.text1}
-          extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
-          href={content.button.href}
-        />
+        text={content.button.label}
+        textClass={BUTTON_COLOR_CLASSES.text1}
+        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+        href={content.button.href}
+      />
     </div>
   </div>
+  <img
+    class="w-full h-auto lg:hidden block"
+    src="/images/home/business.webp"
+    width="1500"
+    height="1200"
+    alt="Business"
+    decoding="async"
+    loading="lazy"
+  />
 </section>

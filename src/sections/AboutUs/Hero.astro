@@ -11,11 +11,11 @@ const { content } = Astro.props as Props;
 
 <section class="back-gradient w-full flex justify-center items-center">
   <div
-    class="container-full flex flex-col justify-center items-center gap-10 py-20"
+    class="container-full flex flex-col justify-center items-center gap-8 md:gap-10 pt-20 pb-10 md:py-20"
   >
     <div class="flex flex-col justify-center items-center gap-6 text-white">
       <h1 set:html={content.title} class="title text-center" />
-      <p class="paragraph w-[40%] text-center">{content.description}</p>
+      <p class="paragraph w-full md:w-[70%] md:w-[40%] text-center">{content.description}</p>
     </div>
 
     <Button

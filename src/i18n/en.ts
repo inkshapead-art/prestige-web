@@ -56,15 +56,15 @@ export default {
       list: [
         {
           icon: "shield",
-          label: "100% performance <br/> guarantee",
+          label: "100% performance <br class='hidden md:block'/> guarantee",
         },
         {
           icon: "men",
-          label: "5,000+ Business <br/> Owners Funded",
+          label: "5,000+ Business <br class='hidden md:block'/> Owners Funded",
         },
         {
           icon: "star",
-          label: "Proven funding <br/> experts",
+          label: "Proven funding <br class='hidden md:block'/> experts",
         },
       ],
       button: {
@@ -131,7 +131,7 @@ export default {
     },
     need: {
       title:
-        "Everything You Need to Build a <br/> <span class='text-secondary font-georgia'>Business Banks Want to Fund</span>",
+        "Everything You Need to Build a <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Business Banks Want to Fund</span>",
       description:
         "Our end-to-end funding system helps you secure capital, strengthen your financial profile, and position your business for sustainable growth. Every solution is designed to increase lender confidence and unlock larger funding opportunities over time.",
       list: [
@@ -254,7 +254,7 @@ export default {
     },
     fundable: {
       title:
-        "We Don't Just Find Funding. <br/> <span class='text-secondary font-georgia'>We Build Fundable <br/> Businesses.</span>",
+        "We Don't Just Find Funding. <br class='block md:hidden lg:block'/> <span class='text-secondary font-georgia'>We Build Fundable <br class='block md:hidden lg:block'/> Businesses.</span>",
       items: [
         "Funding Strategy",
         "Dedicated Funding Expert",
@@ -283,9 +283,9 @@ export default {
     "business-funding": {
       hero: {
         title:
-          'Access Business <br/> Capital <span class="text-secondary font-georgia">Without <br/> Guesswork</span>',
+          'Access Business <br class="hidden md:block"/> Capital <span class="text-secondary font-georgia">Without <br class="hidden md:block"/> Guesswork</span>',
         description:
-          "We help established businesses secure strategic funding through lender-<br/>focused strategies that support sustainable growth and expansion.",
+          'We help established businesses secure strategic funding through lender-<br class="hidden md:block"/>focused strategies that support sustainable growth and expansion.',
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",
@@ -294,7 +294,7 @@ export default {
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br/> Your Business</span>',
+          'Funding Built  <span class="text-secondary font-georgia">Around <br class="hidden lg:block"/> Your Business</span>',
         description:
           "We identify funding opportunities based on your business profile.",
         items: [
@@ -312,7 +312,7 @@ export default {
       },
       information: {
         title:
-          'Approval Starts Long <br/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'Approval Starts Long <br class="block md:hidden lg:block"/> <span class="text-secondary font-georgia">Before You Apply</span>',
         description:
           "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
         items: [
@@ -370,9 +370,9 @@ export default {
     "credit-optimization": {
       hero: {
         title:
-          'Strong Credit  <br/> Creates <span class="text-secondary font-georgia">Better <br/> Opportunities</span>',
+          'Strong Credit  <br class="hidden md:block"/> Creates <span class="text-secondary font-georgia">Better <br class="hidden md:block"/> Opportunities</span>',
         description:
-          "We optimize personal and business credit to maximize funding <br/> opportunities, lender confidence, and better financing terms.",
+          'We optimize personal and business credit to maximize funding <br class="hidden md:block"/> opportunities, lender confidence, and better financing terms.',
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",
@@ -381,7 +381,7 @@ export default {
       },
       statistics: {
         title:
-          'Optimize  <span class="text-secondary font-georgia">Personal <br/> Credit</span>',
+          'Optimize  <span class="text-secondary font-georgia">Personal <br class="hidden lg:block"/> Credit</span>',
         description: "We help improve the factors lenders evaluate most.",
         items: [
           "Credit utilization",
@@ -398,7 +398,7 @@ export default {
       },
       information: {
         title:
-          'Build Business Credit <br/> <span class="text-secondary font-georgia">That Works</span>',
+          'Build Business Credit <br /> <span class="text-secondary font-georgia">That Works</span>',
         description:
           "Create a business credit profile capable of supporting future funding and long-term business growth.",
         items: [
@@ -439,7 +439,7 @@ export default {
       },
       fundable: {
         title:
-          "Better Credit. Better Terms. <br/> <span class='text-secondary font-georgia'>Higher Scores. Larger <br/> Opportunities.</span>",
+          "Better Credit. Better Terms. <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Higher Scores. Larger <br class='hidden md:block'/> Opportunities.</span>",
         items: [
           "Higher approvals",
           "Lower interest rates",
@@ -715,7 +715,7 @@ export default {
   howItWorks: {
     hero: {
       title:
-        'Four Simple Steps to <br/> <span class="text-secondary font-georgia">Become Funding <br/> Ready</span>',
+        'Four Simple Steps to <br class="block md:hidden lg:block"/> <span class="text-secondary font-georgia">Become Funding <br class="block md:hidden lg:block"/> Ready</span>',
       description:
         "Our proven process is designed to strengthen your business, improve lender confidence, and position you for long-term access to business funding.",
       list: [],
@@ -728,7 +728,7 @@ export default {
       title:
         'Our Proven <span class="text-secondary font-georgia">Funding Process</span>',
       description:
-        "A step-by-step system that prepares your business, secures funding, and <br/> supports long-term growth.",
+        "A step-by-step system that prepares your business, secures funding, and <br class='hidden md:block'/> supports long-term growth.",
       button: {
         label: "Schedule My Meeting",
         href: "/scheduling",
@@ -763,7 +763,7 @@ export default {
   },
   successStories: {
     title:
-      "Real businesses. Real funding. <br/> <span class='text-secondary font-georgia'>Real growth.</span>",
+      "Real businesses. Real funding. <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Real growth.</span>",
     description:
       "See how business owners have secured the capital they needed to expand operations, increase cash flow, and scale with confidence through our proven funding system.",
     items: [
@@ -854,23 +854,23 @@ export default {
       items: [
         {
           label: "Business Funding",
-          href: "/business-funding",
+          href: "/en/business-funding",
         },
         {
           label: "Credit Optimization",
-          href: "/credit-optimization",
+          href: "/en/credit-optimization",
         },
         {
           label: "Lender-Ready Growth System",
-          href: "/lender-ready-growth-system",
+          href: "/en/lender-ready-growth-system",
         },
         {
           label: "Flow Optimization",
-          href: "/flow-optimization",
+          href: "/en/flow-optimization",
         },
         {
           label: "Business Consulting",
-          href: "/business-consulting",
+          href: "/en/business-consulting",
         },
       ],
     },
