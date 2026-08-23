@@ -1,0 +1,33 @@
+---
+import type { Language } from "../../../types/language.type";
+import type { SolutionCardData, WidgetType } from "../../../types/solutionCards.type";
+import DonutWidget from "./DonutWidget.astro";
+import GaugeWidget from "./GaugeWidget.astro";
+import BarListWidget from "./BarListWidget.astro";
+import BadgeProgressWidget from "./BadgeProgressWidget.astro";
+import ChecklistWidget from "./ChecklistWidget.astro";
+import LineChartWidget from "./LineChartWidget.astro";
+
+// Add a new widget by (1) creating its .astro file next to these,
+// (2) importing it above, and (3) adding one line to this map.
+const WIDGET_MAP = {
+  donut: DonutWidget,
+  gauge: GaugeWidget,
+  barList: BarListWidget,
+  badgeProgress: BadgeProgressWidget,
+  checklist: ChecklistWidget,
+  lineChart: LineChartWidget,
+} as const;
+
+interface Props {
+  type: WidgetType;
+  title: string;
+  data: SolutionCardData;
+  lang: Language;
+}
+
+const { type, title, data, lang } = Astro.props;
+const Widget = WIDGET_MAP[type];
+---
+
+{Widget && <Widget title={title} data={data as any} lang={lang} />}

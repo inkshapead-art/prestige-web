@@ -2,8 +2,12 @@ export default {
   header: {
     nav: [
       {
+        label: "Home",
+        href: "/",
+      },
+      {
         label: "Solutions ",
-        href: "/scheduling",
+        href: "#",
       },
       {
         label: "How it works",
@@ -456,9 +460,9 @@ export default {
     "lender-ready-growth-system": {
       hero: {
         title:
-          'Become The <br/> Business <span class="text-secondary font-georgia">Banks <br/> Want To Fund</span>',
+          'Become The <br class="hidden md:block"/> Business <span class="text-secondary font-georgia">Banks <br class="hidden md:block"/> Want To Fund</span>',
         description:
-          "We prepare every aspect of your company to meet lender <br/> expectations before funding applications begin.",
+          "We prepare every aspect of your company to meet lender <br class='hidden md:block'/> expectations before funding applications begin.",
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",
@@ -542,9 +546,9 @@ export default {
     "flow-optimization": {
       hero: {
         title:
-          'Improve How Money <br/> Moves <span class="text-secondary font-georgia">Through Your <br/> Business</span>',
+          'Improve How Money <br class="hidden md:block"/> Moves <span class="text-secondary font-georgia">Through Your <br class="hidden md:block"/> Business</span>',
         description:
-          "Healthy cash flow creates stronger businesses and stronger <br/> funding opportunities.",
+          "Healthy cash flow creates stronger businesses and stronger <br class='hidden md:block'/> funding opportunities.",
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",
@@ -628,9 +632,9 @@ export default {
     "business-consulting": {
       hero: {
         title:
-          'Strategic Financial <br/> Guidance <span class="text-secondary font-georgia">For <br/> Growing Businesses</span>',
+          'Strategic Financial <br class="hidden md:block"/> Guidance <span class="text-secondary font-georgia">For <br class="hidden md:block"/> Growing Businesses</span>',
         description:
-          "Beyond funding, we help business owners make smarter <br/> financial decisions for long-term expansion",
+          "Beyond funding, we help business owners make smarter <br class='hidden md:block'/> financial decisions for long-term expansion",
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",

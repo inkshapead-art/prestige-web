@@ -1,0 +1,23 @@
+---
+/**
+ * Pure visual chrome for a hero card: background, radius, border, shadow, padding.
+ * Has zero knowledge of what's inside — DonutWidget, GaugeWidget, etc. all render
+ * inside this same shell so every solution's cards look consistent.
+ */
+interface Props {
+  /** "primary" = the larger top-left card. "secondary" = the compact bottom-right one. */
+  variant?: "primary" | "secondary";
+  class?: string;
+}
+
+const { variant = "primary", class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "bg-[#F3F4F1] rounded-[12px] shadow-[0_100px_28px_0_rgba(0,0,0,0),0_64px_25px_0_rgba(0,0,0,0.03),0_36px_21px_0_rgba(0,0,0,0.10),0_16px_16px_0_rgba(0,0,0,0.17),0_4px_9px_0_rgba(0,0,0,0.20)] p-2.5 xl:p-4 w-auto scale-100 md:scale-90 lg:scale-100",
+    className,
+  ]}
+>
+  <slot />
+</div>

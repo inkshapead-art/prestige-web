@@ -1,0 +1,115 @@
+---
+import type { Language } from "../../../types/language.type";
+import type { LineChartData } from "../../../types/solutionCards.type";
+
+interface Props {
+  title: string;
+  data: LineChartData;
+  lang: Language;
+}
+
+const { title, data, lang } = Astro.props;
+const {
+  valueLabel,
+  bigValue,
+  badgeText,
+  series,
+  colors = ["#006836", "#D3AE6A"],
+} = data;
+
+const WIDTH = 192;
+const HEIGHT = 73;
+const PAD = 4;
+
+function pointsFor(values: number[]) {
+  const step = (WIDTH - PAD * 2) / (values.length - 1);
+  return values.map((v, i) => {
+    const x = PAD + i * step;
+    const y = HEIGHT - PAD - (v / 100) * (HEIGHT - PAD * 2);
+    return { x, y };
+  });
+}
+
+const lines = series.map((values, i) => ({
+  color: colors[i % colors.length],
+  points: pointsFor(values),
+}));
+
+const GRID_ROWS = 4;
+const gridLines = Array.from(
+  { length: GRID_ROWS },
+  (_, i) => PAD + (i / (GRID_ROWS - 1)) * (HEIGHT - PAD * 2),
+);
+---
+
+<div>
+  <h3
+    class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center md-[10px] md:mb-4"
+  >
+    {title}
+  </h3>
+
+  <div class="flex items-center justify-between gap-3 mb-4">
+    <div>
+      {
+        valueLabel && (
+          <p class="text-[6px] md:text-[10px] font-medium leading-[100%] text-paragraph">
+            {valueLabel[lang]}
+          </p>
+        )
+      }
+      <span class="text-[15px] md:text-[24px] font-medium leading-[120%] text-paragraph"
+        >{bigValue}</span
+      >
+    </div>
+    {
+      badgeText && (
+        <span class="shrink-0 text-[6px] md:text-[10px] font-normal text-accent bg-accent/10 rounded-full border border-accent px-2 py-1">
+          {badgeText}
+        </span>
+      )
+    }
+  </div>
+
+  <svg
+    viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+    class="w-[122px] md:w-[150px] lg:w-[192px] overflow-visible"
+  >
+    {
+      gridLines.map((y) => (
+        <line
+          x1={PAD}
+          y1={y}
+          x2={WIDTH - PAD}
+          y2={y}
+          stroke="#FFF"
+          stroke-width="1"
+        />
+      ))
+    }
+    {
+      lines.map((line) => (
+        <>
+          <polyline
+            points={line.points.map((p) => `${p.x},${p.y}`).join(" ")}
+            fill="none"
+            stroke={line.color}
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          {line.points.map((p) => (
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r="3.5"
+              fill="#FFFFFF"
+              stroke={line.color}
+              stroke-width="2.5"
+            />
+          ))}
+        </>
+      ))
+    }
+  </svg>
+</div>

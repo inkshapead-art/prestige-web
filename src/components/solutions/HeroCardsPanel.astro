@@ -1,0 +1,48 @@
+---
+import type { Language } from "../../types/language.type";
+import { heroCardsConfig } from "../../data/heroCardsConfig";
+import CardShell from "./CardShell.astro";
+import WidgetRegistry from "./widgets/WidgetRegistry.astro";
+
+/**
+ * Drop this INSIDE a `position: relative` wrapper around the hero photo.
+ * It renders the two hero cards for the given solution, absolutely
+ * positioned. The two offsets below (top-left / bottom-right) are the
+ * ONLY numbers that control position, and they are the same for all
+ * 5 solutions on purpose — change them here once and every hero page
+ * moves together.
+ */
+interface Props {
+  solution: string;
+  lang: Language;
+}
+
+const { solution, lang } = Astro.props;
+const cards = heroCardsConfig[solution];
+---
+
+{cards && (
+  <div class="absolute inset-0 z-20 pointer-events-none">
+    <div class="absolute left-5 md:right-[38%] md:left-auto xl:right-[37%] top-[40%] md:top-[40%] xl:top-[30%] pointer-events-auto">
+      <CardShell variant="primary">
+        <WidgetRegistry
+          type={cards.primary.widget}
+          title={cards.primary.title[lang]}
+          data={cards.primary.data}
+          lang={lang}
+        />
+      </CardShell>
+    </div>
+
+    <div class="absolute right-5 md:right-[8%] xl:right-[10%] bottom-[50%] md:bottom-[15%] xl:bottom-[25%] pointer-events-auto">
+      <CardShell variant="secondary">
+        <WidgetRegistry
+          type={cards.secondary.widget}
+          title={cards.secondary.title[lang]}
+          data={cards.secondary.data}
+          lang={lang}
+        />
+      </CardShell>
+    </div>
+  </div>
+)}

@@ -1,0 +1,46 @@
+---
+import type { Language } from "../../../types/language.type";
+import type { BarListData } from "../../../types/solutionCards.type";
+
+interface Props {
+  title: string;
+  data: BarListData;
+  lang: Language;
+}
+
+const { title, data, lang } = Astro.props;
+---
+
+<div>
+  <h3
+    class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph mb-[13.5px]"
+  >
+    {title}
+  </h3>
+  <ul class="flex flex-col gap-[15px] md:gap-6.5">
+    {
+      data.rows.map((row) => (
+        <li class="flex justify-start items-center gap-2">
+          <span
+            class="w-4 h-4 md:w-[22px] md:h-[22px] rounded-full inline-block shrink-0"
+            style={`background:${row.color}`}
+          />
+          <div>
+            <div class="flex items-center justify-between text-[6px] md:*:text-[8px] mb-1 md:mb-1.75 text-paragraph">
+              <span class="flex items-center gap-1.5  font-medium">
+                {row.label[lang]}
+              </span>
+              <span class="shrink-0">{row.statusText[lang]}</span>
+            </div>
+            <div class="h-1.25 w-[94px] md:w-[120px] lg:w-[168px] rounded-full bg-[#E3E2E2] overflow-hidden">
+              <div
+                class="h-full rounded-full"
+                style={`width:${row.percent}%;background:${row.color}`}
+              />
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</div>

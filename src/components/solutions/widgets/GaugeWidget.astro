@@ -1,0 +1,154 @@
+---
+import type { Language } from "../../../types/language.type";
+import type { GaugeData } from "../../../types/solutionCards.type";
+import ArrowUpIcon from "../icons/ArrowUpIcon.astro";
+
+interface Props {
+  title: string;
+  data: GaugeData;
+  lang: Language;
+}
+
+const { title, data, lang } = Astro.props;
+const { value, min, max, valueSuffix = "", statusLabel, callout } = data;
+
+const rangeMin = min ?? 0;
+const rangeMax = max ?? 100;
+const percent = Math.min(
+  100,
+  Math.max(0, ((value - rangeMin) / (rangeMax - rangeMin)) * 100),
+);
+
+const hubX = 92;
+const hubY = 35;
+const needleLength = 12;
+const angleDeg = 360 - (percent / 100) * 180;
+const angleRad = (angleDeg * Math.PI) / 180;
+const needleTipX = hubX + needleLength * Math.cos(angleRad);
+const needleTipY = hubY - needleLength * Math.sin(angleRad);
+
+// Arco ampliado horizontalmente
+const ARC_PATH = "M6,50 A44,43 0 0 1 94,50";
+const showMinMax = min !== undefined && max !== undefined;
+const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
+---
+
+<div>
+  <h3 class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center">
+    {title}
+  </h3>
+
+  <div class="relative mx-auto max-w-[100px] md:max-w-[130px] lg:max-w-[185px]">
+    <svg viewBox="0 0 100 60" class="w-full">
+      <defs>
+        <linearGradient
+          id={gradientId}
+          x1="6"
+          y1="50"
+          x2="94"
+          y2="50"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stop-color="#002D15"></stop>
+          <stop offset="100%" stop-color="#00A10B"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        d={ARC_PATH}
+        fill="none"
+        stroke={`url(#${gradientId})`}
+        stroke-width="5"
+        stroke-linecap="round"></path>
+
+      {
+        showMinMax && (
+          <>
+            <line
+              x1={hubX}
+              y1={hubY}
+              x2={needleTipX}
+              y2={needleTipY}
+              stroke="#000800"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <circle cx={hubX} cy={hubY} r="5" fill="#000800" />
+          </>
+        )
+      }
+    </svg>
+
+    {
+      showMinMax && (
+        <div class="flex justify-between text-[8.5px] font-semibold text-accent w-full mx-auto">
+          <span>{min}</span>
+          <span>{max}</span>
+        </div>
+      )
+    }
+
+    <div
+      class={`text-center absolute left-1/2 -translate-x-1/2 ${showMinMax ? "top-[60%]" : "top-[40%] md:top-[45%]"} w-full flex flex-col items-center`}
+    >
+      {
+        !showMinMax && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="33"
+            height="9"
+            viewBox="0 0 33 9"
+            fill="none"
+            class="mb-1 md:mb-2 ml-5"
+          >
+            <path
+              d="M32.5648 6.43096L5.00083 5.98427L5.35563 2.00004L32.5648 6.43096Z"
+              fill="#006836"
+            />
+            <path
+              d="M4 8C1.79086 8 -4.76837e-07 6.20914 -4.76837e-07 4C-4.76837e-07 1.79086 1.79086 -2.7141e-07 4 -1.74846e-07C6.20914 -7.8281e-08 8 1.79086 8 4C8 6.20914 6.20914 8 4 8Z"
+              fill="#000800"
+            />
+          </svg>
+        )
+      }
+      <div
+        class="text-[17px] xl:text-[29px] leading-[100%] font-semibold text-[#001C07]"
+      >
+        {value}{valueSuffix}
+      </div>
+      <div
+        class="text-[6px] xl:text-[12px] font-semibold leading-[100%] text-center text-accent mt-1"
+      >
+        {statusLabel[lang]}
+      </div>
+    </div>
+  </div>
+
+  {
+    callout && (
+      <div class="mt-3 md:mt-4 flex justify-start items-center gap-1.5 md:gap-2 bg-[#E3E2E2] rounded-lg p-2 md:p-2.5 w-auto">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 md:w-5.25 h-4 md:h-5.25"
+        >
+          <circle cx="7.75" cy="7.75" r="7.75" fill="#006836" />
+          <path
+            d="M7.52872 11.0714V3.98572M4.87158 6.64286L7.52872 3.98572L10.1859 6.64286"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <p
+          class="text-[6px] md:text-[8px] font-medium leading-[100%] text-paragraph"
+          set:html={callout.text[lang]}
+        />
+      </div>
+    )
+  }
+</div>

@@ -1,0 +1,52 @@
+---
+import type { Language } from "../../../types/language.type";
+import type { BadgeProgressData } from "../../../types/solutionCards.type";
+import ArrowUpIcon from "../icons/ArrowUpIcon.astro";
+
+interface Props {
+  title: string;
+  data: BadgeProgressData;
+  lang: Language;
+}
+
+const { title, data, lang } = Astro.props;
+const { bigValue, progressPercent, statusText } = data;
+---
+
+<div class="text-paragraph">
+  <h3 class="text-[10px] font-medium leading-[100%] text-paragraph">
+    {title}
+  </h3>
+  <div class="text-[20.3px] xl:text-[36px] font-medium leading-[120%] mb-[6.2px] md:mb-2.75">
+    {bigValue}
+  </div>
+  <div
+    class="h-2 md:h-3.5 w-[109px] lg:w-[193px] rounded-full bg-[#E3E2E2] overflow-hidden mb-[6.2px] md:mb-2.75"
+  >
+    <div
+      class="h-full rounded-full bg-[#051913]"
+      style={`width:${progressPercent}%`}
+    >
+    </div>
+  </div>
+  <div class="flex items-center justify-between">
+    <span class="text-[6px] lg:text-[10px] font-medium leading-[100%] text-accent"
+      >{statusText[lang]}</span
+    >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="7.75" cy="7.75" r="7.75" fill="#006836"></circle>
+      <path
+        d="M7.52872 11.0714V3.98572M4.87158 6.64286L7.52872 3.98572L10.1859 6.64286"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </div>
+</div>

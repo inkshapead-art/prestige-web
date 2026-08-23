@@ -8,7 +8,7 @@ import {
   tikTokLink,
   youtubeLink,
 } from "../constants/info";
-import Button from "./Button.astro";
+import { ChevronDown, ChevronRight, Menu, X, Plus, Minus } from "@lucide/astro";
 
 type Translations = typeof import("../i18n/en").default;
 type FooterContent = Translations["footer"];
@@ -66,10 +66,10 @@ const socialMedia = [
 <footer class="flex flex-col justify-center items-center w-full">
   <div class="bg-white w-full flex justify-center items-center">
     <div
-      class="container-full flex flex-col justify-center items-center py-10 gap-14"
+      class="container-full flex flex-col justify-center items-center py-10 gap-8 md:gap-14"
     >
       <div
-        class="w-full flex justify-between items-center pb-8 border-b border-black/10"
+        class="w-full flex justify-between items-center md:pb-8 md:border-b border-black/10"
       >
         <a
           href={`/${lang}`}
@@ -84,28 +84,141 @@ const socialMedia = [
             class="cursor-pointer w-[269px] h-auto block"
           />
         </a>
-        <p class="text-[20px] leading-[150%] font-normal text-paragraph">
+        <p
+          class="text-[20px] leading-[150%] font-normal text-paragraph hidden md:block"
+        >
           {content?.help}
         </p>
       </div>
+
       <div
         class="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-stretch h-full gap-6 lg:gap-0 w-full"
       >
+        <!-- Description -->
         <div
-          class="flex flex-col justify-center items-center lg:items-start gap-4 lg:gap-6 w-full lg:w-[385px] self-start"
+          class="flex flex-col justify-center items-start md:items-center lg:items-start gap-4 lg:gap-6 w-full lg:w-[385px] self-start"
         >
           <p class="text-[15px] leading-[170%] font-normal text-paragraph">
             {content?.description}
           </p>
+          <p
+            class="text-[20px] leading-[150%] font-semibold text-paragraph md:hidden block"
+          >
+            {content?.help}
+          </p>
         </div>
+
+        <!-- ACCORDIONS (Mobile & Tablet: from middle down) -->
+        <div class="flex flex-col w-full lg:hidden gap-6">
+          <!-- Quick Links Accordion -->
+          <div class="w-full flex flex-col gap-6">
+            <details class="group w-full">
+              <summary
+                class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
+              >
+                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                  {content?.quickLinks.title}
+                </h3>
+                <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
+                <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
+              </summary>
+              <ul class="flex flex-col justify-center items-start gap-4 pt-2 pb-4">
+                {
+                  content?.quickLinks.links.map((item) => (
+                    <li>
+                      <a
+                        href={`/${lang}/solutions${item.href}`}
+                        class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </details>
+            <div class="h-[1px] bg-[#0000001A] w-full"></div>
+          </div>
+
+          <!-- Company Accordion -->
+          <div class="w-full flex flex-col gap-6">
+            <details class="group w-full">
+              <summary
+                class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
+              >
+                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                  {content?.company.title}
+                </h3>
+                <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
+                <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
+              </summary>
+              <ul class="flex flex-col justify-center items-start gap-4 pt-2 pb-4">
+                {
+                  content?.company.links.map((item) => (
+                    <li>
+                      <a
+                        href={`/${lang}${item.href}`}
+                        class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </details>
+            <div class="h-[1px] bg-[#0000001A] w-full"></div>
+          </div>
+
+          <!-- Touch Accordion -->
+          <div class="w-full flex flex-col gap-6">
+            <details class="group w-full">
+              <summary
+                class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
+              >
+                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                  {content?.touch.title}
+                </h3>
+                <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
+                <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
+              </summary>
+              <div class="flex flex-col justify-center items-start gap-6 pt-2 pb-4">
+                {
+                  infoContacts.map((item) => (
+                    <div class="flex justify-start items-start gap-2">
+                      <img
+                        src={`/images/icons/${item.icon}.svg`}
+                        width="24"
+                        height="24"
+                        class="w-6 h-6"
+                        decoding="async"
+                        loading="lazy"
+                        alt={item.icon}
+                      />
+                      <a href={item.href}>
+                        <p
+                          set:html={item.label}
+                          class="text-[15px] font-normal leading-[150%] text-paragraph hover:font-semibold transition-all duration-300 ease-in-out"
+                        />
+                      </a>
+                    </div>
+                  ))
+                }
+              </div>
+            </details>
+            <div class="h-[1px] bg-[#0000001A] w-full"></div>
+          </div>
+        </div>
+
+        <!-- STANDARD COLUMNS (Desktop view only) -->
         <div
-          class="flex flex-col justify-center items-center lg:items-start gap-6 self-start w-full lg:w-auto"
+          class="hidden lg:flex flex-col justify-center items-start gap-6 self-start w-auto"
         >
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.quickLinks.title}
           </h3>
           <ul
-            class="flex flex-col justify-center items-center lg:items-start gap-6"
+            class="flex flex-col justify-center items-start gap-6"
           >
             {
               content?.quickLinks.links.map((item) => (
@@ -121,14 +234,15 @@ const socialMedia = [
             }
           </ul>
         </div>
+
         <div
-          class="flex flex-col justify-center items-center lg:items-start gap-6 self-start w-full lg:w-auto"
+          class="hidden lg:flex flex-col justify-center items-start gap-6 self-start w-auto"
         >
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.company.title}
           </h3>
           <ul
-            class="flex flex-col justify-center items-center lg:items-start gap-6"
+            class="flex flex-col justify-center items-start gap-6"
           >
             {
               content?.company.links.map((item) => (
@@ -144,14 +258,15 @@ const socialMedia = [
             }
           </ul>
         </div>
+
         <div
-          class="flex flex-col justify-center items-center lg:items-start gap-8 self-start w-full lg:w-auto"
+          class="hidden lg:flex flex-col justify-center items-start gap-8 self-start w-auto"
         >
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.touch.title}
           </h3>
           <div
-            class="flex flex-col justify-center items-center lg:items-start gap-8"
+            class="flex flex-col justify-center items-start gap-8"
           >
             {
               infoContacts.map((item) => (
@@ -177,6 +292,7 @@ const socialMedia = [
           </div>
         </div>
       </div>
+
       <div class="flex justify-start items-center gap-4 w-full">
         {
           socialMedia.map((item) => (
@@ -214,10 +330,10 @@ const socialMedia = [
       <p
         class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
       >
-        Copyright © 2026 by <a href="https://inkshapegroup.com"
+        Copyright © 2026 by <a href="https://inkshapegroup.com"
           >Inkshape Group</a
-        > | Privacy | <a href="/">Prestige Growth Partners </a> | Greenville & Charlotte
-        | Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
+        > | Privacy | <a href="/">Prestige Growth Partners </a> | Greenville & Charlotte
+        | Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
       </p>
     </div>
   </div>
