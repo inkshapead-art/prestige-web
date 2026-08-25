@@ -12,13 +12,13 @@ const { content } = Astro.props as Props;
 <section
   class="container-full flex flex-col justify-center items-center gap-8 md:gap-12 py-10 md:py-15"
 >
-  <h2 set:html={content.title} class="title text-paragraph" />
+  <h2 set:html={content.title} class="title text-paragraph fade-up-a" />
   <div
     class="w-full grid grid-cols-1 xl:grid-cols-3 gap-6 justify-center items-center"
   >
     {
       content.items.map((item, index) => (
-        <div class="flex flex-col md:flex-row xl:flex-col justify-center items-start md:items-center xl:items-start gap-4 md:gap-6 p-6 md:p-8 bg-[#F6F6F6] rounded-[12px] self-stretch">
+        <div class="flex flex-col md:flex-row xl:flex-col justify-center items-start md:items-center xl:items-start gap-4 md:gap-6 p-6 md:p-8 bg-[#F6F6F6] rounded-[12px] self-stretch fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
           <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
             <p class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase">
               {item.step}
@@ -27,7 +27,7 @@ const { content } = Astro.props as Props;
             <p class="paragraph text-paragraph">{item.description}</p>
           </div>
 
-          <div class="w-full bg-white py-8 px-5.5 rounded-[8px] grow flex justify-center items-center hidden md:block">
+          <div class="w-full bg-white py-8 px-5.5 rounded-[8px] grow flex justify-center items-center hidden md:block hover:scale-[1.02] transition-all duration-300 ease-in-out">
             {index === 0 ? (
               <div class="flex justify-between gap-5.75 w-full items-center relative ">
                 <div class="relative w-full h-auto flex justify-center items-center max-w-[120px] lg:max-w-[153px] ">

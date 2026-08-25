@@ -14,14 +14,16 @@ const { content } = Astro.props as Props;
     class="container-full flex flex-col justify-center items-center gap-8 md:gap-10 pt-20 pb-10 md:py-20"
   >
     <div class="flex flex-col justify-center items-center gap-6 text-white">
-      <h1 set:html={content.title} class="title text-center" />
-      <p class="paragraph w-full md:w-[70%] md:w-[40%] text-center">{content.description}</p>
+      <h1 set:html={content.title} class="title text-center fade-up-a" />
+      <p class="paragraph w-full md:w-[70%] md:w-[40%] text-center fade-up-a">
+        {content.description}
+      </p>
     </div>
 
     <Button
       text={content.button.label}
       textClass={BUTTON_COLOR_CLASSES.text1}
-      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1} fade-up-a`}
       href={content.button.href}
     />
   </div>

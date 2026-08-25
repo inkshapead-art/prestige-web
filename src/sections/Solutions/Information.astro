@@ -18,15 +18,15 @@ const { content } = Astro.props as Props;
       class="w-full flex flex-col justify-center items-start gap-8 md:gap-10"
     >
       <div class="flex flex-col justify-center items-start gap-6">
-        <h2 set:html={content.title} class="title text-white" />
-        <p set:html={content.description} class="paragraph text-white" />
+        <h2 set:html={content.title} class="title text-white fade-up-a" />
+        <p set:html={content.description} class="paragraph text-white fade-up-a" />
       </div>
       <div
         class="w-full grid grid-cols-1 lg:grid-cols-2 justify-start items-start gap-x-6 gap-y-6 lg:gap-y-12"
       >
         {
-          content.items.map((item) => (
-            <div class="flex flex-row lg:flex-col justify-start lg:justify-center items-center lg:items-start gap-2 md:gap-4 text-white">
+          content.items.map((item,index) => (
+            <div class="flex flex-row lg:flex-col justify-start lg:justify-center items-center lg:items-start gap-2 md:gap-4 text-white fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
               <div class="w-2.5 h-2.5 rounded-full border-[2.5px] border-secondary lg:hidden" />
               <h3 class="subtitle">{item.title}</h3>
               <ul class="lg:flex flex-col justify-center items-start gap-4 hidden ">
@@ -44,7 +44,7 @@ const { content } = Astro.props as Props;
     </div>
 
     <div
-      class="w-full h-auto overflow-hidden relative rounded-xl"
+      class="w-full h-auto overflow-hidden relative rounded-xl fade-up-a group"
       style="aspect-ratio:644/720"
     >
       <img
@@ -52,7 +52,7 @@ const { content } = Astro.props as Props;
         alt={content.title}
         width="900"
         height="1117"
-        class="object-cover w-full h-full object-center absolute"
+        class="object-cover w-full h-full object-center absolute group-hover:scale-[1.1] transition-all duration-300 ease-in-out"
         decoding="async"
         loading="lazy"
       />

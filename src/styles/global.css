@@ -249,36 +249,36 @@ html {
   }
 }
 
-.animation-up-fast {
+.fade-up-a {
   opacity: 0;
 }
 
-.animation-up-fast.active {
+.fade-up-a.active {
   animation: fadeUpFast 0.4s ease-in-out forwards;
 }
 
-.animation-fade-down {
+.fade-down-a {
   opacity: 0;
   transform: translateY(-100%);
 }
 
-.animation-fade-down.active {
+.fade-down-a.active {
   animation: fadeDown 0.6s ease-in-out forwards;
 }
 
-.animation-fade-left {
+.fade-left-a {
   opacity: 0;
 }
 
-.animation-fade-left.active {
+.fade-left-a.active {
   animation: fadeLeft 0.6s ease-in-out forwards;
 }
 
-.animation-fade-right {
+.fade-right-a {
   opacity: 0;
 }
 
-.animation-fade-right.active {
+.fade-right-a.active {
   animation: fadeRight 0.6s ease-in-out forwards;
 }
 

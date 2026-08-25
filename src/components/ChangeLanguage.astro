@@ -20,7 +20,7 @@ const currentLang = match ? match[1] : "en";
     aria-expanded="false"
   >
     <div
-      class={`text-[16px] text-white group-hover:font-extrabold font-normal leading-[150%] uppercase transition-all duration-300 ease-in-out flex justify-center items-center gap-2 `}
+      class={`text-[16px] ${isProjectPage ? "text-paragraph" : "text-white"} group-hover:font-extrabold font-normal leading-[150%] uppercase transition-all duration-300 ease-in-out flex justify-center items-center gap-2 `}
     >
       {
         currentLang === "en" ? (
@@ -43,7 +43,7 @@ const currentLang = match ? match[1] : "en";
     >
       <path
         d="M7 10L12 15L17 10"
-        stroke="white"
+        stroke={isProjectPage ? "black" : "white"}
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"></path>

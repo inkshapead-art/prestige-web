@@ -13,13 +13,13 @@ const { content } = Astro.props as Props;
   class="container-full flex flex-col justify-center items-start gap-8 md:gap-12 relative z-0 py-10 md:py-20"
 >
   <div class="flex flex-col justify-center items-center gap-6 text-paragraph">
-    <h2 set:html={content.title} class="title text-center" />
-    <p class="paragraph w-full md:w-[80%] lg:w-[63%] text-center">{content.description}</p>
+    <h2 set:html={content.title} class="title text-center fade-up-a" />
+    <p class="paragraph w-full md:w-[80%] lg:w-[63%] text-center fade-up-a">{content.description}</p>
   </div>
   <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 justify-center items-stretch">
   {
-    content.list.map((item) => (
-      <div class="flex flex-col justify-between items-start gap-6 md:gap-10 bg-[#F6F6F6] rounded-xl p-6 md:p-4 lg:p-8">
+    content.list.map((item, index) => (
+      <div class="flex flex-col justify-between items-start gap-6 md:gap-10 bg-[#F6F6F6] rounded-xl p-6 md:p-4 lg:p-8 fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
         <!-- Contenedor principal del texto con flex-1 para expandirse -->
         <div class="flex flex-col flex-1 justify-start items-start gap-4 text-paragraph">
           <img

@@ -2,51 +2,51 @@ export default {
   header: {
     nav: [
       {
-        label: "Home",
+        label: "Inicio",
         href: "/",
       },
       {
-        label: "Solutions ",
+        label: "Soluciones ",
         href: "#",
       },
       {
-        label: "How it works",
+        label: "Cómo funciona",
         href: "/how-it-works",
       },
       {
-        label: "Success Stories",
+        label: "Casos de Éxito",
         href: "/success-stories",
       },
       {
-        label: "About Us",
+        label: "Nosotros",
         href: "/about-us",
       },
     ],
     solutions: [
       {
-        label: "Business Funding",
+        label: "Financiamiento Empresarial",
         href: "/solutions/business-funding",
       },
       {
-        label: "Credit Optimization",
+        label: "Optimización de Crédito",
         href: "/solutions/credit-optimization",
       },
       {
-        label: "Lender-Ready Growth System",
+        label: "Sistema Crecimiento Prestar",
         href: "/solutions/lender-ready-growth-system",
       },
       {
-        label: "Flow Optimization",
+        label: "Optimización de Flujo",
         href: "/solutions/flow-optimization",
       },
       {
-        label: "Business Consulting",
+        label: "Consultoría Empresarial",
         href: "/solutions/business-consulting",
       },
     ],
     buttons: [
       {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     ],
@@ -56,131 +56,129 @@ export default {
       title:
         'Impulsamos tu crecimiento <br/> <span class="text-secondary font-georgia"> con un portafolio sólido.</span>',
       description:
-        "Access $150K to $1M in business funding through a proven system designed to optimize your business profile, improve lender confidence, and position you for long-term capital.",
+        "Accede de $150K a $1M en financiamiento empresarial mediante un sistema probado que optimiza tu perfil, aumenta la confianza de prestamistas y te posiciona para capital a largo plazo.",
       list: [
         {
           icon: "shield",
-          label: "100% performance <br class='hidden md:block'/> guarantee",
+          label: "Garantía de <br class='hidden md:block'/> desempeño 100%",
         },
         {
           icon: "men",
-          label: "5,000+ Business <br class='hidden md:block'/> Owners Funded",
+          label:
+            "5,000+ Dueños de <br class='hidden md:block'/> Negocios Financiados",
         },
         {
           icon: "star",
-          label: "Proven funding <br class='hidden md:block'/> experts",
+          label:
+            "Expertos probados <br class='hidden md:block'/> en financiamiento",
         },
       ],
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
     howWroks: {
       title:
-        "How Prestige <span class='text-secondary font-georgia'>Works</span>",
+        "Cómo Funciona <span class='text-secondary font-georgia'>Prestige</span>",
       items: [
         {
-          step: "Step 1",
-          title: "Business Funding Scan",
+          step: "Paso 1",
+          title: "Escaneo de Financiamiento",
           description:
-            "We analyze how lenders currently evaluate your business and identify what's limiting your funding potential.",
+            "Analizamos cómo evalúan los prestamistas tu negocio e identificamos qué limita tu potencial de financiamiento.",
         },
         {
-          step: "STEP 2",
-          title: "Capital Acquisition",
+          step: "PASO 2",
+          title: "Adquisición de Capital",
           description:
-            "Our team helps you secure funding through business loans, credit lines and strategic lending partners.",
+            "Nuestro equipo te ayuda a conseguir fondos mediante préstamos, líneas de crédito y socios prestamistas estratégicos.",
         },
         {
-          step: "STEP 3",
-          title: "Funding Optimization",
+          step: "PASO 3",
+          title: "Optimización de Financiamiento",
           description:
-            "We optimize your business profile so banks compete to lend you larger amounts with better terms.",
+            "Optimizamos tu perfil para que los bancos compitan prestándote montos mayores con mejores condiciones.",
         },
       ],
       item1: {
-        funding: "Funding Readiness",
+        funding: "Listo para Financiar",
         items: [
-          "Business Credit",
-          "Banking Profile",
-          "Revenue Strength",
-          "Compliance",
+          "Crédito Empresarial",
+          "Perfil Bancario",
+          "Fortaleza de Ingresos",
+          "Cumplimiento",
         ],
       },
       item2: {
-        business: "Business Loan",
-        funding: "Funding Readiness",
-        qualified: "Pre-Qualified",
+        business: "Préstamo Empresarial",
+        funding: "Listo para Financiar",
+        qualified: "Pre-Calificado",
       },
       item3: {
-        before: "Before",
-        after: "After",
+        before: "Antes",
+        after: "Después",
       },
     },
     business: {
       title:
-        'Is Your Business Ready <br/> to <span class="text-secondary font-georgia"> Unlock More Capital?</span>',
+        '¿Está Tu Negocio Listo <br/> para <span class="text-secondary font-georgia"> Desbloquear Más <br/> Capital?</span>',
       description:
-        "We partner with ambitious business owners who are serious about scaling. If your business meets these core requirements, our team will evaluate your funding potential and build a personalized roadmap toward larger capital opportunities.",
-      items: [
-        "U.S.-Based Business",
-        "$20K+ Monthly Revenue",
-        "Ready to Scale Your Business",
-      ],
+        "Nos asociamos con dueños de negocio ambiciosos que buscan escalar en serio. Si cumples los requisitos, evaluamos tu potencial y creamos una hoja de ruta personalizada hacia mayores oportunidades de capital.",
+      items: ["Negocio en EE. UU.", "Ingresos $20K+/mes", "Listo para Escalar"],
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
     need: {
       title:
-        "Everything You Need to Build a <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Business Banks Want to Fund</span>",
+        "Todo lo que Necesitas para Construir un <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Negocio que los Bancos Quieran Financiar</span>",
       description:
-        "Our end-to-end funding system helps you secure capital, strengthen your financial profile, and position your business for sustainable growth. Every solution is designed to increase lender confidence and unlock larger funding opportunities over time.",
+        "Nuestro sistema integral de financiamiento te ayuda a obtener capital, fortalecer tu perfil financiero y posicionar tu negocio para crecimiento sostenible. Cada solución aumenta la confianza del prestamista y desbloquea mayores oportunidades con el tiempo.",
       list: [
         {
           icon: "user-back",
-          title: "Business Funding",
+          title: "Financiamiento Empresarial",
           description:
-            "Access business loans, credit lines, and strategic funding solutions tailored to your company's growth goals.",
+            "Accede a préstamos, líneas de crédito y soluciones estratégicas adaptadas a las metas de crecimiento de tu empresa.",
           items: [
-            "Business Loans",
-            "Credit Lines",
-            "Strategic Lending Solutions",
+            "Préstamos Empresariales",
+            "Líneas de Crédito",
+            "Soluciones de Préstamo Estratégicas",
           ],
           button: {
-            label: "Schedule My Meeting",
+            label: "Agendar Mi Reunión",
             href: "/scheduling",
           },
         },
         {
           icon: "card",
-          title: "Credit Optimization",
+          title: "Optimización de Crédito",
           description:
-            "Improve your personal and business credit profile to maximize approvals and qualify for better funding terms.",
+            "Mejora tu perfil de crédito personal y empresarial para maximizar aprobaciones y calificar a mejores condiciones.",
           items: [
-            "Personal Credit Enhancement",
-            "Business Credit Building",
-            "Approval Optimization",
+            "Mejora de Crédito Personal",
+            "Construcción de Crédito Empresarial",
+            "Optimización de Aprobaciones",
           ],
           button: {
-            label: "Schedule My Meeting",
+            label: "Agendar Mi Reunión",
             href: "/scheduling",
           },
         },
         {
           icon: "up-back",
-          title: "Lender-Ready Growth System",
+          title: "Sistema de Crecimiento Listo para Prestar",
           description:
-            "Build a business that meets lender expectations through profile optimization, compliance, and long-term funding strategies.",
+            "Construye un negocio que cumpla expectativas de prestamistas mediante optimización de perfil, cumplimiento y estrategias de financiamiento a largo plazo.",
           items: [
-            "Business Profile Optimization",
-            "Compliance & Documentation",
-            "Long-Term Funding Strategy",
+            "Optimización de Perfil Empresarial",
+            "Cumplimiento y Documentación",
+            "Estrategia de Financiamiento a Largo Plazo",
           ],
           button: {
-            label: "Schedule My Meeting",
+            label: "Agendar Mi Reunión",
             href: "/scheduling",
           },
         },
@@ -188,23 +186,23 @@ export default {
     },
     reviews: {
       title:
-        'Why Business Owners <br/> <span class="text-secondary font-georgia">Trust Prestige</span>',
+        'Por Qué los Dueños de Negocio <br/> <span class="text-secondary font-georgia">Confían en Prestige</span>',
       items: [
         {
           image: "item-1",
           name: "Joe Cury",
           description:
-            "Ron’s clear funding system helped me secure the capital my business needed with confidence and support.",
+            "El claro sistema de financiamiento de Ron me ayudó a conseguir el capital que mi negocio necesitaba con confianza y apoyo.",
           value: "+$100,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-2",
           name: "Martha Green",
           description:
-            "Their step-by-step process built the right funding profile and helped me secure the financing I needed.",
+            "Su proceso paso a paso construyó el perfil de financiamiento correcto y me ayudó a obtener la financiación que necesitaba.",
           value: "+$95,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-3",
@@ -212,73 +210,73 @@ export default {
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
           value: "+$110,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-4",
           name: "Rudy Trevino",
           description:
-            "The seamless process helped me build business credit and secure funding. I highly recommend their team.",
+            "El proceso fluido me ayudó a construir crédito empresarial y conseguir financiamiento. Recomiendo mucho a su equipo.",
           value: "+$175,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-5",
           name: "Sara Mendel",
           description:
-            "Prestige Growth Partners secured over $2M, transforming my business with strategic funding and expert guidance.",
+            "Prestige Growth Partners aseguró más de $2M, transformando mi negocio con financiamiento estratégico y guía experta.",
           value: "+$250,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-6",
           name: "Luis Perez",
           description:
-            "Ron and his team secured the funding I needed with clear guidance and outstanding support.",
+            "Ron y su equipo consiguieron el financiamiento que necesitaba con guía clara y apoyo excepcional.",
           value: "+$100,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-7",
           name: "Jessi Mitchel",
           description:
-            "Ron and his team secured the funding I needed quickly, making business growth simple and stress-free.",
+            "Ron y su equipo obtuvieron mi financiamiento rápido, haciendo el crecimiento simple y sin estrés.",
           value: "+$95,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
         {
           image: "item-8",
           name: "Rich Alvear",
           description:
-            "Prestige Growth Partners secured my funding quickly, making business growth simple, stress-free, and achievable.",
+            "Prestige Growth Partners consiguió mi financiamiento rápido, haciendo el crecimiento simple, sin estrés y alcanzable.",
           value: "+$89,000",
-          approved: "Approved",
+          approved: "Aprobado",
         },
       ],
     },
     fundable: {
       title:
-        "We Don't Just Find Funding. <br class='block md:hidden lg:block'/> <span class='text-secondary font-georgia'>We Build Fundable <br class='block md:hidden lg:block'/> Businesses.</span>",
+        "Más que fondos. <br class='block md:hidden lg:block'/> <span class='text-secondary font-georgia'>Creamos empresas invertibles.</span>",
       items: [
-        "Funding Strategy",
-        "Dedicated Funding Expert",
-        "Business Optimization",
-        "Credit Improvement",
-        "Automated Systems",
-        "Long-Term Capital Plan",
+        "Estrategia de Financiamiento",
+        "Experto en Financiamiento Dedicado",
+        "Optimización Empresarial",
+        "Mejora de Crédito",
+        "Sistemas Automatizados",
+        "Plan de Capital a Largo Plazo",
       ],
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
     nextLevel: {
       title:
-        "Ready To Unlock Your <br/> <span class='text-secondary font-georgia'>Next Level Of Capital?</span>",
+        "Listo para Desbloquear tu <br class='hidden lg:block'/> <span class='text-secondary font-georgia'>Siguiente Nivel de Capital?</span>",
       description:
-        "Let's build a funding strategy that positions your business for sustainable growth.",
+        "Construyamos una estrategia de financiamiento que posicione tu negocio para crecimiento sostenible.",
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
@@ -287,69 +285,69 @@ export default {
     "business-funding": {
       hero: {
         title:
-          'Access Business <br class="hidden md:block"/> Capital <span class="text-secondary font-georgia">Without <br class="hidden md:block"/> Guesswork</span>',
+          'Accede a Capital <br class="hidden md:block"/> Empresarial <span class="text-secondary font-georgia">Sin <br class="hidden md:block"/> Adivinanzas</span>',
         description:
-          'We help established businesses secure strategic funding through lender-<br class="hidden md:block"/>focused strategies that support sustainable growth and expansion.',
+          "Ayudamos a negocios establecidos a conseguir financiamiento estratégico <br class='hidden md:block'/> mediante estrategias  enfocadas en prestamistas que apoyan crecimiento <br class='hidden md:block'/> sostenible y expansión.",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
         components: ["Hero1", "Hero2"],
       },
       statistics: {
         title:
-          'Funding Built  <span class="text-secondary font-georgia">Around <br class="hidden lg:block"/> Your Business</span>',
+          'Financiamiento Diseñado <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Para Tu Negocio</span>',
         description:
-          "We identify funding opportunities based on your business profile.",
+          "Identificamos oportunidades de financiamiento basadas en el perfil de tu empresa.",
         items: [
-          "Business Lines of Credit",
-          "Business Credit Cards",
-          "Equipment Financing",
-          "SBA & Commercial Loans",
-          "Real Estate Funding",
+          "Líneas de Crédito Empresariales",
+          "Tarjetas de Crédito Empresariales",
+          "Financiamiento de Equipos",
+          "Préstamos SBA y Comerciales",
+          "Financiamiento Inmobiliario",
         ],
         component: "Statistics1",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
       information: {
         title:
-          'Approval Starts Long <br class="block md:hidden lg:block"/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'La Aprobación Empieza Mucho  <span class="text-secondary font-georgia">Antes de Aplicar</span>',
         description:
-          "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
+          "Optimizamos tu perfil financiero antes de aplicar, aumentando la confianza del prestamista, elegibilidad y potencial de aprobación.",
         items: [
           {
-            title: "Credit Positioning",
+            title: "Posicionamiento de Crédito",
             list: [
-              "Strengthen Credit Profiles",
-              "Identify Funding Factors",
-              "Strengthen Financial Foundation",
+              "Fortalecer Perfiles de Crédito",
+              "Identificar Factores de Financiamiento",
+              "Fortalecer Base Financiera",
             ],
           },
           {
-            title: "Financial Documentation",
+            title: "Documentación Financiera",
             list: [
-              "Organize Funding Documents",
-              "Prepare Financial Records",
-              "Eliminate Documentation Errors",
+              "Organizar Documentos",
+              "Preparar Registros Financieros",
+              "Eliminar Errores de Documentación",
             ],
           },
           {
-            title: "Business Credibility",
+            title: "Credibilidad Empresarial",
             list: [
-              "Increase Lender Trust",
-              "Build Business Presence",
-              "Improve Business Credibility",
+              "Aumentar Confianza del Prestamista",
+              "Construir Presencia Empresarial",
+              "Mejorar Credibilidad del Negocio",
             ],
           },
           {
-            title: "Banking Profile",
+            title: "Perfil Bancario",
             list: [
-              "Optimize Bank Evaluation",
-              "Improve Key Data",
-              "Increase Funding Opportunities",
+              "Optimizar Evaluación Bancaria",
+              "Mejorar Datos Clave",
+              "Aumentar Financiamiento",
             ],
           },
         ],
@@ -357,16 +355,16 @@ export default {
       },
       fundable: {
         title:
-          "Funding That Creates <br/> Growth.  <br/> <span class='text-secondary font-georgia'>Capital isn't the goal. <br/> Growth is.</span>",
+          "Financiamiento Que Crea <br class='hidden md:block'/> Crecimiento.  <span class='text-secondary font-georgia'>El capital no es la meta. El crecimiento sí.</span>",
         items: [
-          "Expand operations",
-          "Hire talent",
-          "Acquire competitors",
-          "Purchase commercial property",
-          "Improve cash flow",
+          "Expandir operaciones",
+          "Contratar talento",
+          "Adquirir competidores",
+          "Comprar propiedad comercial",
+          "Mejorar flujo de caja",
         ],
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
@@ -374,68 +372,69 @@ export default {
     "credit-optimization": {
       hero: {
         title:
-          'Strong Credit  <br class="hidden md:block"/> Creates <span class="text-secondary font-georgia">Better <br class="hidden md:block"/> Opportunities</span>',
+          'Crédito Sólido <br class="hidden md:block"/> Crea <span class="text-secondary font-georgia">Mejores <br class="hidden md:block"/> Oportunidades</span>',
         description:
-          'We optimize personal and business credit to maximize funding <br class="hidden md:block"/> opportunities, lender confidence, and better financing terms.',
+          "Optimizamos crédito personal <br class='hidden md:block lg:hidden'/> y empresarial para maximizar oportunidades <br class='hidden lg:block'/> de <br class='hidden md:block lg:hidden'/> financiamiento, confianza del prestamista y mejores condiciones.",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
         components: ["Hero3", "Hero4"],
       },
       statistics: {
         title:
-          'Optimize  <span class="text-secondary font-georgia">Personal <br class="hidden lg:block"/> Credit</span>',
-        description: "We help improve the factors lenders evaluate most.",
+          'Optimiza <span class="text-secondary font-georgia">Crédito <br class="hidden lg:block"/> Personal</span>',
+        description:
+          "Ayudamos a mejorar los factores que más evalúan los prestamistas.",
         items: [
-          "Credit utilization",
-          "Payment history",
-          "Credit mix",
-          "Reporting accuracy",
-          "Strategic account management",
+          "Utilización de crédito",
+          "Historial de pagos",
+          "Combinación de crédito",
+          "Precisión en reportes",
+          "Gestión estratégica de cuentas",
         ],
         component: "Statistics2",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
       information: {
         title:
-          'Build Business Credit <br /> <span class="text-secondary font-georgia">That Works</span>',
+          'Construye Crédito Empresarial <br class="hidden md:block"/> <span class="text-secondary font-georgia">Que Funciona</span>',
         description:
-          "Create a business credit profile capable of supporting future funding and long-term business growth.",
+          "Crea un perfil de crédito empresarial capaz de sostener financiamiento futuro y crecimiento a largo plazo.",
         items: [
           {
-            title: "Vendor Accounts",
+            title: "Cuentas con Proveedores",
             list: [
-              "Build Vendor Credit",
-              "Open Reporting Accounts",
-              "Strengthen Credit Foundation",
+              "Construir Crédito con Proveedores",
+              "Abrir Cuentas que Reportan",
+              "Fortalecer Base de Crédito",
             ],
           },
           {
-            title: "Revolving Accounts",
+            title: "Cuentas Revolventes",
             list: [
-              "Access Business Credit",
-              "Increase Credit Availability",
-              "Demonstrate Credit Responsibility",
+              "Acceder a Crédito Empresarial",
+              "Aumentar Disponibilidad de Crédito",
+              "Demostrar Responsabilidad Crediticia",
             ],
           },
           {
-            title: "Net-30 Reporting",
+            title: "Reporte Net-30",
             list: [
-              "Build Payment History",
-              "Improve Business Credit",
-              "Increase Funding Eligibility",
+              "Construir Historial de Pagos",
+              "Mejorar Crédito Empresarial",
+              "Aumentar Elegibilidad",
             ],
           },
           {
-            title: "Credit Bureau Optimization",
+            title: "Optimización de Burós",
             list: [
-              "Review Credit Reports",
-              "Correct Credit Errors",
-              "Meet Lender Expectations",
+              "Revisar Reportes de Crédito",
+              "Corregir Errores de Crédito",
+              "Cumplir Expectativas del Prestamista",
             ],
           },
         ],
@@ -443,16 +442,16 @@ export default {
       },
       fundable: {
         title:
-          "Better Credit. Better Terms. <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Higher Scores. Larger <br class='hidden md:block'/> Opportunities.</span>",
+          "Mejor crédito y términos. <span class='text-secondary font-georgia'>Más puntaje. <br class='hidden md:block'/> Más oportunidades.</span>",
         items: [
-          "Higher approvals",
-          "Lower interest rates",
-          "Larger credit limits",
-          "Faster underwriting",
-          "Greater financial flexibility",
+          "Más aprobaciones",
+          "Tasas de interés menores",
+          "Límites de crédito mayores",
+          "Subscripción más rápida",
+          "Mayor flexibilidad financiera",
         ],
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
@@ -460,68 +459,68 @@ export default {
     "lender-ready-growth-system": {
       hero: {
         title:
-          'Become The <br class="hidden md:block"/> Business <span class="text-secondary font-georgia">Banks <br class="hidden md:block"/> Want To Fund</span>',
+          'Conviértete en el <br class="hidden md:block"/> Negocio <span class="text-secondary font-georgia">Que los Bancos <br class="hidden md:block"/> Quieren Financiar</span>',
         description:
-          "We prepare every aspect of your company to meet lender <br class='hidden md:block'/> expectations before funding applications begin.",
+          "Preparamos cada aspecto de tu <br class='hidden md:block lg:hidden'/> empresa para cumplir expectativas <br class='hidden md:block lg:hidden'/> de prestamistas <br class='hidden lg:block'/> antes de iniciar aplicaciones de financiamiento.",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
         components: ["Hero5", "Hero6"],
       },
       statistics: {
         title:
-          'Complete Funding <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Readiness Audit </span>',
-        description: "We evaluate every lender requirement including:",
+          'Auditoría Completa de <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Listos para Financiamiento </span>',
+        description: "Evaluamos cada requisito del prestamista incluyendo:",
         items: [
-          "Business structure",
+          "Estructura empresarial",
           "EIN",
-          "Address consistency",
-          "Banking",
-          "Online presence",
+          "Consistencia de dirección",
+          "Banca",
+          "Presencia en línea",
         ],
         component: "Statistics3",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
       information: {
         title:
-          'Approval Starts Long <br/> <span class="text-secondary font-georgia">Before You Apply</span>',
+          'La Aprobación Empieza Mucho  <span class="text-secondary font-georgia">Antes de Aplicar</span>',
         description:
-          "We optimize your financial profile before applications, increasing lender confidence, funding eligibility, and approval potential.",
+          "Optimizamos tu perfil financiero antes de aplicar, aumentando la confianza del prestamista, elegibilidad y potencial de aprobación.",
         items: [
           {
-            title: "Credit Positioning",
+            title: "Posicionamiento de Crédito",
             list: [
-              "Strengthen Credit Profiles",
-              "Identify Funding Factors",
-              "Strengthen Financial Foundation",
+              "Fortalecer Perfiles de Crédito",
+              "Identificar Factores de Financiamiento",
+              "Fortalecer Base Financiera",
             ],
           },
           {
-            title: "Financial Documentation",
+            title: "Documentación Financiera",
             list: [
-              "Organize Funding Documents",
-              "Prepare Financial Records",
-              "Eliminate Documentation Errors",
+              "Organizar Documentos ",
+              "Preparar Registros Financieros",
+              "Eliminar Errores de Documentación",
             ],
           },
           {
-            title: "Business Credibility",
+            title: "Credibilidad Empresarial",
             list: [
-              "Increase Lender Trust",
-              "Build Business Presence",
-              "Improve Business Credibility",
+              "Aumentar Confianza del Prestamista",
+              "Construir Presencia Empresarial",
+              "Mejorar Credibilidad del Negocio",
             ],
           },
           {
-            title: "Banking Profile",
+            title: "Perfil Bancario",
             list: [
-              "Optimize Bank Evaluation",
-              "Improve Key Data",
-              "Increase Funding Opportunities",
+              "Optimizar Evaluación Bancaria",
+              "Mejorar Datos Clave",
+              "Aumentar Oportunidades",
             ],
           },
         ],
@@ -529,16 +528,16 @@ export default {
       },
       fundable: {
         title:
-          "Build a Business That <br/> Qualifies <span class='text-secondary font-georgia'>Again and Again. </span>",
+          "Construye un Negocio Que <br class='hidden lg:block'/> Califica <span class='text-secondary font-georgia'>Una y Otra Vez. </span>",
         items: [
-          "Sustainable Funding Growth",
-          "Higher Approval Potential",
-          "Stronger Banking Relationships",
-          "Better Lending Terms",
-          "Long-Term Scalability",
+          "Crecimiento Sostenible ",
+          "Mayor Potencial de Aprobación",
+          "Relaciones Bancarias Más Fuertes",
+          "Mejores Condiciones de Préstamo",
+          "Escalabilidad a Largo Plazo",
         ],
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
@@ -546,68 +545,68 @@ export default {
     "flow-optimization": {
       hero: {
         title:
-          'Improve How Money <br class="hidden md:block"/> Moves <span class="text-secondary font-georgia">Through Your <br class="hidden md:block"/> Business</span>',
+          'Mejora Cómo el Dinero <br class="hidden md:block"/> Se Mueve <span class="text-secondary font-georgia">Por Tu <br class="hidden md:block"/> Negocio</span>',
         description:
-          "Healthy cash flow creates stronger businesses and stronger <br class='hidden md:block'/> funding opportunities.",
+          "Un flujo de caja saludable crea negocios más fuertes y <br class='hidden md:block'/> mejores oportunidades de financiamiento.",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
         components: ["Hero7", "Hero8"],
       },
       statistics: {
         title:
-          'Optimize <span class="text-secondary font-georgia">Cash Flow </span>',
-        description: "We help improve",
+          'Optimiza <span class="text-secondary font-georgia">Flujo de Caja </span>',
+        description: "Ayudamos a mejorar",
         items: [
-          "Revenue allocation",
-          "Working capital",
-          "Business reserves",
-          "Banking behavior",
-          "Payment timing",
+          "Asignación de ingresos",
+          "Capital de trabajo",
+          "Reservas empresariales",
+          "Comportamiento bancario",
+          "Cronograma de pagos",
         ],
         component: "Statistics4",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
       information: {
         title:
-          'Gain Complete <br/> <span class="text-secondary font-georgia">Financial Visibility</span>',
+          'Obtén Visibilidad <br/> <span class="text-secondary font-georgia">Financiera Completa</span>',
         description:
-          "We organize your finances, delivering clear insights that support smarter decisions, lower risk, and sustainable business growth.",
+          "Organizamos tus finanzas, brindando insights claros para decisiones más inteligentes, menor riesgo y crecimiento sostenible.",
         items: [
           {
-            title: "Cash Flow Insights",
+            title: "Insights de Flujo de Caja",
             list: [
-              "Monitor Income Trends",
-              "Track Business Expenses",
-              "Improve Cash Flow",
+              "Monitorear Tendencias de Ingresos",
+              "Rastrear Gastos del Negocio",
+              "Mejorar Flujo de Caja",
             ],
           },
           {
-            title: "Performance Analysis",
+            title: "Análisis de Rendimiento",
             list: [
-              "Evaluate Business Metrics",
-              "Identify Growth Opportunities",
-              "Improve Financial Efficiency",
+              "Evaluar Métricas del Negocio",
+              "Identificar Oportunidades",
+              "Mejorar Eficiencia Financiera",
             ],
           },
           {
-            title: "Financial Reporting",
+            title: "Reportes Financieros",
             list: [
-              "Organize Financial Records",
-              "Review Performance Reports",
-              "Maintain Accurate Data",
+              "Organizar Registros Financieros",
+              "Revisar Reportes de Rendimiento",
+              "Mantener Datos Precisos",
             ],
           },
           {
-            title: "Credit Bureau Optimization",
+            title: "Optimización de Burós",
             list: [
-              "Support Growth Decisions",
-              "Reduce Financial Risks",
-              "Plan Future Investments",
+              "Apoyar Decisiones de Crecimiento",
+              "Reducir Riesgos Financieros",
+              "Planear Inversiones Futuras",
             ],
           },
         ],
@@ -615,16 +614,16 @@ export default {
       },
       fundable: {
         title:
-          "Scale Without <br/> <span class='text-secondary font-georgia'>Financial Barriers. </span>",
+          "Escala Sin <br/> <span class='text-secondary font-georgia'>Barreras Financieras. </span>",
         items: [
-          "Healthy Cash Flow",
-          "Scalable Financial Systems",
-          "Operational Efficiency",
-          "Sustainable Business Growth",
-          "Long-Term Stability",
+          "Flujo de Caja Saludable",
+          "Sistemas Financieros Escalables",
+          "Eficiencia Operativa",
+          "Crecimiento Empresarial Sostenible",
+          "Estabilidad a Largo Plazo",
         ],
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
@@ -632,68 +631,68 @@ export default {
     "business-consulting": {
       hero: {
         title:
-          'Strategic Financial <br class="hidden md:block"/> Guidance <span class="text-secondary font-georgia">For <br class="hidden md:block"/> Growing Businesses</span>',
+          'Guía Financiera <br class="hidden md:block"/> Estratégica <span class="text-secondary font-georgia">Para <br class="hidden md:block"/> Negocios en <br class="hidden md:block xl:hidden"/> Crecimiento</span>',
         description:
-          "Beyond funding, we help business owners make smarter <br class='hidden md:block'/> financial decisions for long-term expansion",
+          "Más allá del financiamiento, <br class='hidden md:block lg:hidden'/> ayudamos a dueños a tomar <br class='hidden md:block lg:hidden'/> decisiones financieras <br class='hidden lg:block'/> más   inteligentes para expansión a largo plazo",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
         components: ["Hero9", "Hero10"],
       },
       statistics: {
         title:
-          'Build A Scalable <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Growth Plan </span>',
-        description: "Together we create a roadmap focused on:",
+          'Construye Un Plan <br class="hidden lg:block"/> <span class="text-secondary font-georgia">De Crecimiento Escalable </span>',
+        description: "Juntos creamos una hoja de ruta enfocada en:",
         items: [
-          "Expansion",
-          "Capital allocation",
-          "Business acquisitions",
-          "Market opportunities",
-          "Financial leverage",
+          "Expansión",
+          "Asignación de capital",
+          "Adquisiciones empresariales",
+          "Oportunidades de mercado",
+          "Apalancamiento financiero",
         ],
         component: "Statistics5",
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
       information: {
         title:
-          'Expert Guidance Backed by <br/> <span class="text-secondary font-georgia">Real Funding Experience</span>',
+          'Guía Experta Respaldada <br class="block md:hidden lg:block "/> <span class="text-secondary font-georgia">Por Experiencia Real</span>',
         description:
-          "Our specialists provide strategic funding guidance, helping businesses meet lender requirements and secure capital confidently.",
+          "Nuestros especialistas brindan guía estratégica de financiamiento, ayudando a negocios a cumplir requisitos de prestamistas y asegurar capital con confianza.",
         items: [
           {
-            title: "Funding Strategy",
+            title: "Estrategia de Financiamiento",
             list: [
-              "Growth-Focused Planning",
-              "Capital Allocation",
-              "Funding Roadmap",
+              "Planificación Enfocada en Crecimiento",
+              "Asignación de Capital",
+              "Hoja de Ruta de Financiamiento",
             ],
           },
           {
-            title: "Business Advisory",
+            title: "Asesoría Empresarial",
             list: [
-              "Business Assessments",
-              "Financial Direction",
-              "Strategic Recommendations",
+              "Evaluaciones del Negocio",
+              "Dirección Financiera",
+              "Recomendaciones Estratégicas",
             ],
           },
           {
-            title: "Lender Expertise",
+            title: "Experiencia con Prestamistas",
             list: [
-              "Lending Requirements",
-              "Approval Strategies",
-              "Risk Reduction",
+              "Requisitos de Préstamo",
+              "Estrategias de Aprobación",
+              "Reducción de Riesgo",
             ],
           },
           {
-            title: "Ongoing Support",
+            title: "Soporte Continuo",
             list: [
-              "Continuous Guidance",
-              "Progress Monitoring",
-              "Growth Planning",
+              "Guía Continua",
+              "Monitoreo de Progreso",
+              "Planificación de Crecimiento",
             ],
           },
         ],
@@ -701,16 +700,16 @@ export default {
       },
       fundable: {
         title:
-          "Grow With a <br/> <span class='text-secondary font-georgia'>Long-Term Partner. </span>",
+          "Crece Con Un <br/> <span class='text-secondary font-georgia'>Socio a Largo Plazo. </span>",
         items: [
-          "Ongoing Expert Support",
-          "Future Funding Opportunities",
-          "Continuous Business Growth",
-          "Strategic Financial Guidance",
-          "Long-Term Success",
+          "Soporte Experto Continuo",
+          "Futuras Oportunidades de Financiamiento",
+          "Crecimiento Empresarial Continuo",
+          "Guía Financiera Estratégica",
+          "Éxito a Largo Plazo",
         ],
         button: {
-          label: "Schedule My Meeting",
+          label: "Agendar",
           href: "/scheduling",
         },
       },
@@ -719,214 +718,263 @@ export default {
   howItWorks: {
     hero: {
       title:
-        'Four Simple Steps to <br class="block md:hidden lg:block"/> <span class="text-secondary font-georgia">Become Funding <br class="block md:hidden lg:block"/> Ready</span>',
+        'Cuatro Pasos Simples para <br class="block md:hidden xl:block"/> <span class="text-secondary font-georgia">Estar Listo para <br class="block md:hidden lg:block"/> Financiamiento</span>',
       description:
-        "Our proven process is designed to strengthen your business, improve lender confidence, and position you for long-term access to business funding.",
+        "Nuestro proceso probado fortalece tu negocio, aumenta la confianza del prestamista y te posiciona para acceso a financiamiento a largo plazo.",
       list: [],
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
     process: {
       title:
-        'Our Proven <span class="text-secondary font-georgia">Funding Process</span>',
+        'Nuestro Proceso <span class="text-secondary font-georgia">Probado de Financiamiento</span>',
       description:
-        "A step-by-step system that prepares your business, secures funding, and <br class='hidden md:block'/> supports long-term growth.",
+        "Un sistema paso a paso que prepara tu negocio, asegura financiamiento y <br class='hidden md:block'/> respalda crecimiento a largo plazo.",
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
       items: [
         {
-          step: "Step 1",
-          title: "Scale & Grow",
+          step: "Paso 1",
+          title: "Evaluar y Crecer",
           description:
-            "We evaluate your business, credit, and finances to identify your strongest funding opportunities.",
+            "Evaluamos tu negocio, crédito y finanzas para identificar tus mejores oportunidades de financiamiento.",
         },
         {
-          step: "Step 2",
-          title: "Scale & Grow",
+          step: "Paso 2",
+          title: "Optimizar Perfil",
           description:
-            "We strengthen your business profile to improve credibility, lender confidence, and funding readiness.",
+            "Fortalecemos tu perfil empresarial para mejorar credibilidad, confianza del prestamista y preparación para financiamiento.",
         },
         {
-          step: "Step 3",
-          title: "Scale & Grow",
+          step: "Paso 3",
+          title: "Conseguir Fondos",
           description:
-            "We pursue the best funding options based on your qualifications and business growth objectives.",
+            "Buscamos las mejores opciones de financiamiento según tus calificaciones y metas de crecimiento.",
         },
         {
-          step: "Step 4",
-          title: "Scale & Grow",
+          step: "Paso 4",
+          title: "Soporte Continuo",
           description:
-            "We provide ongoing support to help your business secure future funding and sustain long-term growth.",
+            "Brindamos apoyo continuo para que tu negocio asegure financiamiento futuro y sostenga crecimiento a largo plazo.",
         },
       ],
     },
   },
   successStories: {
     title:
-      "Real businesses. Real funding. <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Real growth.</span>",
+      "Negocios reales. Financiamiento real. <br class='hidden md:block'/> <span class='text-secondary font-georgia'>Crecimiento real.</span>",
     description:
-      "See how business owners have secured the capital they needed to expand operations, increase cash flow, and scale with confidence through our proven funding system.",
+      "Descubre cómo dueños de negocio consiguieron el capital necesario para expandir operaciones, aumentar flujo de caja y escalar con confianza mediante nuestro sistema probado.",
     items: [
       {
         image: "item-1",
         name: "Joe Cury",
         description:
-          "Ron’s clear funding system helped me secure the capital my business needed with confidence and support.",
-        approved: "Approved",
+          "El claro sistema de financiamiento de Ron me ayudó a conseguir el capital que mi negocio necesitaba con confianza y apoyo.",
+        approved: "Aprobado",
       },
       {
         image: "item-2",
         name: "Martha Green",
         description:
-          "Their step-by-step process built the right funding profile and helped me secure the financing I needed.",
-        approved: "Approved",
+          "Su proceso paso a paso construyó el perfil de financiamiento correcto y me ayudó a obtener la financiación que necesitaba.",
+        approved: "Aprobado",
       },
       {
         image: "item-3",
         name: "Madleidy Alvarez",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
-        approved: "Approved",
+        approved: "Aprobado",
       },
       {
         image: "item-4",
         name: "Rudy Trevino",
         description:
-          "The seamless process helped me build business credit and secure funding. I highly recommend their team.",
-        approved: "Approved",
+          "El proceso fluido me ayudó a construir crédito empresarial y conseguir financiamiento. Recomiendo mucho a su equipo.",
+        approved: "Aprobado",
       },
       {
         image: "item-5",
         name: "Sara Mendel",
         description:
-          "Prestige Growth Partners secured over $2M, transforming my business with strategic funding and expert guidance.",
-        approved: "Approved",
+          "Prestige Growth Partners aseguró más de $2M, transformando mi negocio con financiamiento estratégico y guía experta.",
+        approved: "Aprobado",
       },
       {
         image: "item-6",
         name: "Luis Perez",
         description:
-          "Ron and his team secured the funding I needed with clear guidance and outstanding support.",
-        approved: "Approved",
+          "Ron y su equipo consiguieron el financiamiento que necesitaba con guía clara y apoyo excepcional.",
+        approved: "Aprobado",
       },
       {
         image: "item-7",
         name: "Jessi Mitchel",
         description:
-          "Ron and his team secured the funding I needed quickly, making business growth simple and stress-free.",
-        approved: "Approved",
+          "Ron y su equipo obtuvieron mi financiamiento rápido, haciendo el crecimiento simple y sin estrés.",
+        approved: "Aprobado",
       },
       {
         image: "item-8",
         name: "Rich Alvear",
         description:
-          "Prestige Growth Partners secured my funding quickly, making business growth simple, stress-free, and achievable.",
-        approved: "Approved",
+          "Prestige Growth Partners consiguió mi financiamiento rápido, haciendo el crecimiento simple, sin estrés y alcanzable.",
+        approved: "Aprobado",
       },
     ],
   },
   aboutUs: {
     hero: {
       title:
-        'Helping Businesses <br/> <span class="text-secondary font-georgia">Become Bankable</span>',
+        'Ayudando a Negocios <br/> <span class="text-secondary font-georgia">A Ser Financiables</span>',
       description:
-        "Prestige Growth Partners helps established businesses improve their financial profile, optimize lender readiness, and access growth capital through proven systems.",
+        "Prestige Growth Partners ayuda a negocios establecidos a mejorar su perfil financiero, optimizar su preparación para prestamistas y acceder a capital de crecimiento mediante sistemas probados.",
       button: {
-        label: "Schedule My Meeting",
+        label: "Agendar",
         href: "/scheduling",
       },
     },
     financial: {
       title:
-        'Financial Growth <br/> <span class="text-secondary font-georgia">Through Better Systems</span>',
+        'Crecimiento Financiero <br/> <span class="text-secondary font-georgia">Mediante Mejores Sistemas</span>',
       description:
-        "We believe businesses shouldn't rely on luck when seeking funding. They should rely on preparation, strategy, and strong financial fundamentals.",
+        "Creemos que los negocios no deben depender de la suerte al buscar financiamiento. Deben confiar en preparación, estrategia y fundamentos financieros sólidos.",
       link: {
-        label: "Meet an Expert >",
+        label: "Conocer a un Experto >",
         href: "/scheduling",
       },
     },
     founding: {
       title:
-        'More Than <span class="text-secondary font-georgia">Funding</span>',
+        'Más Que <span class="text-secondary font-georgia">Financiamiento</span>',
       description:
-        "Unlike firms focused on a single loan, we help clients build long-term lender readiness through business optimization, credit strategy, coaching, and funding systems.",
+        "A diferencia de firmas enfocadas en un solo préstamo, ayudamos a clientes a construir preparación para prestamistas a largo plazo mediante optimización empresarial, estrategia de crédito, coaching y sistemas de financiamiento.",
       items: [
         {
-          label: "Business Funding",
-          href: "/en/business-funding",
+          label: "Financiamiento Empresarial",
+          href: "/es/business-funding",
         },
         {
-          label: "Credit Optimization",
-          href: "/en/credit-optimization",
+          label: "Optimización de Crédito",
+          href: "/es/credit-optimization",
         },
         {
-          label: "Lender-Ready Growth System",
-          href: "/en/lender-ready-growth-system",
+          label: "Sistema Crecimiento Listo para Prestar",
+          href: "/es/lender-ready-growth-system",
         },
         {
-          label: "Flow Optimization",
-          href: "/en/flow-optimization",
+          label: "Optimización de Flujo",
+          href: "/es/flow-optimization",
         },
         {
-          label: "Business Consulting",
-          href: "/en/business-consulting",
+          label: "Consultoría Empresarial",
+          href: "/es/business-consulting",
         },
       ],
     },
   },
   footer: {
-    help: "Need help?",
+    help: "¿Necesitas ayuda?",
     description:
-      "Helping businesses unlock strategic capital through funding, credit optimization, and lender-ready systems for sustainable long-term growth.",
+      "Ayudando a negocios a desbloquear capital estratégico mediante financiamiento, optimización de crédito y sistemas listos para prestamistas para crecimiento sostenible a largo plazo.",
     quickLinks: {
-      title: "Solutions",
+      title: "Soluciones",
       links: [
         {
-          label: "How it works",
+          label: "Cómo funciona",
           href: "/how-it-works",
         },
         {
-          label: "Credit Optimization",
+          label: "Optimización de Crédito",
           href: "/credit-optimization",
         },
         {
-          label: "Lender-Ready Growth System",
+          label: "Sistema Listo para Prestar",
           href: "/lender-ready-growth-system",
         },
         {
-          label: "Flow Optimization",
+          label: "Optimización de Flujo",
           href: "/flow-optimization",
         },
         {
-          label: "Business Consulting",
+          label: "Consultoría Empresarial",
           href: "/business-consulting",
         },
       ],
     },
     company: {
-      title: "Company",
+      title: "Empresa",
       links: [
         {
-          label: "How it works",
+          label: "Cómo funciona",
           href: "/how-it-works",
         },
         {
-          label: "Success Stories",
+          label: "Casos de Éxito",
           href: "/success-stories",
         },
         {
-          label: "About Us",
+          label: "Nosotros",
           href: "/about-us",
         },
       ],
     },
     touch: {
-      title: "Contact",
+      title: "Contacto",
+    },
+  },
+  seo: {
+    home: {
+      title: "Prestige Growth Partners | Financiamiento Empresarial y Capital de Crecimiento",
+      description: "Accede de $150K a $1M+ en financiamiento empresarial con nuestro sistema probado. Optimizamos tu perfil corporativo, aumentamos la confianza bancaria y aseguramos capital.",
+      keywords: "financiamiento empresarial, prestamos comerciales, lineas de credito para negocios, capital de trabajo, credito de negocios, expertos en financiamiento, prestige growth partners",
+    },
+    aboutUs: {
+      title: "Sobre Nosotros | Prestige Growth Partners - Expertos en Capital Empresarial",
+      description: "Conoce cómo Prestige Growth Partners ayuda a empresarios a conseguir financiamiento, optimizar perfiles crediticios y construir estabilidad financiera a largo plazo.",
+      keywords: "sobre prestige growth partners, empresa de financiamiento empresarial, equipo de adquisicion de capital, consultores de crecimiento financiero",
+    },
+    howItWorks: {
+      title: "Cómo Funciona | Proceso de Financiamiento en 3 Pasos | Prestige Growth Partners",
+      description: "Descubre nuestro proceso en 3 pasos: Escaneo de Financiamiento, Adquisición de Capital y Optimización de Fondos para posicionar tu empresa hacia el éxito.",
+      keywords: "escaneo de financiamiento, proceso de adquisicion de capital, optimizacion de fondos, como funciona financiamiento empresarial",
+    },
+    successStories: {
+      title: "Casos de Éxito | Resultados de Clientes | Prestige Growth Partners",
+      description: "Explora historias reales de más de 5,000 dueños de negocios financiados que escalaron sus operaciones y expandieron con Prestige Growth Partners.",
+      keywords: "opiniones financiamiento empresarial, casos de exito dueños de negocio, testimonios prestige growth partners, resultados financiamiento",
+    },
+    solutions: {
+      "business-funding": {
+        title: "Financiamiento Empresarial y Adquisición de Capital | Prestige Growth Partners",
+        description: "Accede a capital estratégico para tu empresa, líneas de crédito y préstamos comerciales diseñados para impulsar tu crecimiento sin perder equidad.",
+        keywords: "financiamiento empresarial, prestamos para negocios, lineas de credito comerciales, adquisicion de capital, financiamiento de equipo",
+      },
+      "credit-optimization": {
+        title: "Optimización de Crédito Personal y Empresarial | Prestige Growth Partners",
+        description: "Maximiza tu elegibilidad para financiamiento y obtén mejores tasas de interés optimizando el crédito personal y corporativo de tu empresa.",
+        keywords: "optimizacion de credito, construccion de credito empresarial, credito personal, cuentas net-30, buro de credito, preparacion de financiamiento",
+      },
+      "lender-ready-growth-system": {
+        title: "Sistema Crecimiento Prestar | Auditoría para Financiamiento | Prestige Growth Partners",
+        description: "Prepara tu empresa para calificar ante los principales prestamistas. Auditamos tu EIN, estructura legal, banca y registros financieros para aprobación.",
+        keywords: "sistema crecimiento prestar, auditoria de financiamiento, requisitos bancarios, cumplimiento empresarial, perfil bancario",
+      },
+      "flow-optimization": {
+        title: "Optimización de Flujo de Caja y Visibilidad Financiera | Prestige Growth Partners",
+        description: "Obtén visibilidad financiera completa, optimiza la asignación de ingresos y organiza el capital de trabajo para construir un negocio sólido y financiable.",
+        keywords: "optimizacion de flujo, gestion de flujo de caja, capital de trabajo, reportes financieros, flujo de dinero empresarial",
+      },
+      "business-consulting": {
+        title: "Consultoría Empresarial Estratégica y Escalabilidad | Prestige Growth Partners",
+        description: "Asesoramiento estratégico de alto nivel para optimizar operaciones financieras, escalar el rendimiento del negocio y atraer socios bancarios clave.",
+        keywords: "consultoria empresarial, estrategia financiera, asesor de crecimiento, escalabilidad operativa, consultoria comercial",
+      },
     },
   },
 };

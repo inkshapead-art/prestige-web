@@ -7,6 +7,7 @@ import Hero from "../../../../sections/Solutions/Hero.astro";
 import Stadistics from "../../../../sections/Solutions/Stadistics.astro";
 import Fundable from "../../../../sections/Home/Fundable.astro";
 import Information from "../../../../sections/Solutions/Information.astro";
+
 export function getStaticPaths() {
   const solutions = [
     "business-funding",
@@ -30,9 +31,60 @@ const { lang, solution } = Astro.params as { lang: Language; solution: string };
 const translations = { es, en };
 const t = translations[lang];
 const solutionData = (t.solutions as Record<string, any>)[solution] ?? {};
+const seo = (t.seo.solutions as Record<string, any>)[solution] ?? {};
+const canonicalPath = `/solutions/${solution}`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": lang === "es" ? "Inicio" : "Home",
+      "item": `https://www.prestigegrowthpartners.com/${lang}`
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": lang === "es" ? "Soluciones" : "Solutions",
+      "item": `https://www.prestigegrowthpartners.com/${lang}#solutions`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": seo.title ?? solution,
+      "item": `https://www.prestigegrowthpartners.com/${lang}/solutions/${solution}`
+    }
+  ]
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": seo.title ?? solution,
+  "serviceType": "Financial Services & Business Growth Consulting",
+  "provider": {
+    "@type": "FinancialService",
+    "name": "Prestige Growth Partners",
+    "url": "https://www.prestigegrowthpartners.com"
+  },
+  "description": seo.description,
+  "areaServed": "US"
+};
+
+const structuredData = [breadcrumbSchema, serviceSchema];
 ---
 
-<Layout lang={lang} t={t}>
+<Layout
+  lang={lang}
+  t={t}
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonicalPath={canonicalPath}
+  structuredData={structuredData}
+>
   <Hero content={solutionData.hero} solution={solution} lang={lang}/>
   <Stadistics content={solutionData.statistics} solution={solution} lang={lang} />
   <Information content={solutionData.information} />

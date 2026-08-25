@@ -20,7 +20,7 @@ const { content, solution, lang } = Astro.props as Props;
 <section
   class="bg-white container-full flex flex-col lg:flex-row justify-center lg:justify-start items-center py-10 md:py-16 lg:py-26 gap-8 lg:gap-10 xl:gap-22"
 >
-  <div class="w-full md:w-auto lg:w-[45%] xl:w-[50%] relative">
+  <div class="w-full md:w-auto lg:w-[45%] xl:w-[50%] relative fade-right-a">
     <StatisticsCardPanel solution={solution} lang={lang} />
   </div>
   <div
@@ -29,9 +29,9 @@ const { content, solution, lang } = Astro.props as Props;
     <div
       class="flex flex-col justify-center items-start gap-6 md:gap-5 text-paragraph"
     >
-      <h2 class="title" set:html={content.title} />
-      <p class="paragraph">{content.description}</p>
-      <div class="flex flex-col justify-center items-start gap-2">
+      <h2 class="title fade-left-a" set:html={content.title} />
+      <p class="paragraph fade-left-a">{content.description}</p>
+      <div class="flex flex-col justify-center items-start gap-2 fade-left-a">
         {
           content.items.map((item) => (
             <div class="flex justify-center items-center gap-2">
@@ -45,7 +45,7 @@ const { content, solution, lang } = Astro.props as Props;
     <Button
       text={content.button.label}
       textClass={BUTTON_COLOR_CLASSES.text1}
-      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+      extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1} fade-left-a`}
       href={content.button.href}
     />
   </div>

@@ -15,9 +15,17 @@ export const defaultRedirect = "/en";
 const lang = Astro.params.lang as Language;
 const translations = { es, en };
 const t = translations[lang];
+const seo = t.seo.successStories;
 ---
 
-<Layout lang={lang} t={t}>
+<Layout
+  lang={lang}
+  t={t}
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonicalPath="/success-stories"
+>
   <Stories content={t.successStories} />
   <NextLevel content={t.main.nextLevel} />
 </Layout>

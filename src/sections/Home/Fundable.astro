@@ -18,9 +18,9 @@ const { content } = Astro.props as Props;
     <div
       class="w-full flex flex-col justify-center items-start gap-6 md:gap-3 xl:gap-8 p-6 md:px-6 lg:px-12 md:py-0"
     >
-      <h2 set:html={content.title} class="title-sm text-white" />
+      <h2 set:html={content.title} class="title-sm text-white fade-right-a" />
       <div
-        class="flex flex-col justify-center items-start gap-4 md:gap-2 lg:gap-4 text-white"
+        class="flex flex-col justify-center items-start gap-4 md:gap-2 lg:gap-4 text-white fade-right-a"
       >
         {
           content.items.map((item) => (
@@ -34,11 +34,11 @@ const { content } = Astro.props as Props;
       <Button
         text={content.button.label}
         textClass={BUTTON_COLOR_CLASSES.text1}
-        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1} fade-right-a`}
         href={content.button.href}
       />
     </div>
-    <div class="w-full h-auto relative overflow-hidden" aspect-ratio="1/1">
+    <div class="w-full h-auto relative overflow-hidden fade-left-a" aspect-ratio="1/1">
       <img
         src={`/images/home/fundable.webp`}
         alt={content.title}

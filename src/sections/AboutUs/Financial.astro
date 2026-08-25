@@ -17,12 +17,12 @@ const { content } = Astro.props as Props;
       <div class="flex flex-col justify-center items-start gap-6 text-white">
         <h2
           set:html={content.title}
-          class="text-[32px] xl:text-[48px] font-normal leading-[120%]"
+          class="text-[32px] xl:text-[48px] font-normal leading-[120%] fade-right-a"
         />
-        <p class="paragraph w-full md:w-[40%]">{content.description}</p>
+        <p class="paragraph w-full md:w-[40%] fade-right-a">{content.description}</p>
       </div>
       <a
-        class="text-[16px] text-secondary font-semibold leading-[100%] hover:text-white transition-all duration-300 ease-in-out"
+        class="text-[16px] text-secondary font-semibold leading-[100%] hover:text-white transition-all duration-300 ease-in-out fade-right-a"
         href={content.link.href}
       >
         {content.link.label}
@@ -31,7 +31,7 @@ const { content } = Astro.props as Props;
     <img
       src="/images/home/financial.webp"
       alt="Financial"
-      class="relative md:absolute w-full md:w-auto h-auto md:h-full right-0"
+      class="relative md:absolute w-full md:w-auto h-auto md:h-full right-0 fade-left-a"
       width="1400"
       height="1400"
       decoding="async"

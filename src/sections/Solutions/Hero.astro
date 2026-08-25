@@ -41,10 +41,10 @@ const { content, solution, lang } = Astro.props as Props;
       >
         <h1
           set:html={content.title}
-          class="title text-white text-center md:text-left"
+          class="title text-white text-center md:text-left fade-right-a"
         />
         <p
-          class="paragraph text-white text-center md:text-left w-full md:w-[60%] xl:w-auto"
+          class="paragraph text-white text-center md:text-left w-full md:w-[60%] xl:w-auto fade-right-a"
           set:html={content.description}
         />
       </div>
@@ -52,7 +52,7 @@ const { content, solution, lang } = Astro.props as Props;
       <Button
         text={content.button.label}
         textClass={BUTTON_COLOR_CLASSES.text1}
-        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1}`}
+        extraBtnClass={`${BUTTON_COLOR_CLASSES.bg1} fade-right-a`}
         href={content.button.href}
       />
     </div>

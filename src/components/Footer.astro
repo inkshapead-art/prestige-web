@@ -116,13 +116,17 @@ const socialMedia = [
               <summary
                 class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
               >
-                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                <h3
+                  class="text-[16px] leading-[150%] font-semibold text-paragraph"
+                >
                   {content?.quickLinks.title}
                 </h3>
                 <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
                 <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
               </summary>
-              <ul class="flex flex-col justify-center items-start gap-4 pt-2 pb-4">
+              <ul
+                class="flex flex-col justify-center items-start gap-4 pt-2 pb-4"
+              >
                 {
                   content?.quickLinks.links.map((item) => (
                     <li>
@@ -146,13 +150,17 @@ const socialMedia = [
               <summary
                 class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
               >
-                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                <h3
+                  class="text-[16px] leading-[150%] font-semibold text-paragraph"
+                >
                   {content?.company.title}
                 </h3>
                 <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
                 <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
               </summary>
-              <ul class="flex flex-col justify-center items-start gap-4 pt-2 pb-4">
+              <ul
+                class="flex flex-col justify-center items-start gap-4 pt-2 pb-4"
+              >
                 {
                   content?.company.links.map((item) => (
                     <li>
@@ -176,13 +184,17 @@ const socialMedia = [
               <summary
                 class="flex justify-between items-center w-full cursor-pointer list-none py-3 [&::-webkit-details-marker]:hidden"
               >
-                <h3 class="text-[16px] leading-[150%] font-semibold text-paragraph">
+                <h3
+                  class="text-[16px] leading-[150%] font-semibold text-paragraph"
+                >
                   {content?.touch.title}
                 </h3>
                 <Plus class="block group-open:hidden w-5 h-5 text-paragraph" />
                 <Minus class="hidden group-open:block w-5 h-5 text-paragraph" />
               </summary>
-              <div class="flex flex-col justify-center items-start gap-6 pt-2 pb-4">
+              <div
+                class="flex flex-col justify-center items-start gap-6 pt-2 pb-4"
+              >
                 {
                   infoContacts.map((item) => (
                     <div class="flex justify-start items-start gap-2">
@@ -217,15 +229,13 @@ const socialMedia = [
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.quickLinks.title}
           </h3>
-          <ul
-            class="flex flex-col justify-center items-start gap-6"
-          >
+          <ul class="flex flex-col justify-center items-start gap-6">
             {
               content?.quickLinks.links.map((item) => (
                 <li>
                   <a
                     href={`/${lang}/solutions${item.href}`}
-                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out hover:[text-shadow:_0.3px_0_0_currentColor]"
                   >
                     {item.label}
                   </a>
@@ -241,15 +251,13 @@ const socialMedia = [
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.company.title}
           </h3>
-          <ul
-            class="flex flex-col justify-center items-start gap-6"
-          >
+          <ul class="flex flex-col justify-center items-start gap-6">
             {
               content?.company.links.map((item) => (
                 <li>
                   <a
                     href={`/${lang}${item.href}`}
-                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out"
+                    class="text-[15px] font-normal leading-[150%] text-paragraph hover:text-primary transition-all duration-300 ease-in-out hover:[text-shadow:_0.3px_0_0_currentColor]"
                   >
                     {item.label}
                   </a>
@@ -265,9 +273,7 @@ const socialMedia = [
           <h3 class="text-[20px] leading-[150%] font-semibold text-paragraph">
             {content?.touch.title}
           </h3>
-          <div
-            class="flex flex-col justify-center items-start gap-8"
-          >
+          <div class="flex flex-col justify-center items-start gap-8">
             {
               infoContacts.map((item) => (
                 <div class="flex justify-start items-start gap-2">
@@ -283,7 +289,7 @@ const socialMedia = [
                   <a href={item.href}>
                     <p
                       set:html={item.label}
-                      class="text-[15px] font-normal leading-[150%] text-paragraph hover:font-semibold transition-all duration-300 ease-in-out"
+                      class="text-[15px] font-normal leading-[150%] text-paragraph hover:[text-shadow:_0.4px_0_0_currentColor] transition-all duration-300 ease-in-out"
                     />
                   </a>
                 </div>
@@ -332,7 +338,7 @@ const socialMedia = [
       >
         Copyright © 2026 by <a href="https://inkshapegroup.com"
           >Inkshape Group</a
-        > | Privacy | <a href="/">Prestige Growth Partners </a> | Greenville & Charlotte
+        > | Privacy | <a href="/">Prestige Growth Partners </a> | Florida, USA
         | Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
       </p>
     </div>
