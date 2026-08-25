@@ -1,0 +1,70 @@
+---
+import type { Language } from "../../../types/language.type";
+import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const config = statisticsCardsConfig["credit-optimization"];
+---
+
+<!-- 
+  Credit Optimization Statistics Card
+  Modify this file to customize the content, structure, and design for the Credit Optimization page.
+-->
+<div class="w-full flex justify-center items-center gap-14">
+  <div class="flex flex-col justify-center items-center gap-8">
+    <h3 class="text-[13px] md:text-[22px] leading-[100%] font-semibold text-paragraph">
+      {config?.title?.[lang]}
+    </h3>
+    <div class="flex flex-col justify-center items-center gap-1 relative">
+      <img
+        src="/images/solutions/credit-1.svg"
+        alt="Credit Optimization 1"
+        width="322"
+        height="170"
+        decoding="async"
+        loading="lazy"
+        class="w-full h-auto"
+      />
+      <div
+        class="absolute -translate-x-1/2 left-1/2 flex flex-col justify-center items-center top-[58%]"
+      >
+        <p
+          class="text-[28px] md:text-[36px] xl:text-[54px] leading-[100%] font-semibold text-paragraph"
+        >
+          720
+        </p>
+        <p
+          class="text-[16px] md:text-[22px] font-semibold text-accent leading-[100%]"
+        >
+          {config?.subtitle?.[lang]}
+        </p>
+      </div>
+      <div class="w-full flex justify-between items-center">
+        <p class="text-[16px] leading-[100% font-semibold text-accent">300</p>
+        <p class="text-[16px] leading-[100% font-semibold text-accent">850</p>
+      </div>
+    </div>
+    <img
+      src="/images/solutions/credit-2.svg"
+      alt="Credit Optimization 2"
+      width="305"
+      height="59"
+      decoding="async"
+      loading="lazy"
+      class="w-full h-auto"
+    />
+  </div>
+  <img
+    src="/images/solutions/credit-3.svg"
+    alt="Credit Optimization 3"
+    width="224"
+    height="213"
+    decoding="async"
+    loading="lazy"
+    class="w-full h-auto max-w-[150px] xl:max-w-[224px]"
+  />
+</div>

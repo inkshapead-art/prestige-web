@@ -1,0 +1,28 @@
+---
+import type { Language } from "../../../types/language.type";
+import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const config = statisticsCardsConfig["business-consulting"];
+---
+
+<!-- 
+  Business Consulting Statistics Card
+  Modify this file to customize the content, structure, and design for the Business Consulting page.
+-->
+<div class="flex flex-col justify-center items-start gap-6.5">
+  <h3 class="text-[13px] md:text-[22px] leading-[100%] font-semibold text-paragraph">
+    {config?.title?.[lang]}
+  </h3>
+  <img
+    src="/images/solutions/consulting-1.svg"
+    alt="Business Consultating"
+    width="585"
+    height="293"
+    class="w-full h-auto"
+  />
+</div>

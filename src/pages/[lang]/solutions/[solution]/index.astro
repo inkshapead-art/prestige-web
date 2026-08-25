@@ -34,7 +34,7 @@ const solutionData = (t.solutions as Record<string, any>)[solution] ?? {};
 
 <Layout lang={lang} t={t}>
   <Hero content={solutionData.hero} solution={solution} lang={lang}/>
-  <Stadistics content={solutionData.statistics} />
+  <Stadistics content={solutionData.statistics} solution={solution} lang={lang} />
   <Information content={solutionData.information} />
   <Fundable content={solutionData.fundable} />
 </Layout>

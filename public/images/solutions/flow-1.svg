@@ -1,0 +1,20 @@
+<svg width="322" height="118" viewBox="0 0 322 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.91016" y="80" width="308" height="1" fill="white"/>
+<rect x="6.91016" y="117" width="308" height="1" fill="white"/>
+<rect x="6.91016" y="43" width="308" height="1" fill="white"/>
+<rect x="6.91016" y="6" width="308" height="1" fill="white"/>
+<path d="M7 66L69.3797 50.5L127.304 38.5L202.494 31.5L259.304 20L315 7" stroke="#006836" stroke-width="4"/>
+<path d="M5 94L66.4 81.5L132.265 75L202.596 70H260.647L312 57" stroke="#D3AE6A" stroke-width="4"/>
+<circle cx="7" cy="66" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+<circle cx="9" cy="94" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="69" cy="82" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="129" cy="74" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="205" cy="70" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="261" cy="70" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="315" cy="57" r="5.5" fill="white" stroke="#D3AE6A" stroke-width="3"/>
+<circle cx="69" cy="50" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+<circle cx="129" cy="37" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+<circle cx="203" cy="32" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+<circle cx="259" cy="20" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+<circle cx="315" cy="7" r="5.5" fill="white" stroke="#006836" stroke-width="3"/>
+</svg>

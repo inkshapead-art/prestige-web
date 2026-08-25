@@ -471,7 +471,7 @@ export default {
       },
       statistics: {
         title:
-          'Complete Funding <br/> <span class="text-secondary font-georgia">Readiness Audit </span>',
+          'Complete Funding <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Readiness Audit </span>',
         description: "We evaluate every lender requirement including:",
         items: [
           "Business structure",
@@ -643,7 +643,7 @@ export default {
       },
       statistics: {
         title:
-          'Build A Scalable <br/> <span class="text-secondary font-georgia">Growth Plan </span>',
+          'Build A Scalable <br class="hidden lg:block"/> <span class="text-secondary font-georgia">Growth Plan </span>',
         description: "Together we create a roadmap focused on:",
         items: [
           "Expansion",

@@ -1,0 +1,63 @@
+---
+import type { Language } from "../../../types/language.type";
+import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const config = statisticsCardsConfig["flow-optimization"];
+---
+
+<!-- 
+  Flow Optimization Statistics Card
+  Modify this file to customize the content, structure, and design for the Flow Optimization page.
+-->
+<div class="flex justify-center items-center gap-6 md:gap-12">
+  <div class="flex flex-col justify-center itmes-start">
+    <h3 class="text-[13px] md:text-[22px] leading-[100%] font-semibold text-paragraph">
+      {config?.title?.[lang]}
+    </h3>
+    <div class="w-full flex justify-between items-center mt-4 md:mt-9">
+      <p class="text-[13px] text-paragraph font-normal leading-[100%]">
+        {config?.subtitle?.[lang]}
+      </p>
+      <div
+        class="flex bg-accent/10 rounded-full justify-center items-center w-16 xl:w-20 h-7 border border-accent"
+      >
+        <p class="text-accent text-[13px] font-normal leading-[100%]">+18%</p>
+      </div>
+    </div>
+    <p class="text-[24px] xl:text-[32px] font-semibold leading-[100%] text-paragraph">
+      $145,0000
+    </p>
+    <img
+      src="/images/solutions/flow-1.svg"
+      alt="Flow Optimization"
+      width="322"
+      height="118"
+      decoding="async"
+      loading="lazy"
+      class="w-full h-auto mt-[11px]"
+    />
+    <img
+      src="/images/solutions/credit-2.svg"
+      alt="Credit Optimization 2"
+      width="305"
+      height="59"
+      decoding="async"
+      loading="lazy"
+      class="w-full h-auto mt-6"
+    />
+  </div>
+  <img
+    src="/images/solutions/credit-3.svg"
+    alt="Credit Optimization 3"
+    width="224"
+    height="213"
+    decoding="async"
+    loading="lazy"
+    class="w-full h-auto max-w-[150px] xl:max-w-[224px]"
+  />
+</div>

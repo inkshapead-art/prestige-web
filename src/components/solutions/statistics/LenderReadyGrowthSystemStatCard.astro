@@ -1,0 +1,93 @@
+---
+import type { Language } from "../../../types/language.type";
+import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const config = statisticsCardsConfig["lender-ready-growth-system"];
+---
+
+<!-- 
+  Lender-Ready Growth System Statistics Card
+  Modify this file to customize the content, structure, and design for the Lender-Ready Growth System page.
+-->
+<div class="w-full flex flex-col justify-center items-center gap-8">
+  <div class="flex justify-center items-center gap-9">
+    <div class="relative w-[150px] xl:w-[245px] h-[150px] xl:h-[245px]">
+      <img
+        src="/images/solutions/lender-1.svg"
+        alt="Lender-Ready Growth System 1"
+        width="245"
+        height="245"
+        decoding="async"
+        loading="lazy"
+        class="w-full h-auto"
+      />
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center"
+      >
+        <p
+          class="text-[32px] xl:text-[54px] leading-[100%] font-semibold text-paragraph"
+        >
+          85%
+        </p>
+        <p class="text-[19px] font-medium text-accent leading-[150%]">
+          {config?.title?.[lang]}
+        </p>
+      </div>
+    </div>
+    <div class="flex justify-center items-stretch gap-[17px]">
+      <img
+        src="/images/solutions/credit-3.svg"
+        alt="Credit Optimization 3"
+        width="224"
+        height="213"
+        decoding="async"
+        loading="lazy"
+        class="w-full h-auto max-w-[120px] md:max-w-[150px] xl:max-w-[199px]"
+      />
+      <div class="flex flex-col justify-between items-center gap-2 md:gap-0">
+        <div
+          class="flex bg-accent/10 rounded-full justify-center items-center w-16 md:w-20 h-6 md:h-7 border border-accent"
+        >
+          <p class="text-accent text-[13px] font-normal leading-[100%]">
+            {config?.title?.[lang]}
+          </p>
+        </div>
+        <div
+          class="flex bg-accent/10 rounded-full justify-center items-center w-16 md:w-20 h-6 md:h-7 border border-accent"
+        >
+          <p class="text-accent text-[13px] font-normal leading-[100%]">
+            {config?.title?.[lang]}
+          </p>
+        </div>
+        <div
+          class="flex bg-secondary/10 rounded-full justify-center items-center w-16 md:w-20 h-6 md:h-7 border border-secondary"
+        >
+          <p class="text-secondary text-[13px] font-normal leading-[100%]">
+            {config?.subtitle?.[lang]}
+          </p>
+        </div>
+        <div
+          class="flex bg-secondary/10 rounded-full justify-center items-center w-16 md:w-20 h-6 md:h-7 border border-secondary"
+        >
+          <p class="text-secondary text-[13px] font-normal leading-[100%]">
+            {config?.subtitle?.[lang]}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img
+    src="/images/solutions/lender-2.svg"
+    alt="Lender-Ready Growth System 2"
+    width="577"
+    height="59"
+    decoding="async"
+    loading="lazy"
+    class="w-full h-auto max-w-[500px] lg:max-w-none"
+  />
+</div>

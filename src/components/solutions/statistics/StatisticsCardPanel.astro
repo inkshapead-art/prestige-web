@@ -1,0 +1,38 @@
+---
+import type { Language } from "../../../types/language.type";
+import BusinessFundingStatCard from "./BusinessFundingStatCard.astro";
+import CreditOptimizationStatCard from "./CreditOptimizationStatCard.astro";
+import LenderReadyGrowthSystemStatCard from "./LenderReadyGrowthSystemStatCard.astro";
+import FlowOptimizationStatCard from "./FlowOptimizationStatCard.astro";
+import BusinessConsultingStatCard from "./BusinessConsultingStatCard.astro";
+
+/**
+ * StatisticsCardPanel dynamically selects and renders 1 card for the Statistics section
+ * based on the active solution slug. The card container is relative & w-full.
+ */
+interface Props {
+  solution: string;
+  lang: Language;
+}
+
+const { solution, lang } = Astro.props;
+
+const cardComponentsMap = {
+  "business-funding": BusinessFundingStatCard,
+  "credit-optimization": CreditOptimizationStatCard,
+  "lender-ready-growth-system": LenderReadyGrowthSystemStatCard,
+  "flow-optimization": FlowOptimizationStatCard,
+  "business-consulting": BusinessConsultingStatCard,
+};
+
+const SelectedCard =
+  cardComponentsMap[solution as keyof typeof cardComponentsMap];
+---
+
+{
+  SelectedCard ? (
+    <div class="w-full relative bg-[#F6F6F6] p-5 md:p-7.5 rounded-[12px] flex justify-center items-center">
+      <SelectedCard lang={lang} />
+    </div>
+  ) : null
+}

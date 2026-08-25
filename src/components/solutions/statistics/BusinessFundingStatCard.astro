@@ -1,0 +1,47 @@
+---
+import type { Language } from "../../../types/language.type";
+import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const config = statisticsCardsConfig["business-funding"];
+---
+
+<!-- 
+  Business Funding Statistics Card
+  Modify this file to customize the content, structure, and design for the Business Funding page.
+-->
+<div class="w-full flex flex-col justify-center items-center">
+  <div class="w-full flex justify-between items-center">
+    <h3 class="text-[13px] md:text-[21px] text-paragraph leading-[100%] font-semibold">
+      {config?.title?.[lang]}
+    </h3>
+    <div
+      class="flex justify-center items-center bg-[#E5E5E5] py-1 px-2 rounded-sm"
+    >
+      <p class="text-[13px] font-normal leading-[100%] text-paragraph">
+        {config?.subtitle?.[lang]}
+      </p>
+    </div>
+  </div>
+  <img
+    src="/images/solutions/business-1.svg"
+    class="w-full h-auto mt-7"
+    width="613"
+    height="263"
+    decoding="async"
+    loading="lazy"
+  />
+  <div class="w-full flex justify-between items-center mt-7">
+    {
+      config?.days?.map((day) => (
+        <p class="text-[13px] font-normal leading-[100%] text-paragraph">
+          {day.label[lang]}
+        </p>
+      ))
+    }
+  </div>
+</div>

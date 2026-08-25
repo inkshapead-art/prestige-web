@@ -1,21 +1,27 @@
 ---
 import Button from "../../components/Button.astro";
 import { BUTTON_COLOR_CLASSES } from "../../constants/buttonClasses";
+import StatisticsCardPanel from "../../components/solutions/statistics/StatisticsCardPanel.astro";
+import type { Language } from "../../types/language.type";
+
 type Translations = typeof import("../../i18n/en").default;
-type HeroContent =
+type StatisticsContent =
   Translations["solutions"]["business-consulting"]["statistics"];
+
 interface Props {
-  content: HeroContent;
+  content: StatisticsContent;
+  solution: string;
+  lang: Language;
 }
-const { content } = Astro.props as Props;
+
+const { content, solution, lang } = Astro.props as Props;
 ---
 
 <section
-  class="bg-white container-full flex flex-col lg:flex-row justify-center lg:justify-between items-center py-10 md:py-16 lg:py-26 gap-8 lg:gap-0"
+  class="bg-white container-full flex flex-col lg:flex-row justify-center lg:justify-start items-center py-10 md:py-16 lg:py-26 gap-8 lg:gap-10 xl:gap-22"
 >
-  <div
-    class="w-full lg:w-[50%] h-auto bg-[#F6F6F6] rounded-[12px] overflow-hidden aspect-682/420 md:aspect-682/370 lg:aspect-682/420"
-  >
+  <div class="w-full md:w-auto lg:w-[45%] xl:w-[50%] relative">
+    <StatisticsCardPanel solution={solution} lang={lang} />
   </div>
   <div
     class="flex flex-col justify-center items-start gap-6 md:gap-10 w-full lg:w-auto"
