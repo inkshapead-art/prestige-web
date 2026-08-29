@@ -135,7 +135,7 @@ export default function EstimateForm() {
     setSubmitError(null);
 
     try {
-      const response = await fetch("/api/enviar-leads", {
+      const response = await fetch("/api/enviar-leads.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

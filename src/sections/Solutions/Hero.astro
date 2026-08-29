@@ -16,13 +16,22 @@ const { content, solution, lang } = Astro.props as Props;
 <section
   class="w-full flex justify-center items-center relative overflow-hidden h-[calc(100vh-var(--header-height))] md:h-[50vh] xl:h-[calc(100vh-var(--header-height))] bg-[#000800] bg-gradient-to-b from-[#002D15] to-[#000800]/0"
 >
-  <div class="absolute inset-0 z-0 pointer-events-none">
+  <div class="absolute bottom-0 z-0 pointer-events-none w-full h-full">
     <img
       src="/images/hero-solutions.webp"
       alt="Hero Solutions Prestige"
-      class="w-full lg:w-[97%] 3xl:w-full h-full md:h-full xl:h-auto object-cover object-[79%_50%] md:object-[77%_50%] xl:object-center"
-      width="2752"
-      height="1391"
+      class="w-full md:w-auto xl:w-full h-full xl:h-auto object-cover object-[78%_50%] md:object-[77%_50%] xl:object-bottom hidden md:block"
+      width="2500"
+      height="1061"
+      decoding="async"
+      loading="eager"
+    />
+    <img
+      src="/images/hero-solutions-mobile.webp"
+      alt="Hero Solutions Prestige"
+      class="w-full h-full object-cover md:hidden"
+      width="430"
+      height="932"
       decoding="async"
       loading="eager"
     />

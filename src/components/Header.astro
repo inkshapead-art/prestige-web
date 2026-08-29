@@ -6,8 +6,6 @@ import {
   instagramLink,
   phoneNumber,
   phoneNumberLink,
-  tikTokLink,
-  youtubeLink,
 } from "../constants/info";
 import Button from "./Button.astro";
 import ChangeLanguage from "./ChangeLanguage.astro";
@@ -37,19 +35,11 @@ const socialMedia = [
     icon: "instagram",
     href: instagramLink,
   },
-  {
-    icon: "tiktok",
-    href: tikTokLink,
-  },
-  {
-    icon: "youtube",
-    href: youtubeLink,
-  },
 ];
 ---
 
 <header
-  class={`fixed left-0 right-0 z-50 w-full flex flex-col justify-center items-center top-0 ${isSuccessStoriesPage ? "bg-white" : "bg-primary"}`}
+  class={`fixed left-0 right-0 z-[100] w-full flex flex-col justify-center items-center top-0 border-b border-[#FFFFFF1A] ${isSuccessStoriesPage ? "bg-white" : "bg-primary"}`}
   id="site-header"
   style="transition: background-color 0.3s ease-out;"
 >
@@ -162,7 +152,7 @@ const socialMedia = [
 </header>
 
 <div
-  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-start bg-white text-paragraph flex-col justify-between h-full z-60 pb-12 px-4 pt-6 gap-12 transform translate-x-full transition-transform duration-300 ease-out w-full"
+  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-start bg-white text-paragraph flex-col justify-between h-full z-[2147483647] pb-12 px-4 pt-6 gap-12 transform translate-x-full transition-transform duration-300 ease-out w-full"
   id="mobile-menu"
 >
   <div class="flex flex-col justify-center items-start gap-6 w-full">
@@ -188,7 +178,7 @@ const socialMedia = [
             return (
               <>
                 <li
-                  class={`flex flex-col items-start justify-start group gap-3.5 px-0 w-full text-start ${isSolution ? "relative" : ""} ${isActive && !isSolution ? "bg-accent text-white uppercase px-4" : ""}`}
+                  class={`flex flex-col items-start justify-start group gap-3.5 px-0 w-full text-start ${isSolution ? "relative" : ""} `}
                   id={`mobile-nav-item-${index}`}
                 >
                   <a
@@ -203,7 +193,7 @@ const socialMedia = [
                     }
                   >
                     <p
-                      class={`text-[14px] leading-[25.5px] font-normal tracking-[-0.5px] ${isActive && !isSolution ? "text-white" : "text-paragraph"}`}
+                      class={`text-[16px] leading-[25.5px] font-normal tracking-[-0.5px] ${isActive && !isSolution ? "font-semibold uppercase" : "font-blod"} text-paragraph`}
                       set:html={item.label}
                     />
                     {isSolution && (
@@ -216,13 +206,13 @@ const socialMedia = [
                   {isSolution && (
                     <div
                       id="mobile-solutions-submenu"
-                      class="flex-col justify-center items-center w-full bg-primary divide-y divide-secondary hidden absolute z-20 top-full left-0 translate-y-1"
+                      class="flex-col justify-center items-center w-full divide-y-[0.1px] divide-[#E7E7E7] hidden z-20"
                       data-solution-menu="true"
                     >
                       {content.solutions.map((sub) => (
                         <a
                           href={`/${lang}${sub.href}`}
-                          class="paragraph text-white py-4 transition-colors duration-300 ease-in-out cursor-pointer px-6 w-full text-center font-semibold"
+                          class="paragraph text-paragraph py-2 transition-colors duration-300 ease-in-out cursor-pointer px-6 w-full text-start font-semibold"
                         >
                           {sub.label}
                         </a>

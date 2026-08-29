@@ -210,7 +210,7 @@ export default {
           image: "item-3",
           name: "Madleidy Alvarez",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
+            "Prestige Growth Partners secured my funding quickly, making business growth simple, stress-free, and achievable.",
           value: "+$110,000",
           approved: "Approved",
         },
@@ -789,7 +789,7 @@ export default {
         image: "item-3",
         name: "Madleidy Alvarez",
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
+          "Prestige Growth Partners secured my funding quickly, making business growth simple, stress-free, and achievable.",
         approved: "Approved",
       },
       {
@@ -932,49 +932,74 @@ export default {
   seo: {
     home: {
       title: "Prestige Growth Partners | Business Funding & Capital Solutions",
-      description: "Access $150K to $1M+ in business funding with our proven system. We optimize your business profile, increase lender confidence, and secure long-term capital.",
-      keywords: "business funding, commercial loans, business lines of credit, capital growth, business credit, funding experts, prestige growth partners",
+      description:
+        "Access $150K to $1M+ in business funding with our proven system. We optimize your business profile, increase lender confidence, and secure long-term capital.",
+      keywords:
+        "business funding, commercial loans, business lines of credit, capital growth, business credit, funding experts, prestige growth partners",
     },
     aboutUs: {
       title: "About Us | Prestige Growth Partners - Business Capital Experts",
-      description: "Learn how Prestige Growth Partners helps business owners secure funding, optimize credit profiles, and build long-term financial stability.",
-      keywords: "about prestige growth partners, business funding company, capital acquisition team, financial growth consultants",
+      description:
+        "Learn how Prestige Growth Partners helps business owners secure funding, optimize credit profiles, and build long-term financial stability.",
+      keywords:
+        "about prestige growth partners, business funding company, capital acquisition team, financial growth consultants",
     },
     howItWorks: {
-      title: "How It Works | 3-Step Business Funding Process | Prestige Growth Partners",
-      description: "Discover our 3-step funding process: Business Funding Scan, Capital Acquisition, and Funding Optimization to position your business for success.",
-      keywords: "business funding scan, capital acquisition process, funding optimization, how business funding works, prestige growth process",
+      title:
+        "How It Works | 3-Step Business Funding Process | Prestige Growth Partners",
+      description:
+        "Discover our 3-step funding process: Business Funding Scan, Capital Acquisition, and Funding Optimization to position your business for success.",
+      keywords:
+        "business funding scan, capital acquisition process, funding optimization, how business funding works, prestige growth process",
     },
     successStories: {
-      title: "Success Stories | Client Results & Reviews | Prestige Growth Partners",
-      description: "Explore real success stories from over 5,000 funded business owners who scaled their operations and expanded with Prestige Growth Partners.",
-      keywords: "business funding reviews, client success stories, prestige growth partners reviews, business capital results, funding testimonials",
+      title:
+        "Success Stories | Client Results & Reviews | Prestige Growth Partners",
+      description:
+        "Explore real success stories from over 5,000 funded business owners who scaled their operations and expanded with Prestige Growth Partners.",
+      keywords:
+        "business funding reviews, client success stories, prestige growth partners reviews, business capital results, funding testimonials",
     },
     solutions: {
       "business-funding": {
-        title: "Business Funding & Capital Acquisition | Prestige Growth Partners",
-        description: "Access strategic business capital, lines of credit, and commercial loans designed to fuel business growth without equity loss or guesswork.",
-        keywords: "business funding, business loans, line of credit, commercial financing, capital acquisition, equipment financing, SBA loans",
+        title:
+          "Business Funding & Capital Acquisition | Prestige Growth Partners",
+        description:
+          "Access strategic business capital, lines of credit, and commercial loans designed to fuel business growth without equity loss or guesswork.",
+        keywords:
+          "business funding, business loans, line of credit, commercial financing, capital acquisition, equipment financing, SBA loans",
       },
       "credit-optimization": {
-        title: "Business & Personal Credit Optimization | Prestige Growth Partners",
-        description: "Maximize funding eligibility and secure lower interest rates with our comprehensive personal and business credit optimization services.",
-        keywords: "credit optimization, business credit building, personal credit repair, net-30 vendor accounts, credit bureau optimization, funding readiness",
+        title:
+          "Business & Personal Credit Optimization | Prestige Growth Partners",
+        description:
+          "Maximize funding eligibility and secure lower interest rates with our comprehensive personal and business credit optimization services.",
+        keywords:
+          "credit optimization, business credit building, personal credit repair, net-30 vendor accounts, credit bureau optimization, funding readiness",
       },
       "lender-ready-growth-system": {
-        title: "Lender-Ready Growth System | Funding Audit | Prestige Growth Partners",
-        description: "Position your business to qualify for top-tier funding. We audit and align your EIN, entity structure, banking, and financial records for bank approval.",
-        keywords: "lender ready growth system, business funding audit, lender requirements, business compliance, banking profile optimization",
+        title:
+          "Lender-Ready Growth System | Funding Audit | Prestige Growth Partners",
+        description:
+          "Position your business to qualify for top-tier funding. We audit and align your EIN, entity structure, banking, and financial records for bank approval.",
+        keywords:
+          "lender ready growth system, business funding audit, lender requirements, business compliance, banking profile optimization",
       },
       "flow-optimization": {
-        title: "Cash Flow Optimization & Financial Visibility | Prestige Growth Partners",
-        description: "Gain complete financial visibility, optimize revenue allocation, and organize working capital to build a healthy, fundable business.",
-        keywords: "flow optimization, cash flow management, working capital, financial reporting, business cash flow, revenue allocation",
+        title:
+          "Cash Flow Optimization & Financial Visibility | Prestige Growth Partners",
+        description:
+          "Gain complete financial visibility, optimize revenue allocation, and organize working capital to build a healthy, fundable business.",
+        keywords:
+          "flow optimization, cash flow management, working capital, financial reporting, business cash flow, revenue allocation",
       },
       "business-consulting": {
-        title: "Strategic Business Consulting & Scaling | Prestige Growth Partners",
-        description: "Get high-level strategic consulting to optimize financial operations, scale business performance, and attract premium lending partners.",
-        keywords: "business consulting, financial strategy, business growth advisor, operational scaling, commercial expansion consulting",
+        title:
+          "Strategic Business Consulting & Scaling | Prestige Growth Partners",
+        description:
+          "Get high-level strategic consulting to optimize financial operations, scale business performance, and attract premium lending partners.",
+        keywords:
+          "business consulting, financial strategy, business growth advisor, operational scaling, commercial expansion consulting",
       },
     },
   },

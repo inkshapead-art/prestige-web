@@ -19,22 +19,28 @@ const percent = Math.min(
   Math.max(0, ((value - rangeMin) / (rangeMax - rangeMin)) * 100),
 );
 
-const hubX = 92;
-const hubY = 35;
-const needleLength = 12;
-const angleDeg = 360 - (percent / 100) * 180;
-const angleRad = (angleDeg * Math.PI) / 180;
-const needleTipX = hubX + needleLength * Math.cos(angleRad);
-const needleTipY = hubY - needleLength * Math.sin(angleRad);
-
-// Arco ampliado horizontalmente
 const ARC_PATH = "M6,50 A44,43 0 0 1 94,50";
 const showMinMax = min !== undefined && max !== undefined;
 const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
+
+// El arco es prácticamente un círculo centrado en (50,50). Para cualquier
+// punto sobre ese círculo, el ángulo que apunta hacia el centro es una
+// función LINEAL de qué tan avanzado está el recorrido (0-100%):
+//   en t=0%   (punto 6,50)  -> apunta hacia +x (derecha)  -> 90deg
+//   en t=50%  (punto 50,7)  -> apunta hacia abajo         -> 180deg
+//   en t=100% (punto 94,50) -> apunta hacia -x (izquierda) -> 270deg
+// Fórmula: angulo(t) = 90 + t * 180  (t de 0 a 1, o percent de 0 a 100 => *1.8)
+const needleRotateTarget = 90 + percent * 1.8;
 ---
 
-<div>
-  <h3 class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center">
+<div
+  class="gauge"
+  data-animate
+  style={`--needle-percent: ${percent}%; --needle-rotate-target: ${needleRotateTarget}deg;`}
+>
+  <h3
+    class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center"
+  >
     {title}
   </h3>
 
@@ -54,26 +60,31 @@ const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
         </linearGradient>
       </defs>
       <path
+        class="gauge-arc"
         d={ARC_PATH}
         fill="none"
         stroke={`url(#${gradientId})`}
         stroke-width="5"
-        stroke-linecap="round"></path>
+        stroke-linecap="round"
+        pathLength="100"></path>
 
       {
         showMinMax && (
-          <>
+          <g class="gauge-needle">
+            {/* dibujado apuntando "hacia arriba" (0,-12) en su orientación
+                de referencia; offset-rotate se encarga de girarlo al
+                ángulo correcto en cada punto del recorrido */}
             <line
-              x1={hubX}
-              y1={hubY}
-              x2={needleTipX}
-              y2={needleTipY}
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="-12"
               stroke="#000800"
               stroke-width="2.5"
               stroke-linecap="round"
             />
-            <circle cx={hubX} cy={hubY} r="5" fill="#000800" />
-          </>
+            <circle cx="0" cy="0" r="5" fill="#000800" />
+          </g>
         )
       }
     </svg>
@@ -88,7 +99,7 @@ const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
     }
 
     <div
-      class={`text-center absolute left-1/2 -translate-x-1/2 ${showMinMax ? "top-[60%]" : "top-[40%] md:top-[45%]"} w-full flex flex-col items-center`}
+      class={`gauge-value text-center absolute left-1/2 -translate-x-1/2 ${showMinMax ? "top-[60%]" : "top-[40%] md:top-[45%]"} w-full flex flex-col items-center`}
     >
       {
         !showMinMax && (
@@ -126,7 +137,7 @@ const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
 
   {
     callout && (
-      <div class="mt-3 md:mt-4 flex justify-start items-center gap-1.5 md:gap-2 bg-[#E3E2E2] rounded-lg p-2 md:p-2.5 w-auto">
+      <div class="gauge-callout mt-3 md:mt-4 flex justify-start items-center gap-1.5 md:gap-2 bg-[#E3E2E2] rounded-lg p-2 md:p-2.5 w-auto">
         <svg
           width="16"
           height="16"
@@ -152,3 +163,70 @@ const gradientId = `gaugeGradient-${Math.round(value * 1000)}`;
     )
   }
 </div>
+
+<style>
+  /* El arco se dibuja de 0% a 100% */
+  .gauge-arc {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gauge.active .gauge-arc {
+    stroke-dashoffset: 0;
+  }
+
+  /* El marcador viaja sobre la curva del arco (posición) y a la vez
+     rota con un ángulo calculado matemáticamente para apuntar SIEMPRE
+     hacia el centro (donde está el número). offset-distance y
+     offset-rotate comparten exactamente la misma duración/easing para
+     que ambos avancen en sincronía y la línea nunca "se desalinee"
+     durante la animación, solo al final. */
+  .gauge-needle {
+    offset-path: path("M6,50 A44,43 0 0 1 94,50");
+    offset-anchor: 0px 0px;
+    offset-distance: 0%;
+    offset-rotate: 90deg; /* ángulo hacia el centro en el punto de inicio (t=0%) */
+    transition:
+      offset-distance 1s cubic-bezier(0.22, 1, 0.36, 1),
+      offset-rotate 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gauge.active .gauge-needle {
+    offset-distance: var(--needle-percent);
+    offset-rotate: var(--needle-rotate-target);
+  }
+
+  /* Valor central y callout aparecen cuando el marcador ya casi llegó */
+  .gauge-value,
+  .gauge-callout {
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
+  }
+
+  .gauge-value {
+    transition-delay: 0.85s;
+  }
+
+  .gauge-callout {
+    transition-delay: 1s;
+  }
+
+  .gauge.active .gauge-value,
+  .gauge.active .gauge-callout {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gauge-arc,
+    .gauge-needle,
+    .gauge-value,
+    .gauge-callout {
+      transition: none !important;
+    }
+  }
+</style>

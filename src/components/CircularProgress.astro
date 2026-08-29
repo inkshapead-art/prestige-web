@@ -1,0 +1,115 @@
+---
+// components/CircularProgress.astro
+interface Props {
+  percentage: number;
+  label?: string;
+  size?: number;
+}
+
+const { percentage, label, size = 153 } = Astro.props;
+
+const strokeWidth = 5.5;
+const radius = size / 2 - strokeWidth;
+const circumference = 2 * Math.PI * radius;
+const offset =
+  circumference -
+  (circumference * Math.min(Math.max(percentage, 0), 100)) / 100;
+---
+
+<div
+  class="progress-wrapper progress-reveal relative flex justify-center items-center w-full max-w-[120px] lg:max-w-[153px]"
+  style={`--offset: ${offset};`}
+>
+  <svg
+    class="progress-svg w-full h-full -rotate-90"
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      stroke="#000800"
+      stroke-opacity="0.1"
+      stroke-width={strokeWidth}></circle>
+    <circle
+      class="progress-circle"
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      stroke="#006836"
+      stroke-width={strokeWidth}
+      stroke-linecap="round"
+      stroke-dasharray={circumference}
+      stroke-dashoffset={circumference}></circle>
+  </svg>
+
+  <div
+    class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-2 lg:p-0"
+  >
+    <span
+      class="title-2 text-paragraph progress-number"
+      data-target={percentage}>0%</span
+    >
+    {
+      label && (
+        <span class="text-[9px] lg:text-[12px] font-normal leading-[150%] text-paragraph">
+          {label}
+        </span>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .progress-circle {
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* clave: reacciona a .active, que es la clase que agrega TU observer global */
+  .progress-reveal.active .progress-circle {
+    stroke-dashoffset: var(--offset);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .progress-circle {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // El número animado necesita su propio pequeño observer porque no puede
+  // "escuchar" cambios de clase con CSS puro (no hay forma de animar un
+  // textContent solo con CSS). Es liviano y no choca con el observer global.
+  const numbers = document.querySelectorAll<HTMLElement>(
+    ".progress-number:not([data-animated])",
+  );
+
+  const numberObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        el.dataset.animated = "true";
+        const target = Number(el.dataset.target || 0);
+        const duration = 1400;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = `${Math.round(target * eased)}%`;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+        numberObserver.unobserve(el);
+      }
+    },
+    { threshold: 0.3 },
+  );
+
+  numbers.forEach((el) => numberObserver.observe(el));
+</script>

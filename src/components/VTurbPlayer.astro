@@ -1,0 +1,34 @@
+---
+interface Props {
+  playerId: string;
+  accountId?: string;
+  class?: string;
+}
+
+const {
+  playerId,
+  accountId = "66d80db3-7deb-4ec2-863f-794f8e018c5b",
+  class: className,
+} = Astro.props;
+---
+
+<vturb-smartplayer
+  id={`vid-${playerId}`}
+  class={className}
+  style="display: block; margin: 0 auto; width: 100%;"
+>
+  <div
+    class="vturb-player-placeholder"
+    style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"
+  >
+  </div>
+</vturb-smartplayer>
+
+<script is:inline define:vars={{ playerId, accountId }}>
+  (function () {
+    var s = document.createElement("script");
+    s.src = `https://scripts.converteai.net/${accountId}/players/${playerId}/v4/player.js`;
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+</script>

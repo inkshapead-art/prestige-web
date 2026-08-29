@@ -1,14 +1,15 @@
 ---
+import VTurbPlayer from "../../components/VTurbPlayer.astro";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
 import Instrucctions from "../../sections/Scheduling/Instrucctions.astro";
 ---
 
 <LayoutScheduling>
   <section
-    class="w-full h-[65vh] md:h-[70vh] lg:h-[70vh] xl:h-screen flex flex-col justify-end items-center pb-16 bg-gradient-to-b from-[#002D15] to-transparent bg-[#000700]"
+    class="w-full h-auto md:h-[70vh] lg:h-[70vh] xl:h-auto flex flex-col justify-center items-center bg-gradient-to-b from-[#002D15] to-transparent bg-[#000700]"
   >
     <div
-      class="container-full flex flex-col justify-end md:justify-center xl:justify-end 3xl:justify-center items-center gap-4 md:gap-6 lg:gap-3 3xl:gap-8 text-white h-full translate-y-0 md:translate-y-[5%] xl:translate-y-0 3xl:translate-y-[5%]"
+      class="container-full flex flex-col justify-end md:justify-center xl:justify-center items-center gap-5 md:gap-6 lg:gap-6 3xl:gap-8 text-white h-full pt-38 md:pt-16 xl:pt-38 pb-22 md:pb-20"
     >
       <div class="flex justify-center items-center gap-[9px]">
         <div
@@ -42,17 +43,12 @@ import Instrucctions from "../../sections/Scheduling/Instrucctions.astro";
         Directly impacts your business. 8 minutes.
       </p>
       <div
-        class="relative w-full h-auto md:w-[530px] lg:w-[710px] overflow-hidden rounded-3xl border-2 border-white/20 mt-10 md:mt-0"
+        class="relative w-full h-auto md:w-[530px] lg:w-[710px] overflow-hidden rounded-3xl border-2 border-white/20 mt-5 md:mt-5"
         style="aspect-ratio: 137 / 77"
       >
-        <img
-          alt="Viralidad Cover"
-          class="h-full w-full object-cover"
-          src="/images/scheduling/hero-image.webp"
-          loading="eager"
-          decoding="async"
-          width="1376"
-          height="768"
+        <VTurbPlayer
+          playerId="6a8e1b21301d0bca517bdac6"
+          class="h-full w-full"
         />
       </div>
     </div>

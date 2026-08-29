@@ -19,13 +19,21 @@ const isHomePage = /^\/(en|es)?\/?$/.test(pathname);
   <img
     src="/images/home/hero.webp"
     alt="Hero Pretige"
-    class="w-full h-full object-[83%_50%] md:object-[83%_100%] object-cover absolute inset-0 xl:object-center z-0"
+    class="w-full h-full object-[85%_50%] md:object-[83%_100%] object-cover absolute inset-0 xl:object-center z-0 hidden md:block"
     width="2100"
     height="1062"
     decoding="async"
     loading="eager"
   />
-
+  <img
+    src="/images/home/hero-mobile.webp"
+    alt="Hero Pretige"
+    class="w-full h-full object-cover absolute inset-0 object-[50%_60%] z-0 md:hidden"
+    width="430"
+    height="932"
+    decoding="async"
+    loading="eager"
+  />
   <div class="back-mobile-hero absolute inset-0 z-2 md:hidden block"></div>
   <div
     class="container-full flex justify-start items-center z-10 py-10 md:py-0 h-full"

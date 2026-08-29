@@ -319,3 +319,22 @@ html {
 .back-mobile-hero {
   background: linear-gradient(0deg, #000 1.08%, rgba(0, 0, 0, 0) 54.37%);
 }
+
+
+@keyframes cardWobble {
+  0% { transform: scale(1) rotate(0deg); }
+  20% { transform: scale(1.05) rotate(-6deg); }
+  40% { transform: scale(1.05) rotate(5deg); }
+  60% { transform: scale(1.03) rotate(-3deg); }
+  80% { transform: scale(1.01) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.hover-bounce-card {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+.hover-bounce-card:hover {
+  animation: cardWobble 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}

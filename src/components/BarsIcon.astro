@@ -1,0 +1,56 @@
+---
+// components/BarsIcon.astro
+interface Props {
+  color?: string;
+  size?: number;
+}
+
+const { color = "#006836", size = 48 } = Astro.props;
+
+const bars = [
+  { x: 0, y: 32, w: 9.6, h: 12.8 },
+  { x: 12.8, y: 22.4, w: 9.6, h: 22.4 },
+  { x: 25.6, y: 12.8, w: 9.6, h: 32 },
+  { x: 38.4, y: 3.2, w: 9.6, h: 41.6 },
+];
+---
+
+<svg
+  class="bars-icon"
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 48 48"
+  fill="none"
+>
+  {
+    bars.map((bar, i) => (
+      <rect
+        class="bars-icon__bar"
+        x={bar.x}
+        y={bar.y}
+        width={bar.w}
+        height={bar.h}
+        fill={color}
+        style={`transform-origin: ${bar.x + bar.w / 2}px ${bar.y + bar.h}px; transition-delay: ${i * 120}ms;`}
+      />
+    ))
+  }
+</svg>
+
+<style is:global>
+  .bars-icon__bar {
+    transform: scaleY(0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bars-icon.active .bars-icon__bar {
+    transform: scaleY(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bars-icon__bar {
+      transition: none;
+    }
+  }
+</style>

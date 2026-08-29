@@ -38,33 +38,23 @@ export const estimateSteps: EstimateStep[] = [
         type: "choice",
         options: [
           {
-            label: "Service 1",
-            value: "service-1",
+            label: "Business Funding",
+            value: "Business Funding",
             description: "For homes and residential properties.",
           },
           {
-            label: "Service 2",
-            value: "service-2",
-            description: "For businesses, offices, and commercial spaces.",
-          },
-          {
-            label: "Service 3",
-            value: "service-3",
+            label: "Business Consulting",
+            value: "Business Consulting",
             description: "For industrial facilities and projects.",
           },
           {
-            label: "Service 4",
-            value: "service-4",
+            label: "Credit Optimization",
+            value: "Credit Optimization",
             description: "For industrial facilities and projects.",
           },
           {
-            label: "Service 5",
-            value: "service-5",
-            description: "For industrial facilities and projects.",
-          },
-          {
-            label: "Service 6",
-            value: "service-6",
+            label: "Business loans, SBA, BLOC, BUSINESS CREDIT CARD",
+            value: "Business loans, SBA, BLOC, BUSINESS CREDIT CARD",
             description: "For industrial facilities and projects.",
           },
         ],

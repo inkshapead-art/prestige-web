@@ -1,5 +1,10 @@
 ---
-import { facebookLink, instagramLink, tikTokLink, youtubeLink, emailAddress, phoneNumber } from "../constants/info";
+import {
+  facebookLink,
+  instagramLink,
+  emailAddress,
+  phoneNumber,
+} from "../constants/info";
 
 export interface Props {
   lang?: string;
@@ -29,7 +34,9 @@ const {
 } = Astro.props;
 
 // Normalize path format
-const cleanPath = canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`;
+const cleanPath = canonicalPath.startsWith("/")
+  ? canonicalPath
+  : `/${canonicalPath}`;
 const formattedPath = cleanPath === "/" ? "" : cleanPath;
 
 // Formatted URLs for SEO & Hreflang
@@ -48,47 +55,42 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "FinancialService",
   "@id": `${SITE_URL}/#organization`,
-  "name": SITE_NAME,
-  "legalName": SITE_NAME,
-  "url": SITE_URL,
-  "logo": `${SITE_URL}/favicon.svg`,
-  "image": absoluteImage,
-  "description": description,
-  "telephone": phoneNumber,
-  "email": emailAddress,
-  "address": {
+  name: SITE_NAME,
+  legalName: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.svg`,
+  image: absoluteImage,
+  description: description,
+  telephone: phoneNumber,
+  email: emailAddress,
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "Orlando",
-    "addressRegion": "FL",
-    "addressCountry": "US"
+    addressLocality: "Orlando",
+    addressRegion: "FL",
+    addressCountry: "US",
   },
-  "geo": {
+  geo: {
     "@type": "GeoCoordinates",
-    "latitude": 28.5383,
-    "longitude": -81.3792
+    latitude: 28.5383,
+    longitude: -81.3792,
   },
-  "sameAs": [
-    instagramLink,
-    facebookLink,
-    tikTokLink,
-    youtubeLink
-  ].filter(Boolean),
-  "priceRange": "$$$"
+  sameAs: [instagramLink, facebookLink].filter(Boolean),
+  priceRange: "$$$",
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
-  "url": SITE_URL,
-  "name": SITE_NAME,
-  "publisher": {
-    "@id": `${SITE_URL}/#organization`
+  url: SITE_URL,
+  name: SITE_NAME,
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
   },
-  "inLanguage": [
-    { "@type": "Language", "name": "English", "alternateName": "en" },
-    { "@type": "Language", "name": "Spanish", "alternateName": "es" }
-  ]
+  inLanguage: [
+    { "@type": "Language", name: "English", alternateName: "en" },
+    { "@type": "Language", name: "Spanish", alternateName: "es" },
+  ],
 };
 
 // Custom schemas passed via props
@@ -109,7 +111,12 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={SITE_NAME} />
-<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
 
 <!-- Location Meta Tags -->
 <meta name="geo.region" content="US-FL" />
@@ -122,6 +129,8 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://widgets.leadconnectorhq.com" />
 <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
+<link rel="preconnect" href="https://link.inkshapecrm.com" />
+<link rel="dns-prefetch" href="https://link.inkshapecrm.com" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -150,6 +159,8 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
 <meta name="generator" content={Astro.generator} />
 
 <!-- Structured Data / JSON-LD -->
-{allSchemas.map((schema) => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-))}
+{
+  allSchemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
+}

@@ -46,7 +46,7 @@ export default {
     ],
     buttons: [
       {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     ],
@@ -74,7 +74,7 @@ export default {
         },
       ],
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -127,7 +127,7 @@ export default {
         "Nos asociamos con dueños de negocio ambiciosos que buscan escalar en serio. Si cumples los requisitos, evaluamos tu potencial y creamos una hoja de ruta personalizada hacia mayores oportunidades de capital.",
       items: ["Negocio en EE. UU.", "Ingresos $20K+/mes", "Listo para Escalar"],
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -208,7 +208,7 @@ export default {
           image: "item-3",
           name: "Madleidy Alvarez",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
+            "Prestige Growth Partners consiguió mi financiamiento rápido, haciendo el crecimiento simple, sin estrés y alcanzable.",
           value: "+$110,000",
           approved: "Aprobado",
         },
@@ -266,7 +266,7 @@ export default {
         "Plan de Capital a Largo Plazo",
       ],
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -276,7 +276,7 @@ export default {
       description:
         "Construyamos una estrategia de financiamiento que posicione tu negocio para crecimiento sostenible.",
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -289,7 +289,7 @@ export default {
         description:
           "Ayudamos a negocios establecidos a conseguir financiamiento estratégico <br class='hidden md:block'/> mediante estrategias  enfocadas en prestamistas que apoyan crecimiento <br class='hidden md:block'/> sostenible y expansión.",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
         components: ["Hero1", "Hero2"],
@@ -308,7 +308,7 @@ export default {
         ],
         component: "Statistics1",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -364,7 +364,7 @@ export default {
           "Mejorar flujo de caja",
         ],
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -376,7 +376,7 @@ export default {
         description:
           "Optimizamos crédito personal <br class='hidden md:block lg:hidden'/> y empresarial para maximizar oportunidades <br class='hidden lg:block'/> de <br class='hidden md:block lg:hidden'/> financiamiento, confianza del prestamista y mejores condiciones.",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
         components: ["Hero3", "Hero4"],
@@ -395,7 +395,7 @@ export default {
         ],
         component: "Statistics2",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -451,7 +451,7 @@ export default {
           "Mayor flexibilidad financiera",
         ],
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -461,9 +461,9 @@ export default {
         title:
           'Conviértete en el <br class="hidden md:block"/> Negocio <span class="text-secondary font-georgia">Que los Bancos <br class="hidden md:block"/> Quieren Financiar</span>',
         description:
-          "Preparamos cada aspecto de tu <br class='hidden md:block lg:hidden'/> empresa para cumplir expectativas <br class='hidden md:block lg:hidden'/> de prestamistas <br class='hidden lg:block'/> antes de iniciar aplicaciones de financiamiento.",
+          "Preparamos cada aspecto de tu <br class='hidden md:block lg:hidden'/> empresa para cumplir expectativas <br class='hidden md:block 3xl:hidden'/> de prestamistas <br class='hidden 3xl:block'/> antes de iniciar aplicaciones de financiamiento.",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
         components: ["Hero5", "Hero6"],
@@ -481,7 +481,7 @@ export default {
         ],
         component: "Statistics3",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -537,7 +537,7 @@ export default {
           "Escalabilidad a Largo Plazo",
         ],
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -549,7 +549,7 @@ export default {
         description:
           "Un flujo de caja saludable crea negocios más fuertes y <br class='hidden md:block'/> mejores oportunidades de financiamiento.",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
         components: ["Hero7", "Hero8"],
@@ -567,7 +567,7 @@ export default {
         ],
         component: "Statistics4",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -623,7 +623,7 @@ export default {
           "Estabilidad a Largo Plazo",
         ],
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -635,7 +635,7 @@ export default {
         description:
           "Más allá del financiamiento, <br class='hidden md:block lg:hidden'/> ayudamos a dueños a tomar <br class='hidden md:block lg:hidden'/> decisiones financieras <br class='hidden lg:block'/> más   inteligentes para expansión a largo plazo",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
         components: ["Hero9", "Hero10"],
@@ -653,7 +653,7 @@ export default {
         ],
         component: "Statistics5",
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -709,7 +709,7 @@ export default {
           "Éxito a Largo Plazo",
         ],
         button: {
-          label: "Agendar",
+          label: "Agendar Consultoría",
           href: "/scheduling",
         },
       },
@@ -723,7 +723,7 @@ export default {
         "Nuestro proceso probado fortalece tu negocio, aumenta la confianza del prestamista y te posiciona para acceso a financiamiento a largo plazo.",
       list: [],
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -733,7 +733,7 @@ export default {
       description:
         "Un sistema paso a paso que prepara tu negocio, asegura financiamiento y <br class='hidden md:block'/> respalda crecimiento a largo plazo.",
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
       items: [
@@ -788,7 +788,7 @@ export default {
         image: "item-3",
         name: "Madleidy Alvarez",
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim nisi, ultricies sed ipsum vitae.",
+          "Prestige Growth Partners consiguió mi financiamiento rápido, haciendo el crecimiento simple, sin estrés y alcanzable.",
         approved: "Aprobado",
       },
       {
@@ -835,7 +835,7 @@ export default {
       description:
         "Prestige Growth Partners ayuda a negocios establecidos a mejorar su perfil financiero, optimizar su preparación para prestamistas y acceder a capital de crecimiento mediante sistemas probados.",
       button: {
-        label: "Agendar",
+        label: "Agendar Consultoría",
         href: "/scheduling",
       },
     },
@@ -930,50 +930,77 @@ export default {
   },
   seo: {
     home: {
-      title: "Prestige Growth Partners | Financiamiento Empresarial y Capital de Crecimiento",
-      description: "Accede de $150K a $1M+ en financiamiento empresarial con nuestro sistema probado. Optimizamos tu perfil corporativo, aumentamos la confianza bancaria y aseguramos capital.",
-      keywords: "financiamiento empresarial, prestamos comerciales, lineas de credito para negocios, capital de trabajo, credito de negocios, expertos en financiamiento, prestige growth partners",
+      title:
+        "Prestige Growth Partners | Financiamiento Empresarial y Capital de Crecimiento",
+      description:
+        "Accede de $150K a $1M+ en financiamiento empresarial con nuestro sistema probado. Optimizamos tu perfil corporativo, aumentamos la confianza bancaria y aseguramos capital.",
+      keywords:
+        "financiamiento empresarial, prestamos comerciales, lineas de credito para negocios, capital de trabajo, credito de negocios, expertos en financiamiento, prestige growth partners",
     },
     aboutUs: {
-      title: "Sobre Nosotros | Prestige Growth Partners - Expertos en Capital Empresarial",
-      description: "Conoce cómo Prestige Growth Partners ayuda a empresarios a conseguir financiamiento, optimizar perfiles crediticios y construir estabilidad financiera a largo plazo.",
-      keywords: "sobre prestige growth partners, empresa de financiamiento empresarial, equipo de adquisicion de capital, consultores de crecimiento financiero",
+      title:
+        "Sobre Nosotros | Prestige Growth Partners - Expertos en Capital Empresarial",
+      description:
+        "Conoce cómo Prestige Growth Partners ayuda a empresarios a conseguir financiamiento, optimizar perfiles crediticios y construir estabilidad financiera a largo plazo.",
+      keywords:
+        "sobre prestige growth partners, empresa de financiamiento empresarial, equipo de adquisicion de capital, consultores de crecimiento financiero",
     },
     howItWorks: {
-      title: "Cómo Funciona | Proceso de Financiamiento en 3 Pasos | Prestige Growth Partners",
-      description: "Descubre nuestro proceso en 3 pasos: Escaneo de Financiamiento, Adquisición de Capital y Optimización de Fondos para posicionar tu empresa hacia el éxito.",
-      keywords: "escaneo de financiamiento, proceso de adquisicion de capital, optimizacion de fondos, como funciona financiamiento empresarial",
+      title:
+        "Cómo Funciona | Proceso de Financiamiento en 3 Pasos | Prestige Growth Partners",
+      description:
+        "Descubre nuestro proceso en 3 pasos: Escaneo de Financiamiento, Adquisición de Capital y Optimización de Fondos para posicionar tu empresa hacia el éxito.",
+      keywords:
+        "escaneo de financiamiento, proceso de adquisicion de capital, optimizacion de fondos, como funciona financiamiento empresarial",
     },
     successStories: {
-      title: "Casos de Éxito | Resultados de Clientes | Prestige Growth Partners",
-      description: "Explora historias reales de más de 5,000 dueños de negocios financiados que escalaron sus operaciones y expandieron con Prestige Growth Partners.",
-      keywords: "opiniones financiamiento empresarial, casos de exito dueños de negocio, testimonios prestige growth partners, resultados financiamiento",
+      title:
+        "Casos de Éxito | Resultados de Clientes | Prestige Growth Partners",
+      description:
+        "Explora historias reales de más de 5,000 dueños de negocios financiados que escalaron sus operaciones y expandieron con Prestige Growth Partners.",
+      keywords:
+        "opiniones financiamiento empresarial, casos de exito dueños de negocio, testimonios prestige growth partners, resultados financiamiento",
     },
     solutions: {
       "business-funding": {
-        title: "Financiamiento Empresarial y Adquisición de Capital | Prestige Growth Partners",
-        description: "Accede a capital estratégico para tu empresa, líneas de crédito y préstamos comerciales diseñados para impulsar tu crecimiento sin perder equidad.",
-        keywords: "financiamiento empresarial, prestamos para negocios, lineas de credito comerciales, adquisicion de capital, financiamiento de equipo",
+        title:
+          "Financiamiento Empresarial y Adquisición de Capital | Prestige Growth Partners",
+        description:
+          "Accede a capital estratégico para tu empresa, líneas de crédito y préstamos comerciales diseñados para impulsar tu crecimiento sin perder equidad.",
+        keywords:
+          "financiamiento empresarial, prestamos para negocios, lineas de credito comerciales, adquisicion de capital, financiamiento de equipo",
       },
       "credit-optimization": {
-        title: "Optimización de Crédito Personal y Empresarial | Prestige Growth Partners",
-        description: "Maximiza tu elegibilidad para financiamiento y obtén mejores tasas de interés optimizando el crédito personal y corporativo de tu empresa.",
-        keywords: "optimizacion de credito, construccion de credito empresarial, credito personal, cuentas net-30, buro de credito, preparacion de financiamiento",
+        title:
+          "Optimización de Crédito Personal y Empresarial | Prestige Growth Partners",
+        description:
+          "Maximiza tu elegibilidad para financiamiento y obtén mejores tasas de interés optimizando el crédito personal y corporativo de tu empresa.",
+        keywords:
+          "optimizacion de credito, construccion de credito empresarial, credito personal, cuentas net-30, buro de credito, preparacion de financiamiento",
       },
       "lender-ready-growth-system": {
-        title: "Sistema Crecimiento Prestar | Auditoría para Financiamiento | Prestige Growth Partners",
-        description: "Prepara tu empresa para calificar ante los principales prestamistas. Auditamos tu EIN, estructura legal, banca y registros financieros para aprobación.",
-        keywords: "sistema crecimiento prestar, auditoria de financiamiento, requisitos bancarios, cumplimiento empresarial, perfil bancario",
+        title:
+          "Sistema Crecimiento Prestar | Auditoría para Financiamiento | Prestige Growth Partners",
+        description:
+          "Prepara tu empresa para calificar ante los principales prestamistas. Auditamos tu EIN, estructura legal, banca y registros financieros para aprobación.",
+        keywords:
+          "sistema crecimiento prestar, auditoria de financiamiento, requisitos bancarios, cumplimiento empresarial, perfil bancario",
       },
       "flow-optimization": {
-        title: "Optimización de Flujo de Caja y Visibilidad Financiera | Prestige Growth Partners",
-        description: "Obtén visibilidad financiera completa, optimiza la asignación de ingresos y organiza el capital de trabajo para construir un negocio sólido y financiable.",
-        keywords: "optimizacion de flujo, gestion de flujo de caja, capital de trabajo, reportes financieros, flujo de dinero empresarial",
+        title:
+          "Optimización de Flujo de Caja y Visibilidad Financiera | Prestige Growth Partners",
+        description:
+          "Obtén visibilidad financiera completa, optimiza la asignación de ingresos y organiza el capital de trabajo para construir un negocio sólido y financiable.",
+        keywords:
+          "optimizacion de flujo, gestion de flujo de caja, capital de trabajo, reportes financieros, flujo de dinero empresarial",
       },
       "business-consulting": {
-        title: "Consultoría Empresarial Estratégica y Escalabilidad | Prestige Growth Partners",
-        description: "Asesoramiento estratégico de alto nivel para optimizar operaciones financieras, escalar el rendimiento del negocio y atraer socios bancarios clave.",
-        keywords: "consultoria empresarial, estrategia financiera, asesor de crecimiento, escalabilidad operativa, consultoria comercial",
+        title:
+          "Consultoría Empresarial Estratégica y Escalabilidad | Prestige Growth Partners",
+        description:
+          "Asesoramiento estratégico de alto nivel para optimizar operaciones financieras, escalar el rendimiento del negocio y atraer socios bancarios clave.",
+        keywords:
+          "consultoria empresarial, estrategia financiera, asesor de crecimiento, escalabilidad operativa, consultoria comercial",
       },
     },
   },

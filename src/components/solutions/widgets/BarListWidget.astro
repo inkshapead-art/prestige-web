@@ -9,9 +9,11 @@ interface Props {
 }
 
 const { title, data, lang } = Astro.props;
+
+const STAGGER_MS = 120; // separación entre el inicio de cada barra
 ---
 
-<div>
+<div class="bar-list" data-animate>
   <h3
     class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph mb-[13.5px]"
   >
@@ -19,7 +21,7 @@ const { title, data, lang } = Astro.props;
   </h3>
   <ul class="flex flex-col gap-[15px] md:gap-6.5">
     {
-      data.rows.map((row) => (
+      data.rows.map((row, i) => (
         <li class="flex justify-start items-center gap-2">
           <span
             class="w-4 h-4 md:w-[22px] md:h-[22px] rounded-full inline-block shrink-0"
@@ -34,8 +36,8 @@ const { title, data, lang } = Astro.props;
             </div>
             <div class="h-1.25 w-[94px] md:w-[120px] lg:w-[168px] rounded-full bg-[#E3E2E2] overflow-hidden">
               <div
-                class="h-full rounded-full"
-                style={`width:${row.percent}%;background:${row.color}`}
+                class="bar-fill h-full rounded-full"
+                style={`--bar-target:${row.percent}%; --bar-delay:${i * STAGGER_MS}ms; background:${row.color}`}
               />
             </div>
           </div>
@@ -44,3 +46,21 @@ const { title, data, lang } = Astro.props;
     }
   </ul>
 </div>
+
+<style>
+  .bar-fill {
+    width: 0%;
+    transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--bar-delay, 0ms);
+  }
+
+  .bar-list.active .bar-fill {
+    width: var(--bar-target);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar-fill {
+      transition: none !important;
+    }
+  }
+</style>

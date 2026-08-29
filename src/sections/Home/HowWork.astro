@@ -1,5 +1,7 @@
 ---
 import { MoveRight } from "@lucide/astro";
+import CircularProgress from "../../components/CircularProgress.astro";
+import BarsIcon from "../../components/BarsIcon.astro";
 
 type Translations = typeof import("../../i18n/en").default;
 type HowWorkContent = Translations["main"]["howWroks"];
@@ -18,7 +20,10 @@ const { content } = Astro.props as Props;
   >
     {
       content.items.map((item, index) => (
-        <div class="flex flex-col md:flex-row xl:flex-col justify-center items-start md:items-center xl:items-start gap-4 md:gap-6 p-6 md:p-8 bg-[#F6F6F6] rounded-[12px] self-stretch fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
+        <div
+          class="flex flex-col md:flex-row xl:flex-col justify-center items-start md:items-center xl:items-start gap-4 md:gap-6 p-6 md:p-8 bg-[#F6F6F6] rounded-[12px] self-stretch fade-up-a"
+          style={`animation-delay: ${index * 0.2}s`}
+        >
           <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
             <p class="text-[10px] font-normal leading-[150%] tracking-[1px] rounded-full px-2 py-1 bg-primary-dark text-white uppercase">
               {item.step}
@@ -30,23 +35,10 @@ const { content } = Astro.props as Props;
           <div class="w-full bg-white py-8 px-5.5 rounded-[8px] grow flex justify-center items-center hidden md:block hover:scale-[1.02] transition-all duration-300 ease-in-out">
             {index === 0 ? (
               <div class="flex justify-between gap-5.75 w-full items-center relative ">
-                <div class="relative w-full h-auto flex justify-center items-center max-w-[120px] lg:max-w-[153px] ">
-                  <img
-                    src={`/images/icons/loader.svg`}
-                    alt="Loader"
-                    width="153"
-                    height="153"
-                    class="inline-block w-full h-full"
-                    decoding="async"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-4 p-2 lg:p-0">
-                    <span class="title-2 text-paragraph">80%</span>
-                    <span class="text-[9px] lg:text-[12px] font-normal leading-[150%] text-paragraph">
-                      {content.item1.funding}
-                    </span>
-                  </div>
-                </div>
+                <CircularProgress
+                  percentage={80}
+                  label={content.item1.funding}
+                />
                 <div class="flex flex-col justify-center items-start gap-2.25 flex-1">
                   {content.item1.items.map((i1, index) => (
                     <>
@@ -108,29 +100,17 @@ const { content } = Astro.props as Props;
                 <div class="flex flex-col justify-center items-start gap-6 text-paragraph">
                   <p class="paragraph-xs uppercase">{content.item3.before}</p>
                   <span class="title-2">$150K</span>
-                  <img
-                    src={`/images/icons/bars.svg`}
-                    alt="Bars"
-                    width="100"
-                    height="100"
-                    class="inline-block w-12 h-12"
-                    decoding="async"
-                    loading="lazy"
-                  />
+                  <div class=" inline-block w-12 h-12">
+                    <BarsIcon color="#000800" />
+                  </div>
                 </div>
                 <MoveRight class="w-10 h-10 text-paragraph" />
                 <div class="flex flex-col justify-center items-start gap-6 text-accent">
                   <p class="paragraph-xs uppercase">{content.item3.after}</p>
                   <span class="title-2">$1M</span>
-                  <img
-                    src={`/images/icons/bars-green.svg`}
-                    alt="Bars"
-                    width="100"
-                    height="100"
-                    class="inline-block w-12 h-12"
-                    decoding="async"
-                    loading="lazy"
-                  />
+                  <div class=" inline-block w-12 h-12">
+                    <BarsIcon color="#006836" />
+                  </div>
                 </div>
               </div>
             )}
