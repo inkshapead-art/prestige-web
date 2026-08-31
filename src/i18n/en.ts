@@ -289,7 +289,7 @@ export default {
         title:
           'Access Business <br class="hidden md:block"/> Capital <span class="text-secondary font-georgia">Without <br class="hidden md:block"/> Guesswork</span>',
         description:
-          'We help established businesses secure strategic funding through lender-<br class="hidden md:block"/>focused strategies that support sustainable growth and expansion.',
+          'We help established businesses secure strategic funding through lender-<br class="hidden md:block"/>focused strategies that support <br class="hidden md:block lg:hidden"/> sustainable growth and expansion.',
         button: {
           label: "Schedule My Meeting",
           href: "/scheduling",
