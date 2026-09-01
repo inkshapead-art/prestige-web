@@ -788,7 +788,7 @@ export default {
         image: "item-3",
         name: "Madleidy Alvarez",
         description:
-          "Prestige Growth Partners consiguió mi financiamiento rápido, haciendo el crecimiento simple, sin estrés y alcanzable.",
+          "Gracias al equipo de Prestige por su orientación financiera; mi emprendimiento está creciendo cada día más.",
         approved: "Aprobado",
       },
       {

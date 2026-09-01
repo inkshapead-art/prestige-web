@@ -210,7 +210,7 @@ export default {
           image: "item-3",
           name: "Madleidy Alvarez",
           description:
-            "Prestige Growth Partners secured my funding quickly, making business growth simple, stress-free, and achievable.",
+            "Thanks to the Prestige team for their financial guidance; my business is growing every day.",
           value: "+$110,000",
           approved: "Approved",
         },

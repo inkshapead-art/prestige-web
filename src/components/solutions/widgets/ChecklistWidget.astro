@@ -10,9 +10,13 @@ interface Props {
 }
 
 const { title, data, lang } = Astro.props;
+
+const STAGGER_MS = 100; // separación entre la aparición de cada fila
+const ITEM_DURATION_MS = 400;
+const CHECK_POP_OFFSET_MS = 150; // el check aparece un poco después de que la fila termina de entrar
 ---
 
-<div>
+<div class="checklist" data-animate>
   <h3
     class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center mb-2.5 md:mb-4"
   >
@@ -20,35 +24,82 @@ const { title, data, lang } = Astro.props;
   </h3>
   <ul class="flex flex-col gap-[5.5px] md:gap-2 w-[100px] md:w-[155px]">
     {
-      data.items.map((item) => (
-        <li class="flex items-center justify-between bg-white rounded-lg px-1.25 py-0.75">
-          <div>
-            <p class="text-[6px] md:text-[9px] font-medium leading-[100%] text-paragraph">
-              {item.label[lang]}
-            </p>
-            {item.description && (
-              <p class="text-[5px] md:text-[7px] font-normal leading-[160%] text-paragraph">
-                {item.description[lang]}
-              </p>
-            )}
-          </div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="17"
-            height="17"
-            viewBox="0 0 17 17"
-            fill="none"
-            class="w-[11px] md:w-[17px] h-[11px] md:h-[17px]"
+      data.items.map((item, i) => {
+        const itemDelay = i * STAGGER_MS;
+        const checkDelay = itemDelay + ITEM_DURATION_MS + CHECK_POP_OFFSET_MS;
+        return (
+          <li
+            class="checklist-item flex items-center justify-between bg-white rounded-lg px-1.25 py-0.75"
+            style={`--item-delay:${itemDelay}ms;`}
           >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M8.5 14.875C9.33718 14.875 10.1662 14.7101 10.9396 14.3897C11.7131 14.0694 12.4158 13.5998 13.0078 13.0078C13.5998 12.4158 14.0694 11.7131 14.3897 10.9396C14.7101 10.1662 14.875 9.33718 14.875 8.5C14.875 7.66282 14.7101 6.83384 14.3897 6.06039C14.0694 5.28694 13.5998 4.58417 13.0078 3.99219C12.4158 3.40022 11.7131 2.93064 10.9396 2.61027C10.1662 2.28989 9.33718 2.125 8.5 2.125C6.80924 2.125 5.18774 2.79665 3.99219 3.99219C2.79665 5.18774 2.125 6.80924 2.125 8.5C2.125 10.1908 2.79665 11.8123 3.99219 13.0078C5.18774 14.2033 6.80924 14.875 8.5 14.875ZM8.33567 11.0783L11.8773 6.82833L10.7893 5.92167L7.7435 9.57596L6.16746 7.99921L5.16587 9.00079L7.29087 11.1258L7.83913 11.674L8.33567 11.0783Z"
-              fill="#006836"
-            />
-          </svg>
-        </li>
-      ))
+            <div>
+              <p class="text-[6px] md:text-[9px] font-medium leading-[100%] text-paragraph">
+                {item.label[lang]}
+              </p>
+              {item.description && (
+                <p class="text-[5px] md:text-[7px] font-normal leading-[160%] text-paragraph">
+                  {item.description[lang]}
+                </p>
+              )}
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              class="checklist-check w-[11px] md:w-[17px] h-[11px] md:h-[17px]"
+              style={`--check-delay:${checkDelay}ms;`}
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.5 14.875C9.33718 14.875 10.1662 14.7101 10.9396 14.3897C11.7131 14.0694 12.4158 13.5998 13.0078 13.0078C13.5998 12.4158 14.0694 11.7131 14.3897 10.9396C14.7101 10.1662 14.875 9.33718 14.875 8.5C14.875 7.66282 14.7101 6.83384 14.3897 6.06039C14.0694 5.28694 13.5998 4.58417 13.0078 3.99219C12.4158 3.40022 11.7131 2.93064 10.9396 2.61027C10.1662 2.28989 9.33718 2.125 8.5 2.125C6.80924 2.125 5.18774 2.79665 3.99219 3.99219C2.79665 5.18774 2.125 6.80924 2.125 8.5C2.125 10.1908 2.79665 11.8123 3.99219 13.0078C5.18774 14.2033 6.80924 14.875 8.5 14.875ZM8.33567 11.0783L11.8773 6.82833L10.7893 5.92167L7.7435 9.57596L6.16746 7.99921L5.16587 9.00079L7.29087 11.1258L7.83913 11.674L8.33567 11.0783Z"
+                fill="#006836"
+              />
+            </svg>
+          </li>
+        );
+      })
     }
   </ul>
 </div>
+
+<style>
+  /* Cada fila entra con fade + slide, escalonada */
+  .checklist-item {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
+    transition-delay: var(--item-delay, 0ms);
+  }
+
+  .checklist.active .checklist-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* El check "pop-ea" justo después de que su fila entró */
+  .checklist-check {
+    opacity: 0;
+    transform: scale(0.4);
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); /* leve overshoot, sensación de "check confirmado" */
+    transition-delay: var(--check-delay, 0ms);
+  }
+
+  .checklist.active .checklist-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .checklist-item,
+    .checklist-check {
+      transition: none !important;
+    }
+  }
+</style>

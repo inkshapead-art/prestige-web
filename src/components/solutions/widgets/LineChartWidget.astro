@@ -30,19 +30,38 @@ function pointsFor(values: number[]) {
   });
 }
 
-const lines = series.map((values, i) => ({
-  color: colors[i % colors.length],
-  points: pointsFor(values),
-}));
+const LINE_DURATION_MS = 900;
+const SERIES_STAGGER_MS = 150; // separación entre el inicio de dibujo de cada serie
+const POINT_POP_MS = 250; // cuánto tarda cada punto en aparecer una vez que la línea lo alcanza
+
+const lines = series.map((values, i) => {
+  const points = pointsFor(values);
+  const lineDelay = i * SERIES_STAGGER_MS;
+  return {
+    color: colors[i % colors.length],
+    points: points.map((p, pi) => ({
+      ...p,
+      // delay del punto = cuándo termina de dibujarse la línea hasta ahí
+      delay: lineDelay + (pi / (points.length - 1)) * LINE_DURATION_MS,
+    })),
+    lineDelay,
+  };
+});
 
 const GRID_ROWS = 4;
 const gridLines = Array.from(
   { length: GRID_ROWS },
   (_, i) => PAD + (i / (GRID_ROWS - 1)) * (HEIGHT - PAD * 2),
 );
+
+const totalDelay = (series.length - 1) * SERIES_STAGGER_MS + LINE_DURATION_MS;
 ---
 
-<div>
+<div
+  class="line-chart"
+  data-animate
+  style={`--line-duration: ${LINE_DURATION_MS}ms; --header-delay: ${totalDelay + 100}ms;`}
+>
   <h3
     class="text-[7px] md:text-[10px] font-medium leading-[100%] text-paragraph text-center md-[10px] md:mb-4"
   >
@@ -58,13 +77,14 @@ const gridLines = Array.from(
           </p>
         )
       }
-      <span class="text-[15px] md:text-[24px] font-medium leading-[120%] text-paragraph"
+      <span
+        class="text-[15px] md:text-[24px] font-medium leading-[120%] text-paragraph"
         >{bigValue}</span
       >
     </div>
     {
       badgeText && (
-        <span class="shrink-0 text-[6px] md:text-[10px] font-normal text-accent bg-accent/10 rounded-full border border-accent px-2 py-1">
+        <span class="chart-badge shrink-0 text-[6px] md:text-[10px] font-normal text-accent bg-accent/10 rounded-full border border-accent px-2 py-1">
           {badgeText}
         </span>
       )
@@ -91,21 +111,26 @@ const gridLines = Array.from(
       lines.map((line) => (
         <>
           <polyline
+            class="chart-line"
             points={line.points.map((p) => `${p.x},${p.y}`).join(" ")}
             fill="none"
             stroke={line.color}
             stroke-width="3"
             stroke-linecap="round"
             stroke-linejoin="round"
+            pathLength="100"
+            style={`transition-delay: ${line.lineDelay}ms;`}
           />
           {line.points.map((p) => (
             <circle
+              class="chart-point"
               cx={p.x}
               cy={p.y}
               r="3.5"
               fill="#FFFFFF"
               stroke={line.color}
               stroke-width="2.5"
+              style={`transition-delay: ${p.delay}ms;`}
             />
           ))}
         </>
@@ -113,3 +138,56 @@ const gridLines = Array.from(
     }
   </svg>
 </div>
+
+<style>
+  /* Cada línea se dibuja de izquierda a derecha */
+  .chart-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset var(--line-duration)
+      cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .line-chart.active .chart-line {
+    stroke-dashoffset: 0;
+  }
+
+  /* Cada punto aparece justo cuando la línea lo alcanza */
+  .chart-point {
+    opacity: 0;
+    transform: scale(0.3);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      opacity 0.25s ease-out,
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .line-chart.active .chart-point {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* El badge aparece al final, cuando ya se terminaron de dibujar todas las series */
+  .chart-badge {
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.35s ease-out,
+      transform 0.35s ease-out;
+    transition-delay: var(--header-delay);
+  }
+
+  .line-chart.active .chart-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chart-line,
+    .chart-point,
+    .chart-badge {
+      transition: none !important;
+    }
+  }
+</style>
