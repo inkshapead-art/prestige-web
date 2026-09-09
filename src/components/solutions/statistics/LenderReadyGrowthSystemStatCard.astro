@@ -1,6 +1,9 @@
 ---
 import type { Language } from "../../../types/language.type";
 import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
+import CreditBars from "./CreditBars.astro";
+import CreditBadge from "./CreditBadge.astro";
+import CountUp from "../widgets/CountUp.astro";
 
 interface Props {
   lang: Language;
@@ -17,22 +20,43 @@ const config = statisticsCardsConfig["lender-ready-growth-system"];
 <div class="w-full flex flex-col justify-center items-center gap-8">
   <div class="flex justify-center items-center gap-9">
     <div class="relative w-[150px] xl:w-[245px] h-[150px] xl:h-[245px]">
-      <img
-        src="/images/solutions/lender-1.svg"
-        alt="Lender-Ready Growth System 1"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
         width="245"
         height="245"
-        decoding="async"
-        loading="lazy"
-        class="w-full h-auto"
-      />
+        viewBox="0 0 245 245"
+        fill="none"
+        class="lender-ring w-full h-auto"
+        data-animate
+      >
+        <circle
+          cx="122.5"
+          cy="122.5"
+          r="118.096"
+          stroke="#000800"
+          stroke-opacity="0.1"
+          stroke-width="8.80719"></circle>
+        <mask id="path-2-inside-1_105_1159" fill="white">
+          <path
+            d="M245 122.5C245 148.369 236.81 173.575 221.605 194.504C206.399 215.433 184.958 231.01 160.355 239.004C135.751 246.999 109.249 246.999 84.6454 239.004C60.0421 231.01 38.6011 215.433 23.3954 194.504C8.18973 173.575 -2.26158e-06 148.369 0 122.5C2.26158e-06 96.6305 8.18974 71.4251 23.3954 50.4963C38.6011 29.5675 60.0421 13.9897 84.6454 5.99557C109.249 -1.99853 135.751 -1.99852 160.355 5.99558L157.705 14.1509C134.824 6.71637 110.176 6.71637 87.2952 14.1509C64.4142 21.5854 44.474 36.0727 30.3327 55.5366C16.1915 75.0004 8.575 98.4414 8.575 122.5C8.575 146.559 16.1914 170 30.3327 189.463C44.474 208.927 64.4141 223.415 87.2952 230.849C110.176 238.284 134.824 238.284 157.705 230.849C180.586 223.415 200.526 208.927 214.667 189.463C228.809 170 236.425 146.559 236.425 122.5H245Z"
+          ></path>
+        </mask>
+        <path
+          class="lender-ring-progress"
+          d="M245 122.5C245 148.369 236.81 173.575 221.605 194.504C206.399 215.433 184.958 231.01 160.355 239.004C135.751 246.999 109.249 246.999 84.6454 239.004C60.0421 231.01 38.6011 215.433 23.3954 194.504C8.18973 173.575 -2.26158e-06 148.369 0 122.5C2.26158e-06 96.6305 8.18974 71.4251 23.3954 50.4963C38.6011 29.5675 60.0421 13.9897 84.6454 5.99557C109.249 -1.99853 135.751 -1.99852 160.355 5.99558L157.705 14.1509C134.824 6.71637 110.176 6.71637 87.2952 14.1509C64.4142 21.5854 44.474 36.0727 30.3327 55.5366C16.1915 75.0004 8.575 98.4414 8.575 122.5C8.575 146.559 16.1914 170 30.3327 189.463C44.474 208.927 64.4141 223.415 87.2952 230.849C110.176 238.284 134.824 238.284 157.705 230.849C180.586 223.415 200.526 208.927 214.667 189.463C228.809 170 236.425 146.559 236.425 122.5H245Z"
+          stroke="#006836"
+          stroke-width="16.0131"
+          stroke-linejoin="round"
+          pathLength="100"
+          mask="url(#path-2-inside-1_105_1159)"></path>
+      </svg>
       <div
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center"
       >
         <p
           class="text-[32px] xl:text-[54px] leading-[100%] font-semibold text-paragraph"
         >
-          85%
+          <CountUp value="85%" duration={1000} delay={300} />
         </p>
         <p class="text-[19px] font-medium text-accent leading-[150%]">
           {config?.title?.[lang]}
@@ -40,13 +64,7 @@ const config = statisticsCardsConfig["lender-ready-growth-system"];
       </div>
     </div>
     <div class="flex justify-center items-stretch gap-[17px]">
-      <img
-        src="/images/solutions/credit-3.svg"
-        alt="Credit Optimization 3"
-        width="224"
-        height="213"
-        decoding="async"
-        loading="lazy"
+      <CreditBars
         class="w-full h-auto max-w-[120px] md:max-w-[150px] xl:max-w-[199px]"
       />
       <div class="flex flex-col justify-between items-center gap-2 md:gap-0">
@@ -81,13 +99,27 @@ const config = statisticsCardsConfig["lender-ready-growth-system"];
       </div>
     </div>
   </div>
-  <img
-    src="/images/solutions/lender-2.svg"
-    alt="Lender-Ready Growth System 2"
-    width="577"
-    height="59"
-    decoding="async"
-    loading="lazy"
+  <CreditBadge
+    variant="lender"
     class="w-full h-auto max-w-[500px] lg:max-w-none"
   />
 </div>
+
+<style>
+  .lender-ring-progress {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 300ms;
+  }
+
+  .lender-ring.active .lender-ring-progress {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lender-ring-progress {
+      transition: none !important;
+    }
+  }
+</style>

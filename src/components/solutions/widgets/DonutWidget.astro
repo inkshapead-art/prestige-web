@@ -1,6 +1,7 @@
 ---
 import type { Language } from "../../../types/language.type";
 import type { DonutData } from "../../../types/solutionCards.type";
+import CountUp from "./CountUp.astro";
 
 interface Props {
   title: string;
@@ -76,7 +77,7 @@ const arcs = segments.map((seg) => {
       >
         <span
           class="text-[5px] lg:text-[8px] xl:text-[10px] font-semibold leading-[100%] text-paragraph"
-          >{centerValue}</span
+          ><CountUp value={centerValue} delay={900} duration={1000} /></span
         >
       </div>
     </div>
@@ -96,7 +97,7 @@ const arcs = segments.map((seg) => {
       ]}
     >
       {
-        segments.map((seg) => (
+        segments.map((seg, i) => (
           <li class="flex items-center justify-between gap-2.5">
             <span class="flex items-center gap-2 text-paragraph">
               <span
@@ -106,7 +107,11 @@ const arcs = segments.map((seg) => {
               {seg.label[lang]}
             </span>
             <span class="text-paragraph shrink-0">
-              {seg.displayValue ?? `${seg.percent}%`}
+              <CountUp
+                value={seg.displayValue ?? `${seg.percent}%`}
+                delay={200 + i * 120}
+                duration={800}
+              />
             </span>
           </li>
         ))

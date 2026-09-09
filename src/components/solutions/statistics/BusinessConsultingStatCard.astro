@@ -1,7 +1,9 @@
 ---
 import type { Language } from "../../../types/language.type";
 import { statisticsCardsConfig } from "../../../data/statisticsCardsConfig";
-
+import CreditBadge from "./CreditBadge.astro";
+import CreditBars from "./CreditBars.astro";
+import  TenchBar  from "./TenchBar.astro";
 interface Props {
   lang: Language;
 }
@@ -15,14 +17,17 @@ const config = statisticsCardsConfig["business-consulting"];
   Modify this file to customize the content, structure, and design for the Business Consulting page.
 -->
 <div class="flex flex-col justify-center items-start gap-6.5">
-  <h3 class="text-[13px] md:text-[22px] leading-[100%] font-semibold text-paragraph">
+  <h3
+    class="text-[13px] md:text-[22px] leading-[100%] font-semibold text-paragraph"
+  >
     {config?.title?.[lang]}
   </h3>
-  <img
-    src="/images/solutions/consulting-1.svg"
-    alt="Business Consultating"
-    width="585"
-    height="293"
-    class="w-full h-auto"
-  />
+  <div class=":w-full flex justify-center items-center gap-6">
+    <div class="flex flex-col justify-center items-center gap-2 w-[250px] md:w-full ">
+      <TenchBar/>
+      <CreditBadge class="w-full h-auto mt-6" />
+    </div>
+
+    <CreditBars class="w-full h-auto max-w-[150px] xl:max-w-[224px]" />
+  </div>
 </div>

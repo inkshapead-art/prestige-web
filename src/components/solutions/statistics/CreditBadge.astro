@@ -1,0 +1,136 @@
+---
+interface BadgeLine {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  delay?: number;
+}
+
+interface Props {
+  variant?: "credit" | "lender";
+  class?: string;
+  width?: number;
+  height?: number;
+  rx?: number;
+  bgColor?: string;
+  iconCircleColor?: string;
+  icon?: "arrow" | "check";
+  lines?: BadgeLine[];
+}
+
+const {
+  variant = "credit",
+  class: className = "",
+  width: widthProp,
+  height: heightProp,
+  rx = 4,
+  bgColor = "#E3E2E2",
+  iconCircleColor = "#006836",
+  icon: iconProp,
+  lines: linesProp,
+} = Astro.props;
+
+const isLender = variant === "lender";
+const width = widthProp ?? (isLender ? 577 : 305);
+const height = heightProp ?? 59;
+const iconType = iconProp ?? (isLender ? "check" : "arrow");
+
+const defaultLines: BadgeLine[] = isLender
+  ? [
+      { x: 65, y: 17, width: 483, height: 9 },
+      { x: 65, y: 34, width: 202, height: 9 },
+    ]
+  : [
+      { x: 65, y: 17, width: 213, height: 9 },
+      { x: 65, y: 34, width: 89, height: 9 },
+    ];
+
+const BADGE_LINE_STAGGER_MS = 150;
+const computedLines = (linesProp ?? defaultLines).map((line, i) => ({
+  ...line,
+  delay: line.delay ?? 250 + i * BADGE_LINE_STAGGER_MS,
+}));
+---
+
+<svg
+  class={`credit-badge ${className}`}
+  data-animate
+  width={width}
+  height={height}
+  viewBox={`0 0 ${width} ${height}`}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect width={width} height={height} rx={rx} fill={bgColor} />
+
+  <g
+    class="credit-badge-icon"
+    style="transform-box: fill-box; transform-origin: center;"
+  >
+    <circle cx="31.5" cy="29.5" r="17.5" fill={iconCircleColor} />
+    {
+      iconType === "check" ? (
+        <path
+          d="M28.5496 35.0001L22.8496 29.3001L24.2746 27.8751L28.5496 32.1501L37.7246 22.9751L39.1496 24.4001L28.5496 35.0001Z"
+          fill="white"
+        />
+      ) : (
+        <path
+          d="M31 37V21M25 27L31 21L37 27"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      )
+    }
+  </g>
+
+  {
+    computedLines.map((line) => (
+      <rect
+        class="credit-badge-line"
+        x={line.x}
+        y={line.y}
+        width={line.width}
+        height={line.height}
+        rx={line.height / 2}
+        fill="#A9A9A9"
+        style={`--line-width:${line.width}px; --line-delay:${line.delay}ms;`}
+      />
+    ))
+  }
+</svg>
+
+<style>
+  .credit-badge-icon {
+    opacity: 0;
+    transform: scale(0.5);
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .credit-badge.active .credit-badge-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .credit-badge-line {
+    width: 0;
+    transition: width 550ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--line-delay, 0ms);
+  }
+
+  .credit-badge.active .credit-badge-line {
+    width: var(--line-width);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .credit-badge-icon,
+    .credit-badge-line {
+      transition: none !important;
+    }
+  }
+</style>

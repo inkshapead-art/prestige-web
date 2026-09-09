@@ -1,6 +1,7 @@
 ---
 import type { Language } from "../../../types/language.type";
 import type { LineChartData } from "../../../types/solutionCards.type";
+import CountUp from "./CountUp.astro";
 
 interface Props {
   title: string;
@@ -79,13 +80,13 @@ const totalDelay = (series.length - 1) * SERIES_STAGGER_MS + LINE_DURATION_MS;
       }
       <span
         class="text-[15px] md:text-[24px] font-medium leading-[120%] text-paragraph"
-        >{bigValue}</span
+        ><CountUp value={bigValue} delay={100} duration={1100} /></span
       >
     </div>
     {
       badgeText && (
         <span class="chart-badge shrink-0 text-[6px] md:text-[10px] font-normal text-accent bg-accent/10 rounded-full border border-accent px-2 py-1">
-          {badgeText}
+          <CountUp value={badgeText} delay={totalDelay + 100} duration={600} />
         </span>
       )
     }

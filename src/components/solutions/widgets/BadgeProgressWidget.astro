@@ -2,6 +2,7 @@
 import type { Language } from "../../../types/language.type";
 import type { BadgeProgressData } from "../../../types/solutionCards.type";
 import ArrowUpIcon from "../icons/ArrowUpIcon.astro";
+import CountUp from "./CountUp.astro";
 
 interface Props {
   title: string;
@@ -20,7 +21,7 @@ const { bigValue, progressPercent, statusText } = data;
   <div
     class="text-[20.3px] xl:text-[36px] font-medium leading-[120%] mb-[6.2px] md:mb-2.75"
   >
-    {bigValue}
+    <CountUp value={bigValue} delay={150} duration={1100} />
   </div>
   <div
     class="h-2 md:h-3.5 w-[109px] lg:w-[193px] rounded-full bg-[#E3E2E2] overflow-hidden mb-[6.2px] md:mb-2.75"

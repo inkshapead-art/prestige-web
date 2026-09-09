@@ -1,0 +1,130 @@
+---
+interface BarRow {
+  y: number;
+  width: number;
+  color: string;
+  dot: "circle" | "ellipse";
+  delay?: number;
+}
+
+interface Props {
+  class?: string;
+  width?: number;
+  height?: number;
+  rows?: BarRow[];
+}
+
+const {
+  class: className = "w-full h-auto max-w-[150px] xl:max-w-[224px]",
+  width = 224,
+  height = 213,
+  rows: rowsProp,
+} = Astro.props;
+
+const defaultRows: BarRow[] = [
+  { y: 5, width: 104, color: "#000800", dot: "ellipse" },
+  { y: 68, width: 145, color: "#E1AF66", dot: "circle" },
+  { y: 131, width: 122, color: "#006836", dot: "circle" },
+  { y: 195, width: 156, color: "#A9A9A9", dot: "ellipse" },
+];
+
+const ROW_STAGGER_MS = 150;
+const computedRows = [...(rowsProp ?? defaultRows)]
+  .sort((a, b) => a.y - b.y)
+  .map((row, i) => ({
+    ...row,
+    delay: row.delay ?? i * ROW_STAGGER_MS,
+  }));
+---
+
+<svg
+  class={`credit-bars ${className}`}
+  data-animate
+  width={width}
+  height={height}
+  viewBox={`0 0 ${width} ${height}`}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {
+    computedRows.map((row) => (
+      <>
+        {/* Track (fondo), siempre visible */}
+        <rect
+          x="31"
+          y={row.y}
+          width="193"
+          height="14"
+          rx="7"
+          fill="#E3E2E2"
+        />
+        {/* Barra de progreso animada */}
+        <rect
+          class="credit-bar-fill"
+          x="31"
+          y={row.y}
+          height="14"
+          rx="7"
+          fill={row.color}
+          style={`--bar-width:${row.width}px; --bar-delay:${row.delay}ms;`}
+        />
+        {/* Punto / marcador a la izquierda */}
+        {row.dot === "ellipse" ? (
+          <ellipse
+            class="credit-bar-dot"
+            cx="11"
+            cy={row.y + 6.5}
+            rx="11"
+            ry="11.5"
+            fill={row.color}
+            style={`--dot-delay:${row.delay}ms;`}
+          />
+        ) : (
+          <circle
+            class="credit-bar-dot"
+            cx="11"
+            cy={row.y + 7}
+            r="11"
+            fill={row.color}
+            style={`--dot-delay:${row.delay}ms;`}
+          />
+        )}
+      </>
+    ))
+  }
+</svg>
+
+<style>
+  .credit-bar-fill {
+    width: 0;
+    transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--bar-delay, 0ms);
+  }
+
+  .credit-bars.active .credit-bar-fill {
+    width: var(--bar-width);
+  }
+
+  .credit-bar-dot {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--dot-delay, 0ms);
+  }
+
+  .credit-bars.active .credit-bar-dot {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .credit-bar-fill,
+    .credit-bar-dot {
+      transition: none !important;
+    }
+  }
+</style>

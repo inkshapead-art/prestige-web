@@ -1,0 +1,181 @@
+---
+import CountUp from "../widgets/CountUp.astro";
+
+interface Props {
+  value?: number;
+  min?: number;
+  max?: number;
+  label?: string;
+  class?: string;
+  svgClass?: string;
+  width?: number;
+  height?: number;
+  showLabels?: boolean;
+  animateNumber?: boolean;
+}
+
+const {
+  value = 720,
+  min = 300,
+  max = 850,
+  label,
+  class: className = "",
+  svgClass = "",
+  width = 322,
+  height = 170,
+  showLabels = true,
+  animateNumber = true,
+} = Astro.props;
+
+const GAUGE_CENTER = { x: 160.99, y: 160.99 };
+const GAUGE_RADIUS = 152.769;
+const GAUGE_ARC_PATH = `M${GAUGE_CENTER.x - GAUGE_RADIUS},${GAUGE_CENTER.y} A${GAUGE_RADIUS},${GAUGE_RADIUS} 0 0 1 ${GAUGE_CENTER.x + GAUGE_RADIUS},${GAUGE_CENTER.y}`;
+
+const gaugePercent = Math.min(
+  100,
+  Math.max(
+    0,
+    ((value - min) / (max - min)) * 100,
+  ),
+);
+
+const gaugeNeedleRotateTarget = 90 + gaugePercent * 1.8;
+const gradientId = `credit-gauge-grad-${Math.round(value * 10)}`;
+---
+
+<div class={`flex flex-col justify-center items-center gap-1 relative ${className}`}>
+  <!-- Arco de score + aguja animada -->
+  <svg
+    class={`credit-gauge ${svgClass}`}
+    data-animate
+    width={width}
+    height={height}
+    viewBox="0 0 322 170"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={`--needle-percent: ${gaugePercent}%; --needle-rotate-target: ${gaugeNeedleRotateTarget}deg;`}
+  >
+    <path
+      class="credit-gauge-arc"
+      d={GAUGE_ARC_PATH}
+      stroke={`url(#${gradientId})`}
+      stroke-width="16.4416"
+      stroke-linecap="round"
+      pathLength="100"
+    />
+    <g class="credit-gauge-needle">
+      <line
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="-24"
+        stroke="#000800"
+        stroke-width="4.11039"
+      />
+      <circle cx="0" cy="0" r="12.3312" fill="#000800" />
+    </g>
+    <defs>
+      <linearGradient
+        id={gradientId}
+        x1="8.90577"
+        y1="161.675"
+        x2="313.76"
+        y2="161.675"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#002D15" />
+        <stop offset="1" stop-color="#00A10B" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  {
+    showLabels && (
+      <>
+        <div class="credit-gauge-value absolute -translate-x-1/2 left-1/2 flex flex-col justify-center items-center top-[58%] pointer-events-none">
+          <p class="text-[28px] md:text-[36px] xl:text-[54px] leading-[100%] font-semibold text-paragraph">
+            {animateNumber ? (
+              <CountUp value={value} duration={1000} delay={850} />
+            ) : (
+              value
+            )}
+          </p>
+          {label && (
+            <p class="text-[16px] md:text-[22px] font-semibold text-accent leading-[100%]">
+              {label}
+            </p>
+          )}
+        </div>
+        <div class="w-full flex justify-between items-center">
+          <p class="text-[16px] leading-[100%] font-semibold text-accent">
+            {animateNumber ? (
+              <CountUp value={min} duration={1000} delay={100} />
+            ) : (
+              min
+            )}
+          </p>
+          <p class="text-[16px] leading-[100%] font-semibold text-accent">
+            {animateNumber ? (
+              <CountUp value={max} duration={1000} delay={100} />
+            ) : (
+              max
+            )}
+          </p>
+        </div>
+      </>
+    )
+  }
+
+  <slot />
+</div>
+
+<style>
+  .credit-gauge-arc {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .credit-gauge.active .credit-gauge-arc {
+    stroke-dashoffset: 0;
+  }
+
+  .credit-gauge-needle {
+    offset-path: path(
+      "M8.221,160.99 A152.769,152.769 0 0 1 313.759,160.99"
+    );
+    offset-anchor: 0px 0px;
+    offset-distance: 0%;
+    offset-rotate: 90deg;
+    transition:
+      offset-distance 1s cubic-bezier(0.22, 1, 0.36, 1),
+      offset-rotate 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .credit-gauge.active .credit-gauge-needle {
+    offset-distance: var(--needle-percent);
+    offset-rotate: var(--needle-rotate-target);
+  }
+
+  .credit-gauge-value {
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
+    transition-delay: 0.85s;
+  }
+
+  .credit-gauge.active ~ .credit-gauge-value {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .credit-gauge-arc,
+    .credit-gauge-needle,
+    .credit-gauge-value {
+      transition: none !important;
+    }
+  }
+</style>

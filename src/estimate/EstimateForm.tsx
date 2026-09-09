@@ -183,11 +183,8 @@ export default function EstimateForm() {
       className="relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
     >
       <div className="container-full flex flex-col justify-center items-end">
-        <div className="mb-2.25 flex items-center justify-between text-[16px] font-normal leading--[100%] text-white">
+        <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading--[100%] text-white">
           <span className="sr-only">Form progress</span>
-          <span className="ml-auto">
-            {stepIndex + 1} / {estimateSteps.length}
-          </span>
         </div>
         <div
           className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"

@@ -2,6 +2,7 @@
 import type { Language } from "../../../types/language.type";
 import type { GaugeData } from "../../../types/solutionCards.type";
 import ArrowUpIcon from "../icons/ArrowUpIcon.astro";
+import CountUp from "./CountUp.astro";
 
 interface Props {
   title: string;
@@ -125,7 +126,12 @@ const needleRotateTarget = 90 + percent * 1.8;
       <div
         class="text-[17px] xl:text-[29px] leading-[100%] font-semibold text-[#001C07]"
       >
-        {value}{valueSuffix}
+        <CountUp
+          value={value}
+          suffix={valueSuffix}
+          delay={850}
+          duration={1000}
+        />
       </div>
       <div
         class="text-[6px] xl:text-[12px] font-semibold leading-[100%] text-center text-accent mt-1"

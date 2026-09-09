@@ -1,0 +1,200 @@
+---
+// components/TrendBarChart.astro
+// Extraído del SVG combinado: solo el bar chart + flecha de tendencia.
+
+const BAR_STAGGER_MS = 130;
+const BAR_DURATION_MS = 550;
+
+// Barras en orden de izquierda a derecha (ya vienen así en el archivo original)
+const bars = [
+  {
+    d: "M49 171.5C49 169.291 50.7909 167.5 53 167.5H72C74.2091 167.5 76 169.291 76 171.5V185.5H49V171.5Z",
+  },
+  {
+    d: "M103 142.5C103 140.291 104.791 138.5 107 138.5H126C128.209 138.5 130 140.291 130 142.5V185.5H103V142.5Z",
+  },
+  {
+    d: "M155 119.5C155 117.291 156.791 115.5 159 115.5H178C180.209 115.5 182 117.291 182 119.5V185.5H155V119.5Z",
+  },
+  {
+    d: "M207 86.5C207 84.2909 208.791 82.5 211 82.5H230C232.209 82.5 234 84.2909 234 86.5V185.5H207V86.5Z",
+  },
+  {
+    d: "M259 38.5C259 36.2909 260.791 34.5 263 34.5H282C284.209 34.5 286 36.2909 286 38.5V185.5H259V38.5Z",
+  },
+].map((bar, i) => ({ ...bar, delay: i * BAR_STAGGER_MS }));
+
+const arrowDelay = bars.length * BAR_STAGGER_MS + BAR_DURATION_MS + 150;
+---
+
+<svg
+  class="trend-chart w-full h-auto"
+  data-animate
+  width="312"
+  height="224"
+  viewBox="-2 -4 312 224"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`--arrow-delay: ${arrowDelay}ms;`}
+>
+  <!-- eje Y -->
+  <rect
+    class="trend-axis"
+    x="29"
+    y="185.5"
+    width="180"
+    height="1.00001"
+    transform="rotate(-90 29 185.5)"
+    fill="#A9A9A9"></rect>
+  <!-- eje X (línea base) -->
+  <rect
+    class="trend-axis"
+    x="29"
+    y="184.5"
+    width="276"
+    height="1"
+    fill="#A9A9A9"></rect>
+
+  <!-- placeholders de etiquetas del eje Y -->
+  <rect class="trend-axis" y="5.5" width="23" height="9" rx="4.5" fill="#E3E2E2"
+  ></rect>
+  <rect
+    class="trend-axis"
+    y="49.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    y="93.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    y="137.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    y="181.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+
+  <!-- placeholders de etiquetas del eje X -->
+  <rect
+    class="trend-axis"
+    x="53"
+    y="197.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    x="105"
+    y="197.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    x="157"
+    y="197.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    x="209"
+    y="197.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+  <rect
+    class="trend-axis"
+    x="261"
+    y="197.5"
+    width="23"
+    height="9"
+    rx="4.5"
+    fill="#E3E2E2"></rect>
+
+  <!-- barras: crecen desde la base, una por una -->
+  {
+    bars.map((bar) => (
+      <path
+        class="trend-bar"
+        d={bar.d}
+        fill="#E3E2E2"
+        style={`--bar-delay:${bar.delay}ms;`}
+      />
+    ))
+  }
+
+  <!-- flecha de tendencia: aparece después de que todas las barras crecieron -->
+  <path
+    class="trend-arrow"
+    d="M62.3192 140.516C61.776 140.616 61.4166 141.138 61.5165 141.681C61.6164 142.224 62.1376 142.583 62.6808 142.484L62.5 141.5L62.3192 140.516ZM265.5 0L254.817 4.38301L263.954 11.4431L265.5 0ZM62.5 141.5L62.6808 142.484C99.1553 135.777 188.36 99.4791 260.792 7.72832L260.007 7.10868L259.222 6.48905C187.1 97.8471 98.3306 133.896 62.3192 140.516L62.5 141.5Z"
+    fill="#006836"></path>
+</svg>
+
+<style>
+  /* Ejes y placeholders de etiquetas aparecen rápido, antes que las barras */
+  .trend-axis {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .trend-chart.active .trend-axis {
+    opacity: 1;
+  }
+
+  /* Cada barra crece verticalmente desde la línea base (anclada abajo) */
+  .trend-bar {
+    transform: scaleY(0);
+    transform-box: fill-box;
+    transform-origin: bottom;
+    transition: transform var(--bar-duration, 550ms)
+      cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--bar-delay, 0ms);
+  }
+
+  .trend-chart.active .trend-bar {
+    transform: scaleY(1);
+  }
+
+  /* La flecha aparece con un pequeño "pop" cuando ya crecieron todas las barras */
+  .trend-arrow {
+    opacity: 0;
+    transform: scale(0.7);
+    transform-box: fill-box;
+    transform-origin: bottom left;
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--arrow-delay, 0ms);
+  }
+
+  .trend-chart.active .trend-arrow {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trend-axis,
+    .trend-bar,
+    .trend-arrow {
+      transition: none !important;
+    }
+  }
+</style>

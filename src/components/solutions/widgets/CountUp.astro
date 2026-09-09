@@ -1,0 +1,58 @@
+---
+import { parseCountUpValue } from "../../../utils/countUp";
+
+/**
+ * Número con animación count-up (0 -> valor final) al entrar en viewport.
+ * ÚNICA forma de animar números en los widgets: no duplicar observers.
+ *
+ * @example
+ *   <CountUp value="$750,000" delay={900} class="..." />
+ *   <CountUp value={785} duration={1000} delay={850} />
+ */
+interface Props {
+  /** Texto final visible ("$750,000", "85%", "+18%") o número puro (785). */
+  value: string | number;
+  /** Solo cuando `value` es number. */
+  prefix?: string;
+  /** Solo cuando `value` es number. */
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+  class?: string;
+}
+
+const {
+  value,
+  prefix: prefixOverride,
+  suffix: suffixOverride,
+  duration = 1200,
+  delay = 0,
+  class: className,
+} = Astro.props;
+
+const raw = typeof value === "number" ? String(value) : value;
+const parsed = parseCountUpValue(raw);
+const prefix = prefixOverride ?? parsed.prefix;
+const suffix = suffixOverride ?? parsed.suffix;
+// El HTML inicial debe ser el texto final completo (incluye prefijo/sufijo
+// pasados por separado cuando `value` es number). Si no, `initCountUp`
+// guardaría un `data-final` sin sufijo y el "%"/"$" se perdería al terminar.
+const displayRaw =
+  typeof value === "number" ? `${prefix}${raw}${suffix}` : raw;
+---
+
+<span
+  data-count-up
+  data-target={parsed.target}
+  data-decimals={parsed.decimals}
+  data-prefix={prefix}
+  data-suffix={suffix}
+  data-duration={duration}
+  data-delay={delay}
+  class={className}>{displayRaw}</span
+>
+
+<script>
+  import { initCountUp } from "../../../utils/countUp";
+  initCountUp();
+</script>

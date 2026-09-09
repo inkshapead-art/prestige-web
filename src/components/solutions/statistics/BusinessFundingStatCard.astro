@@ -8,15 +8,29 @@ interface Props {
 
 const { lang } = Astro.props;
 const config = statisticsCardsConfig["business-funding"];
+
+// Tiempos de la animación de entrada (coherentes con los widgets:
+// easing easeOutExpo y reveal de izquierda a derecha como el LineChart).
+const REVEAL_MS = 1400;
+const AREA_DELAY_MS = 150; // el relleno entra justo detrás de la línea
+const DECOR_DELAY_MS = 900; // grid + punteadas aparecen cuando el trazo casi terminó
+const DAY_BASE_DELAY_MS = 500;
+const DAY_STAGGER_MS = 90;
 ---
 
 <!-- 
   Business Funding Statistics Card
   Modify this file to customize the content, structure, and design for the Business Funding page.
 -->
-<div class="w-full flex flex-col justify-center items-center">
+<div
+  class="w-full flex flex-col justify-center items-center bf-chart"
+  data-animate
+  style={`--bf-reveal:${REVEAL_MS}ms; --bf-area-delay:${AREA_DELAY_MS}ms; --bf-decor-delay:${DECOR_DELAY_MS}ms;`}
+>
   <div class="w-full flex justify-between items-center">
-    <h3 class="text-[13px] md:text-[21px] text-paragraph leading-[100%] font-semibold">
+    <h3
+      class="text-[13px] md:text-[21px] text-paragraph leading-[100%] font-semibold"
+    >
       {config?.title?.[lang]}
     </h3>
     <div
@@ -27,21 +41,268 @@ const config = statisticsCardsConfig["business-funding"];
       </p>
     </div>
   </div>
-  <img
-    src="/images/solutions/business-1.svg"
-    class="w-full h-auto mt-7"
+  <svg
     width="613"
     height="263"
-    decoding="async"
-    loading="lazy"
-  />
+    viewBox="0 0 613 263"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    class="w-full h-auto mt-7"
+  >
+    <path d="M4 100H610V99H4V100Z" fill="#F4F7FE" class="bf-fade"></path>
+    <path d="M4 191H610V189H4V191Z" fill="#F4F7FE" class="bf-fade"></path>
+    <mask
+      id="mask0_105_1157"
+      style="mask-type:luminance"
+      maskUnits="userSpaceOnUse"
+      x="3"
+      y="4"
+      width="607"
+      height="259"
+    >
+      <path
+        d="M609.708 262.308H3.62598V190.837H609.708V189.028H3.62598V138.366C3.89187 138.366 4.16365 138.331 4.4315 138.261C31.8596 130.989 54.3981 115.381 76.2678 100.369H263.621C265.178 101.302 266.728 102.232 268.277 103.155C280.255 110.295 292.012 117.042 304.239 122.038C316.46 127.032 329.188 130.267 342.95 130.265C342.958 130.265 342.967 130.265 342.975 130.265C356.325 130.265 370.587 127.207 386.183 119.986C397.597 114.703 408.139 107.945 418.141 100.369H609.708V98.5593H420.501C424.743 95.2644 428.896 91.8302 432.978 88.3074C454.535 69.6871 474.262 48.5717 495.694 32.2512C506.406 24.0891 517.527 17.1248 529.478 12.216C531.502 11.3837 533.551 10.6111 535.623 9.89999H603.526C605.233 10.4102 606.959 10.9585 608.705 11.5465C609.035 11.6569 609.376 11.7094 609.708 11.7094V262.308ZM260.605 98.5593H78.9053C81.0559 97.0865 83.2026 95.6209 85.3473 94.1752C97.7368 85.8068 110.089 78.0139 123.106 72.3451C136.131 66.6745 149.786 63.1137 164.963 63.1101C172.441 63.1119 180.297 63.9767 188.649 65.9092C216.2 72.2764 238.973 85.5951 260.605 98.5593ZM596.916 8.09062H541.451C549.909 5.7348 558.826 4.42844 568.377 4.42664C577.285 4.42664 586.753 5.56656 596.916 8.09062Z"
+        fill="white"></path>
+    </mask>
+    <g mask="url(#mask0_105_1157)" class="bf-reveal bf-area">
+      <mask
+        id="mask1_105_1157"
+        style="mask-type:luminance"
+        maskUnits="userSpaceOnUse"
+        x="3"
+        y="4"
+        width="607"
+        height="259"
+      >
+        <path d="M3.62598 262.308H609.708V4.42664H3.62598V262.308Z" fill="white"
+        ></path>
+      </mask>
+      <g mask="url(#mask1_105_1157)">
+        <rect
+          x="2.43359"
+          y="2.8252"
+          width="609.249"
+          height="260.767"
+          fill="url(#paint0_linear_105_1157)"
+          fill-opacity="0.4"></rect>
+      </g>
+    </g>
+    <mask
+      id="mask2_105_1157"
+      style="mask-type:luminance"
+      maskUnits="userSpaceOnUse"
+      x="76"
+      y="98"
+      width="534"
+      height="3"
+    >
+      <path
+        d="M609.708 100.368H418.141C418.931 99.7695 419.717 99.167 420.501 98.559H609.708V100.368ZM263.621 100.368H76.2676C77.1474 99.7641 78.0272 99.1597 78.905 98.559H260.604C261.613 99.1634 262.616 99.7659 263.621 100.368Z"
+        fill="white"></path>
+    </mask>
+    <g mask="url(#mask2_105_1157)" class="bf-fade bf-decor">
+      <rect
+        x="74.5767"
+        y="97.4553"
+        width="537.106"
+        height="4.55962"
+        fill="url(#pattern0_105_1157)"></rect>
+      <rect
+        x="74.5767"
+        y="97.4553"
+        width="537.106"
+        height="4.55962"
+        fill="#F6F6F6"></rect>
+    </g>
+    <mask
+      id="mask3_105_1157"
+      style="mask-type:luminance"
+      maskUnits="userSpaceOnUse"
+      x="3"
+      y="189"
+      width="607"
+      height="2"
+    >
+      <path d="M3.62598 190.837H609.708V189.028H3.62598V190.837Z" fill="white"
+      ></path>
+    </mask>
+    <g mask="url(#mask3_105_1157)" class="bf-fade bf-decor">
+      <rect
+        x="2.43359"
+        y="187.743"
+        width="609.249"
+        height="4.55962"
+        fill="url(#pattern1_105_1157)"></rect>
+      <rect
+        x="2.43359"
+        y="187.743"
+        width="609.249"
+        height="4.55962"
+        fill="#F6F6F6"></rect>
+    </g>
+    <path d="M4 10H610V8H4V10Z" fill="#F4F7FE" class="bf-fade"></path>
+    <path
+      class="bf-reveal bf-line"
+      d="M3.74517 138.895C35.0335 130.635 59.9706 111.595 84.8 94.9257C97.2107 86.5794 109.584 78.807 122.624 73.1532C135.671 67.4976 149.349 63.9461 164.552 63.9425C172.044 63.9443 179.913 64.8069 188.279 66.7342C219.16 73.8389 244.044 89.6256 268.043 103.882C280.043 111.003 291.819 117.732 304.067 122.715C316.31 127.695 329.059 130.922 342.845 130.92C356.225 130.924 370.52 127.874 386.152 120.668C403.381 112.728 418.624 101.447 433.028 89.0733C454.622 70.5022 474.383 49.4425 495.851 33.165C506.582 25.0244 517.722 18.0785 529.694 13.1826C541.668 8.28494 554.464 5.41562 568.659 5.41382C580.943 5.41382 594.294 7.56853 609.056 12.5149C610.582 13.0257 612.266 12.3002 612.823 10.8962C613.377 9.49039 612.589 7.93845 611.066 7.42593C595.749 2.29364 581.693 -0.00178528 568.659 1.52588e-05C548.569 -0.00720215 530.975 5.46432 515.021 14.0542C491.081 26.9499 470.679 46.7717 449.957 66.1423C429.246 85.5291 408.234 104.454 383.524 115.825C368.563 122.713 355.252 125.501 342.845 125.506C330.064 125.505 318.176 122.532 306.441 117.763C288.842 110.615 271.676 99.383 252.932 88.4832C234.187 77.5925 213.823 67.041 189.705 61.4828C180.898 59.4526 172.535 58.5287 164.552 58.5305C148.338 58.5269 133.734 62.3472 120.123 68.2555C99.698 77.1233 81.4197 90.6271 62.593 103.297C43.7702 115.984 24.4402 127.824 2.13135 133.69C0.570458 134.1 -0.332355 135.6 0.114174 137.036C0.558745 138.474 2.18428 139.306 3.74517 138.895Z"
+      fill="#006836"></path>
+    <mask
+      id="mask4_105_1157"
+      style="mask-type:luminance"
+      maskUnits="userSpaceOnUse"
+      x="535"
+      y="8"
+      width="69"
+      height="2"
+    >
+      <path
+        d="M603.526 9.8999H535.623C537.543 9.2431 539.484 8.63877 541.451 8.09053H596.916C599.088 8.62972 601.289 9.23224 603.526 9.8999Z"
+        fill="white"></path>
+    </mask>
+    <g mask="url(#mask4_105_1157)" class="bf-fade bf-decor">
+      <rect
+        x="534.417"
+        y="6.26294"
+        width="70.6183"
+        height="5.46434"
+        fill="url(#pattern2_105_1157)"></rect>
+      <rect
+        x="534.417"
+        y="6.26294"
+        width="70.6183"
+        height="5.46434"
+        fill="#F6F6F6"></rect>
+    </g>
+    <defs>
+      <pattern
+        id="pattern0_105_1157"
+        patternContentUnits="objectBoundingBox"
+        width="1"
+        height="1"
+      >
+        <use xlink:href="#image0_105_1157" transform="scale(0.00174825 0.2)"
+        ></use>
+      </pattern>
+      <pattern
+        id="pattern1_105_1157"
+        patternContentUnits="objectBoundingBox"
+        width="1"
+        height="1"
+      >
+        <use xlink:href="#image1_105_1157" transform="scale(0.00154083 0.2)"
+        ></use>
+      </pattern>
+      <pattern
+        id="pattern2_105_1157"
+        patternContentUnits="objectBoundingBox"
+        width="1"
+        height="1"
+      >
+        <use xlink:href="#image2_105_1157" transform="scale(0.0133333 0.166667)"
+        ></use>
+      </pattern>
+      <linearGradient
+        id="paint0_linear_105_1157"
+        x1="307.058"
+        y1="2.99994"
+        x2="307.058"
+        y2="263.592"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#006836"></stop>
+        <stop offset="1" stop-color="#F6F6F6"></stop>
+      </linearGradient>
+      <image
+        id="image0_105_1157"
+        width="572"
+        height="5"
+        preserveAspectRatio="none"
+        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjwAAAAFCAYAAABB5TbWAAAABHNCSVQICAgIfAhkiAAAADhJREFUaIHt1lEJACAQBUG1f8MDo6gp5OAxk2A/d+46dwAABFvdAQAAvxkeACCe4QEA4hkeACDeA/QcA8DfgF3rAAAAAElFTkSuQmCC"
+      />
+      <image
+        id="image1_105_1157"
+        width="649"
+        height="5"
+        preserveAspectRatio="none"
+        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAokAAAAFCAYAAAApOnarAAAABHNCSVQICAgIfAhkiAAAADxJREFUaIHt1jENACAMAMFC8C8UEcBKUgHtcKfgxx97nxsAAPBZMaoTAADoZlYHAADQj0kEACAxiQAAJA8/0gPe7iMiIwAAAABJRU5ErkJggg=="
+      />
+      <image
+        id="image2_105_1157"
+        width="75"
+        height="6"
+        preserveAspectRatio="none"
+        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAAGCAYAAACLiGNYAAAABHNCSVQICAgIfAhkiAAAAC1JREFUOI1jvHj633+GUUAUYBpoBwwlMBpYJIDRwCIBsDAyDrQThg4YTVkkAACUPwOpH+tABQAAAABJRU5ErkJggg=="
+      />
+    </defs>
+  </svg>
+
   <div class="w-full flex justify-between items-center mt-7">
     {
-      config?.days?.map((day) => (
-        <p class="text-[13px] font-normal leading-[100%] text-paragraph">
+      config?.days?.map((day, i) => (
+        <p
+          class="text-[13px] font-normal leading-[100%] text-paragraph bf-day"
+          style={`--d:${DAY_BASE_DELAY_MS + i * DAY_STAGGER_MS}ms`}
+        >
           {day.label[lang]}
         </p>
       ))
     }
   </div>
 </div>
+
+<style>
+  /* La curva (ribbon + área degradada) se revela de izquierda a derecha,
+     igual que el dibujo de líneas del LineChartWidget. El inset vertical
+     negativo evita recortar los bordes del trazo durante el wipe. */
+  .bf-reveal {
+    clip-path: inset(-6% 101% -6% -1%);
+    transition: clip-path var(--bf-reveal, 1400ms)
+      cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bf-chart.active .bf-reveal {
+    clip-path: inset(-6% -1% -6% -1%);
+  }
+
+  /* El área entra justo detrás de la línea verde */
+  .bf-area {
+    transition-delay: var(--bf-area-delay, 150ms);
+  }
+
+  /* Grid + líneas punteadas: fade cuando el trazo ya casi terminó */
+  .bf-fade {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  .bf-chart.active .bf-fade {
+    opacity: 1;
+  }
+
+  .bf-decor {
+    transition-delay: var(--bf-decor-delay, 900ms);
+  }
+
+  /* Días del eje X: entrada escalonada con fade + rise */
+  .bf-day {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
+    transition-delay: var(--d, 500ms);
+  }
+
+  .bf-chart.active .bf-day {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bf-reveal,
+    .bf-fade,
+    .bf-day {
+      transition: none !important;
+    }
+  }
+</style>
