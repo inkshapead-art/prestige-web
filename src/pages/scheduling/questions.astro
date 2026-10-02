@@ -1,6 +1,16 @@
 ---
 import EstimateForm from "../../estimate/EstimateForm";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+
+const contentUS = {
+  backgroundAlt: "System background",
+};
+
+const contentEs = {
+  backgroundAlt: "Fondo del sistema",
+};
+
+const content = contentEs;
 ---
 
 <LayoutScheduling>
@@ -9,7 +19,7 @@ import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
   >
     <img
       src="/images/scheduling/fondo-sistema.webp"
-      alt="Fondo del sistema"
+      alt={content.backgroundAlt}
       class="w-full h-full object-cover inset-0 absolute object-center z-1"
       width="1456"
       height="816"

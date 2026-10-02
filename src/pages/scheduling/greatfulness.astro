@@ -2,9 +2,28 @@
 import VTurbPlayer from "../../components/VTurbPlayer.astro";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
 import Instrucctions from "../../sections/Scheduling/Instrucctions.astro";
+
+const contentUS = {
+  badge: "Your call is confirmed — check your email",
+  title:
+    'Before we talk, <br /> <span class="text-secondary font-georgia">you need to see this.</span>',
+  subtitle: "Directly impacts your business. 8 minutes.",
+};
+
+const contentEs = {
+  badge: "Tu llamada está confirmada — revisa tu email",
+  title:
+    'Antes de que hablemos, <br /> <span class="text-secondary font-georgia">necesitas ver esto. </span>',
+  subtitle: "Afecta directamente a tu negocio. 8 minutos.",
+};
+
+const content = contentEs;
 ---
 
 <LayoutScheduling>
+  <script is:inline>
+    fbq("track", "Schedule");
+  </script>
   <section
     class="w-full h-auto md:h-[70vh] lg:h-[70vh] xl:h-auto flex flex-col justify-center items-center bg-gradient-to-b from-[#002D15] to-transparent bg-[#000700]"
   >
@@ -29,18 +48,16 @@ import Instrucctions from "../../sections/Scheduling/Instrucctions.astro";
           </svg>
         </div>
         <p class="text-[14px] font-normal leading-[100%] tracking-[0.147px]">
-          Your call is confirmed — check your email
+          {content.badge}
         </p>
       </div>
 
       <h1
         class="text-[32px] md:text-[36px] lg:text-[44px] font-normal leading-[100%] tracking-[-1.1px] text-white text-center"
-      >
-        Before we talk, <br />
-        <span class="text-secondary font-georgia">you need to see this.</span>
-      </h1>
+        set:html={content.title}
+      />
       <p class="text-[14px] font-normal leading-[100%]">
-        Directly impacts your business. 8 minutes.
+        {content.subtitle}
       </p>
       <div
         class="relative w-full h-auto md:w-[530px] lg:w-[710px] overflow-hidden rounded-3xl border-2 border-white/20 mt-5 md:mt-5"

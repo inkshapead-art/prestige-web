@@ -20,6 +20,38 @@ const DEFAULT_COUNTRY: Country = "US";
 // Sólo para maquetación/pruebas. Cambiar a false o eliminar este bloque antes de publicar.
 const SHOW_DEVELOPMENT_CONTROLS = false;
 
+const contentUS = {
+  required: "This field is required.",
+  invalidEmail: "Enter a valid email address.",
+  invalidPhone: "Enter a valid phone number.",
+  progressLabel: "Form progress",
+  progressValue: (current: number, total: number) =>
+    `Progress: step ${current} of ${total}`,
+  thankYou: "Thank you",
+  sending: "Sending...",
+  submit: "Submit",
+  next: "Next",
+  sendError: "Error sending information. Please try again.",
+  connectionError: "Connection error sending the form.",
+};
+
+const contentEs = {
+  required: "Este campo es obligatorio.",
+  invalidEmail: "Ingresa un correo electrónico válido.",
+  invalidPhone: "Ingresa un número de teléfono válido.",
+  progressLabel: "Progreso del formulario",
+  progressValue: (current: number, total: number) =>
+    `Progreso: paso ${current} de ${total}`,
+  thankYou: "Gracias",
+  sending: "Enviando...",
+  submit: "Enviar",
+  next: "Siguiente",
+  sendError: "Error al enviar la información. Intente nuevamente.",
+  connectionError: "Error de conexión al enviar el formulario.",
+};
+
+const content = contentEs;
+
 function getEntryState(): {
   answers: EstimateAnswers;
   step: number;
@@ -52,12 +84,12 @@ function readDraft(): { answers: EstimateAnswers; step: number } {
 }
 
 function validateField(field: EstimateField, value: string | undefined) {
-  if (!value?.trim()) return "This field is required.";
+  if (!value?.trim()) return content.required;
   if (field.type === "email" && !/^\S+@\S+\.\S+$/.test(value)) {
-    return "Enter a valid email address.";
+    return content.invalidEmail;
   }
   if (field.type === "tel" && !isValidPhoneNumber(value)) {
-    return "Enter a valid phone number.";
+    return content.invalidPhone;
   }
   return undefined;
 }
@@ -163,14 +195,14 @@ export default function EstimateForm() {
           error: responseData,
           sentPayload: payload,
         });
-        setSubmitError("Error al enviar la información. Intente nuevamente.");
+        setSubmitError(content.sendError);
       }
     } catch (error) {
       console.error("[EstimateForm] Excepción al realizar la petición:", {
         error,
         sentPayload: payload,
       });
-      setSubmitError("Error de conexión al enviar el formulario.");
+      setSubmitError(content.connectionError);
     } finally {
       setIsSubmitting(false);
     }
@@ -184,12 +216,12 @@ export default function EstimateForm() {
     >
       <div className="container-full flex flex-col justify-center items-end">
         <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading--[100%] text-white">
-          <span className="sr-only">Form progress</span>
+          <span className="sr-only">{content.progressLabel}</span>
         </div>
         <div
           className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
           role="progressbar"
-          aria-label={`Progress: step ${stepIndex + 1} of ${estimateSteps.length}`}
+          aria-label={content.progressValue(stepIndex + 1, estimateSteps.length)}
           aria-valuemin={1}
           aria-valuemax={estimateSteps.length}
           aria-valuenow={stepIndex + 1}
@@ -205,7 +237,7 @@ export default function EstimateForm() {
         {submitted ? (
           <div className="text-center" role="status">
             <h1 className="font-georgia text-[26px] text-secondary md:text-[32px]">
-              Thank you
+              {content.thankYou}
             </h1>
           </div>
         ) : (
@@ -327,7 +359,11 @@ export default function EstimateForm() {
               disabled={isSubmitting}
               className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isSubmitting ? "Sending..." : isFinalStep ? "Submit" : "Next"}
+              {isSubmitting
+                ? content.sending
+                : isFinalStep
+                  ? content.submit
+                  : content.next}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

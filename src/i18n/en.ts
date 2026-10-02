@@ -6,7 +6,7 @@ export default {
         href: "/",
       },
       {
-        label: "Solutions ",
+        label: "Solutions",
         href: "#",
       },
       {
@@ -87,13 +87,13 @@ export default {
             "We analyze how lenders currently evaluate your business and identify what's limiting your funding potential.",
         },
         {
-          step: "STEP 2",
+          step: "Step 2",
           title: "Capital Acquisition",
           description:
             "Our team helps you secure funding through business loans, credit lines and strategic lending partners.",
         },
         {
-          step: "STEP 3",
+          step: "Step 3",
           title: "Funding Optimization",
           description:
             "We optimize your business profile so banks compete to lend you larger amounts with better terms.",
@@ -740,25 +740,25 @@ export default {
       items: [
         {
           step: "Step 1",
-          title: "Scale & Grow",
+          title: "Assess & Grow",
           description:
             "We evaluate your business, credit, and finances to identify your strongest funding opportunities.",
         },
         {
           step: "Step 2",
-          title: "Scale & Grow",
+          title: "Optimize Profile",
           description:
             "We strengthen your business profile to improve credibility, lender confidence, and funding readiness.",
         },
         {
           step: "Step 3",
-          title: "Scale & Grow",
+          title: "Secure Funding",
           description:
             "We pursue the best funding options based on your qualifications and business growth objectives.",
         },
         {
           step: "Step 4",
-          title: "Scale & Grow",
+          title: "Ongoing Support",
           description:
             "We provide ongoing support to help your business secure future funding and sustain long-term growth.",
         },

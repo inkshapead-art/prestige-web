@@ -1,24 +1,61 @@
 ---
 import VTurbPlayer from "../../components/VTurbPlayer.astro";
 
-const content = [
-  {
-    title: "What exactly is Prestige Growth Partners?",
-    playerId: "6a8e1b69107f2d3d63441ccf", // Vid 2
-  },
-  {
-    title: "What results are possible and in what timeframe?",
-    playerId: "6a8e1b81efad49d8f1e1567a", // Vid 3
-  },
-  {
-    title: "Who is Ronmel Charry?",
-    playerId: "6a8e1bae4f8274c280d53f28", // Vid 4
-  },
-  {
-    title: "What happens if it doesn't work for you?",
-    playerId: "6a8e1bd62755c475e3b4fc02", // Vid 5
-  },
-];
+const contentUS = {
+  eyebrow: "Before the call",
+  heading: "Watch these videos in order",
+  title:
+    'Before the call, <br /> <span class="text-secondary font-georgia">answer these questions</span>',
+  description:
+    'Each video takes under 2 minutes. <br class="md:hidden" />Watch them in order.',
+  videos: [
+    {
+      title: "What exactly is Prestige Growth Partners?",
+      playerId: "6a8e1b69107f2d3d63441ccf", // Vid 2
+    },
+    {
+      title: "What results are possible and in what timeframe?",
+      playerId: "6a8e1b81efad49d8f1e1567a", // Vid 3
+    },
+    {
+      title: "Who is Ronmel Charry?",
+      playerId: "6a8e1bae4f8274c280d53f28", // Vid 4
+    },
+    {
+      title: "What happens if it doesn't work for you?",
+      playerId: "6a8e1bd62755c475e3b4fc02", // Vid 5
+    },
+  ],
+};
+
+const contentEs = {
+  eyebrow: "Antes de la llamada",
+  heading: "Mira estos videos en orden",
+  title:
+    'Antes de la llamada, <br /> <span class="text-secondary font-georgia">responde estas preguntas</span>',
+  description:
+    'Cada video dura menos de 2 minutos. <br class="md:hidden" />Míralos en orden.',
+  videos: [
+    {
+      title: "¿Qué es exactamente Prestige Growth Partners?",
+      playerId: "6a8e1b69107f2d3d63441ccf", // Vid 2
+    },
+    {
+      title: "¿Qué resultados son posibles y en cuánto tiempo?",
+      playerId: "6a8e1b81efad49d8f1e1567a", // Vid 3
+    },
+    {
+      title: "¿Quién es Ronmel Charry?",
+      playerId: "6a8e1bae4f8274c280d53f28", // Vid 4
+    },
+    {
+      title: "¿Qué pasa si no funciona para ti?",
+      playerId: "6a8e1bd62755c475e3b4fc02", // Vid 5
+    },
+  ],
+};
+
+const content = contentEs;
 ---
 
 <section
@@ -27,31 +64,30 @@ const content = [
   <p
     class="text-[10px] text-white leading-[100%] font-normal tracking-[1.56px] uppercase"
   >
-    Before the call
+    {content.eyebrow}
   </p>
-  <div class="flex flex-col justify-center items-center gap-4 mt-10 md:mt-9 text-white">
+  <div
+    class="flex flex-col justify-center items-center gap-4 mt-10 md:mt-9 text-white"
+  >
     <p
       class="text-[11px] md:text-[14px] font-bold leading-[100%] tracking-[2.24px] uppercase"
     >
-      Watch these videos in order
+      {content.heading}
     </p>
     <h2
       class="text-[24px] md:text-[36px] lg:text-[44px] font-normal leading-[100%] text-white text-center"
-    >
-      Before the call,
-      <br />
-      <span class="text-secondary font-georgia">answer these questions</span>
-    </h2>
-    <p class="text-[14px] font-normal leading-[100%] text-center">
-      Each video takes under 2 minutes. <br class="md:hidden" />Watch them in
-      order.
-    </p>
+      set:html={content.title}
+    />
+    <p
+      class="text-[14px] font-normal leading-[100%] text-center"
+      set:html={content.description}
+    />
   </div>
   <div
     class="flex flex-col justify-center items-center mt-10 w-full px-4 md:px-0"
   >
     {
-      content.map((item) => (
+      content.videos.map((item) => (
         <>
           <div class="flex flex-col jusitfy-center items-center gap-[14px] w-full">
             <h2 class="txet-[16px] md:text-[24px] text-white leading-[130%] text-white">

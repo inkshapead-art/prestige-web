@@ -25,7 +25,7 @@ export type EstimateStep = {
 };
 
 // Edita este archivo para cambiar las preguntas, opciones y textos del funnel.
-export const estimateSteps: EstimateStep[] = [
+export const estimateStepsUS: EstimateStep[] = [
   {
     id: "services",
     title: "What type of service do you need?",
@@ -92,6 +92,76 @@ export const estimateSteps: EstimateStep[] = [
     ],
   },
 ];
+
+export const estimateStepsEs: EstimateStep[] = [
+  {
+    id: "services",
+    title: "¿Qué tipo de servicio necesitas?",
+    description: "Elige qué tipo de proyecto necesitas.",
+    layout: "list",
+    fields: [
+      {
+        id: "servicesType",
+        label: "Tipo de servicio",
+        type: "choice",
+        options: [
+          {
+            label: "Financiación empresarial",
+            value: "Business Funding",
+            description: "For homes and residential properties.",
+          },
+          {
+            label: "Consultoría empresarial",
+            value: "Business Consulting",
+            description: "For industrial facilities and projects.",
+          },
+          {
+            label: "Optimización de crédito",
+            value: "Credit Optimization",
+            description: "For industrial facilities and projects.",
+          },
+          {
+            label: "Préstamos empresariales, SBA, BLOC, Tarjeta de crédito",
+            value: "Business loans, SBA, BLOC, BUSINESS CREDIT CARD",
+            description: "For industrial facilities and projects.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "contact",
+    title: "¿Cómo podemos contactarte?",
+    description: "Comparte tu nombre y correo electrónico.",
+    layout: "form",
+    fields: [
+      {
+        id: "name",
+        label: "Nombre completo",
+        placeholder: "Nombre completo",
+        type: "text",
+        autocomplete: "name",
+      },
+    ],
+  },
+  {
+    id: "phone",
+    title: "¿Cuál es tu número de teléfono?",
+    description: "Te contactaremos para hablar de tu proyecto.",
+    layout: "form",
+    fields: [
+      {
+        id: "phone",
+        label: "Número de móvil",
+        placeholder: "Número de móvil",
+        type: "tel",
+        autocomplete: "tel",
+      },
+    ],
+  },
+];
+
+export const estimateSteps: EstimateStep[] = estimateStepsEs;
 
 export type EstimateAnswers = Partial<
   Record<EstimateField["id"] | "zip", string>
