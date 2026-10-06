@@ -1,0 +1,44 @@
+---
+const contentEs = {
+  title: "CASOS REALES",
+  description:
+    "Hace unos años perdí todo: mis socios se fueron, se llevaron los clientes y me quedé con deudas y el crédito destruido. Aprendí, a la fuerza, cómo funcionan realmente los bancos. Hoy ese conocimiento es Prestige Funding System.",
+  description2:
+    "Prestige Growth Partners no existe para venderte una promesa. Existe para que tu negocio deje de quedarse pequeño por no conocer las reglas.",
+};
+const content = contentEs;
+---
+
+<section class="container-full flex justify-center items-start py-20 gap-8">
+  <div class="w-1/2 h-auto relative aspect-62/77 overflow-hidden rounded-lg">
+    <img
+      src="/images/scheduling/person.webp"
+      alt="Persona"
+      width="1024"
+      height="1536"
+      decoding="async"
+      loading="lazy"
+      class="w-full h-full absolute inset-0 object-cover"
+    />
+  </div>
+  <div class="flex flex-col justify-start items-start gap-10 w-1/2">
+    <div class="flex flex-col justify-start items-start gap-8">
+      <h2
+        class="text-[16px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-secondary uppercase tracking-[0.96px] md:tracking-[1.14px]"
+        '
+      >
+        {content.title}
+      </h2>
+      <p
+        class="text-[16px] md:text-[19px] font-normal leading-[150%] text-start text-white"
+      >
+        {content.description}
+      </p>
+    </div>
+    <p
+      class="text-[16px] md:text-[24px] font-normal leading-[150%] text-start text-secondary"
+    >
+      {content.description2}
+    </p>
+  </div>
+</section>

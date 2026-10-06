@@ -100,10 +100,10 @@ const {
   </head>
 
   <body
-    class="font-family-scheduling antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
+    class="scheduling-layout font-family-scheduling antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
   >
     <header
-      class="w-full absolute top-0 left-0 flex justify-center items-center pt-15 md:pt-[54px] pb-6 md:pb-3 z-10"
+      class="w-full absolute top-0 left-0 flex justify-center items-center h-[132px] z-10"
     >
       <a href="/" class="cursor-pointer">
         <img
@@ -111,15 +111,14 @@ const {
           alt={logoAlt}
           width="190"
           height="40"
-          class="w-[147px] md:w-[190px] h-auto"
+          class="w-[147px] md:w-[170px] h-auto"
           decoding="async"
           loading="eager"
         />
       </a>
     </header>
-    <main class="flex flex-col w-full justify-center items-center relative z-0">
-      <slot />
-    </main>
+
+    <slot />
   </body>
 
   <script is:inline>

@@ -2,17 +2,58 @@
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
 import Comunidad from "../../sections/Scheduling/Comunidad.astro";
 import Earnes from "../../sections/Scheduling/Earnes.astro";
-import Hero from "../../sections/Scheduling/Hero.astro";
-import Stadistic from "../../sections/Scheduling/Stadistic.astro";
-import Videos from "../../sections/Scheduling/Videos.astro";
-import Stories from "../../sections/Scheduling/Stories.astro";
+
+import Hero from "../../sections/Schedulingv2/Hero.astro";
+import RealCases from "../../sections/Schedulingv2/RealCases.astro";
+import Reasons from "../../sections/Schedulingv2/Reasons.astro";
+import Stadistic from "../../sections/Schedulingv2/Stadistic.astro";
+import Stories from "../../sections/Schedulingv2/Stories.astro";
+import Videos from "../../sections/Schedulingv2/Videos.astro";
+import WorkTeam from "../../sections/Schedulingv2/WorkTeam.astro";
 ---
 
 <LayoutScheduling>
-  <Hero />
+  <main class="flex flex-col w-full justify-center items-center relative z-0">
+    <div
+      class="w-full flex flex-col justify-center items-center bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0"
+    >
+      <Hero />
+      <Stories />
+      <Reasons />
+    </div>
+    <Stadistic />
+    <div
+      class="bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0 w-full flex flex-col justify-center items-center"
+    >
+      <Videos />
+      <RealCases />
+      <WorkTeam />
+    </div>
+  </main>
+  <footer
+    class="flex justify-center items-center w-full bg-[#000700] py-20 px-4 md:px-0"
+  >
+    <p
+      class="text-[16px] md:text-[19px] font-normal leading-[150%] text-white text-center"
+    >
+      © 2025 Prestige Growth Partners | Privacidad | Doral, FL | <a
+        href="tel:+17863386177"
+        class="hover:text-secondary transition-all duration-300 ease-in-out"
+        >786-338-6177</a
+      >
+      <br />
+      Aviso: Prestige no es prestamista. Resultados no tipicos.
+    </p>
+  </footer>
+</LayoutScheduling>
+
+{
+  /*
+    <Hero />
   <Stories />
   <Videos />
   <Earnes />
   <Stadistic />
   <Comunidad />
-</LayoutScheduling>
+  */
+}

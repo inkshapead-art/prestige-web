@@ -1,0 +1,76 @@
+---
+interface CreatorProfile {
+  name: string;
+  image: string;
+}
+
+const creators: CreatorProfile[] = [
+  { name: "Joe Cury", image: "person-1" },
+  { name: "Martha Green", image: "person-2" },
+  { name: "Madleidy Alvarez", image: "person-3" },
+  { name: "Rudy Trevino", image: "person-4" },
+  { name: "Sara Mendel", image: "person-5" },
+  { name: "Luis Perez", image: "person-6" },
+  { name: "JESSI MITCHEL", image: "person-7" },
+  { name: "RICH ALVEAR", image: "person-8" },
+];
+
+const contentUs = {
+  success:
+    "Building lender-ready businesses through <br class='block md:hidden'/> proven funding and growth systems.",
+  stories:
+    '<span class="text-secondary font-family-scheduling">5,000+</span> Success Stories',
+};
+
+const contentEs = {
+  success: "CASOS REALES · MONTOS DISTINTOS",
+  stories:
+    '<span class="text-secondary font-family-scheduling">De $89,000 a $250,000:</span>  cada caso fue distinto.',
+};
+
+const content = contentEs;
+---
+
+<section
+  class="flex justify-center items-center w-full"
+>
+  <div
+    class="container-full flex flex-col justify-center items-center gap-4 md:gap-10 pt-5 pb-8 md:py-20"
+  >
+    <p
+      class="text-[16px] md:text-[20px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-center text-secondary uppercase tracking-[1.14px]"
+      set:html={content.success}
+    />
+
+    <div
+      class="grid grid-cols-4 lg:flex gap-x-10 gap-y-6 md:gap-10 lg:gap-20 items-start justify-center w-full flex-wrap"
+    >
+      {
+        creators.map((creator) => (
+          <div class="flex flex-col gap-2 items-center shrink-0">
+            <div class="group hover:translate-y-[-3px] transition-transform duration-300 hover:scale-105 w-14 h-14 rounded-full overflow-hidden relative">
+              <img
+                alt={creator.name}
+                class="h-full w-full object-cover absolute inset-0"
+                src={`/images/scheduling/${creator.image}.png`}
+                width="56"
+                height="56"
+                decoding="async"
+                loading="lazy"
+              />
+            </div>
+
+            <p
+              class="text-[8px] md:text-[10px] text-white leading-[126%] tracking-[0.54px] font-light uppercase text-center"
+              set:html={creator.name}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <p
+      set:html={content.stories}
+      class="text-[19px] md:text-[31px] text-white font-bold font-title-libre leading-[138%] text-center"
+    />
+  </div>
+</section>

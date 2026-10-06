@@ -1,0 +1,67 @@
+---
+const contentEs = {
+  tag: "¿TE PASA ESTO?",
+  title: "Esta llamada es para ti si...",
+  items: [
+    "Necesitas capital para tu negocio y no sabes por dónde empezar.",
+    "Nunca has pedido financiamiento y el proceso te intimida.",
+    "Ya lo intentaste y el banco te dijo que no, o te aprobó mucho menos de lo que pediste.",
+    "Tus ingresos declarados no reflejan lo que tu negocio genera.",
+    "Ya probaste con un broker o un curso y no pasó nada.",
+    "Quieres crecer sin poner tus ahorros ni tu crédito en juego.",
+  ],
+};
+const content = contentEs;
+---
+
+<section
+  class="w-full flex flex-col justify-center items-center gap-10 py-20 mx-auto border-y border-white/20 px-4 md:px-0"
+>
+  <p
+    class="text-[16px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-center text-secondary uppercase tracking-[0.96px] md:tracking-[1.14px]"
+  >
+    {content.tag}
+  </p>
+  <h2
+    class="text-[24px] md:text-[36px] lg:text-[41px] font-bold leading-[140%] md:leading-[138%] text-white font-title-libre"
+  >
+    {content.title}
+  </h2>
+  <ul class="flex flex-col justify-center items-center gap-2 max-w-[766px]">
+    {
+      content.items.map((item) => (
+        <li class="w-full flex justify-start items-center gap-4 p-4 rounded-lg bg-[#111] border border-white/7">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="0.5"
+              y="0.5"
+              width="23"
+              height="23"
+              rx="11.5"
+              fill="#D3AE6A"
+              fill-opacity="0.1"
+            />
+            <rect
+              x="0.5"
+              y="0.5"
+              width="23"
+              height="23"
+              rx="11.5"
+              stroke="#D3AE6A"
+            />
+          </svg>
+
+          <p class="text-[16px] md:text-[19px] font-normal leading-[150%] md:leading-[168%] text-start text-white">
+            {item}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

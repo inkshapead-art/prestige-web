@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap");
 
 @import "tailwindcss";
 
@@ -57,6 +58,7 @@
   --font-georgia: "Alike", sans-serif;
   --font-family-scheduling: "DIN Next Lt Pro", sans-serif;
   --font-family-times: "Times New Roman", serif;
+  --font-title-libre: "Libre Baskerville", serif;
   --color-primary: #002d15;
   --color-primary-rgb: rgb(0, 59, 70);
   --color-secondary: #d3ae6a;
@@ -72,6 +74,43 @@
     font-family: var(--font-family);
   }
 }
+
+@layer utilities {
+  .font-family-scheduling,
+  .font-family-scheduling * {
+    font-family: var(--font-family-scheduling);
+  }
+
+  .scheduling-layout .font-title-libre,
+  .scheduling-layout .font-title-libre * {
+    font-family: var(--font-title-libre);
+  }
+
+  .scheduling-layout .font-georgia,
+  .scheduling-layout .font-georgia * {
+    font-family: var(--font-georgia);
+  }
+
+  .scheduling-layout,
+  .scheduling-layout * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .scheduling-layout *::before,
+  .scheduling-layout *::after {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -320,14 +359,25 @@ html {
   background: linear-gradient(0deg, #000 1.08%, rgba(0, 0, 0, 0) 54.37%);
 }
 
-
 @keyframes cardWobble {
-  0% { transform: scale(1) rotate(0deg); }
-  20% { transform: scale(1.05) rotate(-6deg); }
-  40% { transform: scale(1.05) rotate(5deg); }
-  60% { transform: scale(1.03) rotate(-3deg); }
-  80% { transform: scale(1.01) rotate(2deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.05) rotate(-6deg);
+  }
+  40% {
+    transform: scale(1.05) rotate(5deg);
+  }
+  60% {
+    transform: scale(1.03) rotate(-3deg);
+  }
+  80% {
+    transform: scale(1.01) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 .hover-bounce-card {
