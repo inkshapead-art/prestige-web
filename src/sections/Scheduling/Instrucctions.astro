@@ -29,10 +29,9 @@ const contentUS = {
 };
 
 const contentEs = {
-  eyebrow: "Antes de la llamada",
   heading: "Mira estos videos en orden",
   title:
-    'Antes de la llamada, <br /> <span class="text-secondary font-georgia">responde estas preguntas</span>',
+    'Antes de la llamada, <br /> <span class="text-secondary font-title-libre">revisa los siguientes 4 videos</span>',
   description:
     'Cada video dura menos de 2 minutos. <br class="md:hidden" />Míralos en orden.',
   videos: [
@@ -59,32 +58,25 @@ const content = contentEs;
 ---
 
 <section
-  class="bg-[#000700] flex justify-center items-center w-full flex-col pb-16"
+  class="bg-[#000700] flex justify-center items-center w-full flex-col py-14 md:py-20 gap-10"
 >
-  <p
-    class="text-[10px] text-white leading-[100%] font-normal tracking-[1.56px] uppercase"
-  >
-    {content.eyebrow}
-  </p>
-  <div
-    class="flex flex-col justify-center items-center gap-4 mt-10 md:mt-9 text-white"
-  >
+  <div class="flex flex-col justify-center items-center gap-6 text-white">
     <p
-      class="text-[11px] md:text-[14px] font-bold leading-[100%] tracking-[2.24px] uppercase"
+      class="text-[16px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-center text-secondary uppercase tracking-[0.96px] md:tracking-[1.14px]"
     >
       {content.heading}
     </p>
     <h2
-      class="text-[24px] md:text-[36px] lg:text-[44px] font-normal leading-[100%] text-white text-center"
+      class="text-[24px] md:text-[36px] lg:text-[41px] font-bold leading-[140%] md:leading-[138%] text-white font-title-libre text-center"
       set:html={content.title}
     />
     <p
-      class="text-[14px] font-normal leading-[100%] text-center"
+      class="text-[16px] md:text-[19px] font-normal leading-[150%] text-center text-white"
       set:html={content.description}
     />
   </div>
   <div
-    class="flex flex-col justify-center items-center mt-10 w-full px-4 md:px-0"
+    class="flex flex-col justify-center items-center w-full px-4 md:px-0"
   >
     {
       content.videos.map((item) => (

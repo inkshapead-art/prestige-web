@@ -1,4 +1,4 @@
-import { type FormEvent, useEffect, useMemo, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import PhoneInput, {
   isValidPhoneNumber,
   type Country,
@@ -44,7 +44,7 @@ const contentEs = {
     `Progreso: paso ${current} de ${total}`,
   thankYou: "Gracias",
   sending: "Enviando...",
-  submit: "Enviar",
+  submit: "Ver Calendario",
   next: "Siguiente",
   sendError: "Error al enviar la información. Intente nuevamente.",
   connectionError: "Error de conexión al enviar el formulario.",
@@ -95,11 +95,9 @@ function validateField(field: EstimateField, value: string | undefined) {
 }
 
 export default function EstimateForm() {
-  const entry = useMemo(getEntryState, []);
-  const draft = useMemo(readDraft, []);
-  const initialState = entry.hasEntry ? entry : draft;
-  const [answers, setAnswers] = useState<EstimateAnswers>(initialState.answers);
-  const [stepIndex, setStepIndex] = useState(initialState.step ?? 0);
+  const [answers, setAnswers] = useState<EstimateAnswers>({});
+  const [stepIndex, setStepIndex] = useState(0);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -109,17 +107,46 @@ export default function EstimateForm() {
   const isFinalStep = stepIndex === estimateSteps.length - 1;
   const progressPercentage = ((stepIndex + 1) / estimateSteps.length) * 100;
   const choiceField = step.fields.find((field) => field.type === "choice");
+  const hasPhoneField = step.fields.some((field) => field.type === "tel");
 
   useEffect(() => {
+    const entry = getEntryState();
+    const draft = readDraft();
+    const initialState = entry.hasEntry ? entry : draft;
+
+    setAnswers(initialState.answers);
+    setStepIndex(initialState.step ?? 0);
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isInitialized) return;
+
     window.sessionStorage.setItem(
       DRAFT_KEY,
       JSON.stringify({ answers, step: stepIndex }),
     );
-  }, [answers, stepIndex]);
+  }, [answers, stepIndex, isInitialized]);
 
   function setAnswer(id: EstimateField["id"], value: string) {
     setAnswers((current) => ({ ...current, [id]: value }));
     setErrors((current) => ({ ...current, [id]: undefined }));
+  }
+
+  function selectChoice(id: EstimateField["id"], value: string) {
+    const nextAnswers = { ...answers, [id]: value };
+    const nextStepIndex = isFinalStep
+      ? stepIndex
+      : Math.min(stepIndex + 1, estimateSteps.length - 1);
+
+    setAnswers(nextAnswers);
+    setErrors((current) => ({ ...current, [id]: undefined }));
+    window.sessionStorage.setItem(
+      DRAFT_KEY,
+      JSON.stringify({ answers: nextAnswers, step: nextStepIndex }),
+    );
+
+    if (!isFinalStep) setStepIndex(nextStepIndex);
   }
 
   function validateStep() {
@@ -212,7 +239,7 @@ export default function EstimateForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
+      className="estimate-form relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
     >
       <div className="container-full flex flex-col justify-center items-end">
         <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading--[100%] text-white">
@@ -221,7 +248,10 @@ export default function EstimateForm() {
         <div
           className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
           role="progressbar"
-          aria-label={content.progressValue(stepIndex + 1, estimateSteps.length)}
+          aria-label={content.progressValue(
+            stepIndex + 1,
+            estimateSteps.length,
+          )}
           aria-valuemin={1}
           aria-valuemax={estimateSteps.length}
           aria-valuenow={stepIndex + 1}
@@ -246,6 +276,11 @@ export default function EstimateForm() {
               <h1 className="font-georgia text-[24px] md:text-[32px] leading-[183%] md:leading-[137.5%] tracking-[-1.1px] text-secondary text-center font-normal">
                 {step.title}
               </h1>
+              {step.description && (
+                <p className="mt-6 text-center text-[14px] leading-[1.35] text-white">
+                  {step.description}
+                </p>
+              )}
             </header>
 
             {choiceField ? (
@@ -259,7 +294,9 @@ export default function EstimateForm() {
                         key={option.value}
                         type="button"
                         aria-pressed={selected}
-                        onClick={() => setAnswer(choiceField.id, option.value)}
+                        onClick={() =>
+                          selectChoice(choiceField.id, option.value)
+                        }
                         className={`w-full rounded-lg border-[1.5px] p-6 text-center text-[14px] md:text-[16px] font-normal text-white transition leading-[100%] cursor-pointer ${
                           selected
                             ? "border-secondary bg-black/80 shadow-[0_18px_5px_0_rgba(0, 0, 0, 0.00), 0_11px_5px_0_rgba(0, 0, 0, 0.02), 0_6px_4px_0_rgba(0, 0, 0, 0.08), 0_3px_3px_0_rgba(0, 0, 0, 0.13), 0_1px_2px_0 rgba(0, 0, 0, 0.15)]"
@@ -281,10 +318,13 @@ export default function EstimateForm() {
                 )}
               </fieldset>
             ) : (
-              <div className="grid w-full gap-3">
+              <div className="grid w-full gap-3 justify-center">
                 {step.fields.map((field) =>
                   field.type === "tel" ? (
-                    <label key={field.id} className="grid gap-1">
+                    <label
+                      key={field.id}
+                      className="grid gap-1 w-auto md:w-[400px]"
+                    >
                       <span className="sr-only">{field.label}</span>
                       <PhoneInput
                         id={field.id}
@@ -312,7 +352,10 @@ export default function EstimateForm() {
                       )}
                     </label>
                   ) : (
-                    <label key={field.id} className="grid gap-1">
+                    <label
+                      key={field.id}
+                      className="grid gap-1 w-full md:w-auto"
+                    >
                       <span className="sr-only">{field.label}</span>
                       <input
                         id={field.id}
@@ -328,7 +371,7 @@ export default function EstimateForm() {
                         aria-describedby={
                           errors[field.id] ? `${field.id}-error` : undefined
                         }
-                        className="w-full rounded-lg border border-[#E3E3E3] bg-black/10 px-4 py-5.25 text-[15px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-[100%]"
+                        className="w-[calc(100vw-2rem)] md:w-[400px] rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[15px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-normal"
                       />
                       {errors[field.id] && (
                         <span
@@ -354,36 +397,49 @@ export default function EstimateForm() {
               </p>
             )}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isSubmitting
-                ? content.sending
-                : isFinalStep
-                  ? content.submit
-                  : content.next}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
+            {(!choiceField || isFinalStep) && (
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <path
-                  d="M15.575 9.24098C15.6735 9.24104 15.771 9.26051 15.8619 9.29826C15.9529 9.33601 16.0355 9.39131 16.1051 9.461C16.1747 9.53069 16.2299 9.61341 16.2676 9.70443C16.3052 9.79545 16.3245 9.89299 16.3245 9.99148C16.3244 10.09 16.3049 10.1875 16.2672 10.2785C16.2294 10.3694 16.1741 10.4521 16.1044 10.5217C16.0347 10.5913 15.952 10.6464 15.861 10.6841C15.77 10.7217 15.6725 10.741 15.574 10.741L15.575 9.24098ZM14.4445 9.99048L14.4445 9.24048L14.445 9.24048L14.4445 9.99048ZM9.42596 10.7405C9.22705 10.7405 9.03629 10.6615 8.89563 10.5208C8.75498 10.3802 8.67596 10.1894 8.67596 9.99048C8.67596 9.79157 8.75498 9.6008 8.89563 9.46015C9.03629 9.3195 9.22705 9.24048 9.42596 9.24048L9.42596 10.7405ZM9.41671 9.24048C9.61563 9.24048 9.80639 9.3195 9.94704 9.46015C10.0877 9.6008 10.1667 9.79157 10.1667 9.99048C10.1667 10.1894 10.0877 10.3802 9.94704 10.5208C9.80639 10.6615 9.61563 10.7405 9.41671 10.7405L9.41671 9.24048ZM3.99996 10.7405C3.80105 10.7405 3.61029 10.6615 3.46963 10.5208C3.32898 10.3802 3.24996 10.1894 3.24996 9.99048C3.24996 9.79157 3.32898 9.6008 3.46963 9.46015C3.61029 9.3195 3.80105 9.24048 3.99996 9.24048L3.99996 10.7405ZM15.574 10.741L15.5552 10.741L15.556 9.24098L15.575 9.24098L15.574 10.741ZM15.5552 10.741L15.3327 10.741L15.334 9.24098L15.556 9.24098L15.5552 10.741ZM15.3327 10.741L15.1107 10.741L15.1117 9.24098L15.334 9.24098L15.3327 10.741ZM15.1107 10.741L14.8882 10.7407L14.8895 9.24073L15.1117 9.24098L15.1107 10.741ZM14.8882 10.7407L14.6662 10.7405L14.6672 9.24048L14.8895 9.24073L14.8882 10.7407ZM14.6662 10.7405L14.444 10.7405L14.445 9.24048L14.6672 9.24048L14.6662 10.7405ZM14.4445 10.7405L9.42596 10.7405L9.42596 9.24048L14.4445 9.24048L14.4445 10.7405ZM9.41671 10.7405L3.99996 10.7405L3.99996 9.24048L9.41671 9.24048L9.41671 10.7405Z"
-                  fill="black"
-                />
-                <path
-                  d="M10.2224 3.77759L15.5164 9.07184C15.6383 9.19372 15.735 9.33841 15.801 9.49766C15.8669 9.65691 15.9009 9.82759 15.9009 9.99996C15.9009 10.1723 15.8669 10.343 15.801 10.5023C15.735 10.6615 15.6383 10.8062 15.5164 10.9281L10.2222 16.2221"
-                  stroke="black"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
+                {isSubmitting
+                  ? content.sending
+                  : isFinalStep
+                    ? content.submit
+                    : content.next}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M15.575 9.24098C15.6735 9.24104 15.771 9.26051 15.8619 9.29826C15.9529 9.33601 16.0355 9.39131 16.1051 9.461C16.1747 9.53069 16.2299 9.61341 16.2676 9.70443C16.3052 9.79545 16.3245 9.89299 16.3245 9.99148C16.3244 10.09 16.3049 10.1875 16.2672 10.2785C16.2294 10.3694 16.1741 10.4521 16.1044 10.5217C16.0347 10.5913 15.952 10.6464 15.861 10.6841C15.77 10.7217 15.6725 10.741 15.574 10.741L15.575 9.24098ZM14.4445 9.99048L14.4445 9.24048L14.445 9.24048L14.4445 9.99048ZM9.42596 10.7405C9.22705 10.7405 9.03629 10.6615 8.89563 10.5208C8.75498 10.3802 8.67596 10.1894 8.67596 9.99048C8.67596 9.79157 8.75498 9.6008 8.89563 9.46015C9.03629 9.3195 9.22705 9.24048 9.42596 9.24048L9.42596 10.7405ZM9.41671 9.24048C9.61563 9.24048 9.80639 9.3195 9.94704 9.46015C10.0877 9.6008 10.1667 9.79157 10.1667 9.99048C10.1667 10.1894 10.0877 10.3802 9.94704 10.5208C9.80639 10.6615 9.61563 10.7405 9.41671 10.7405L9.41671 9.24048ZM3.99996 10.7405C3.80105 10.7405 3.61029 10.6615 3.46963 10.5208C3.32898 10.3802 3.24996 10.1894 3.24996 9.99048C3.24996 9.79157 3.32898 9.6008 3.46963 9.46015C3.61029 9.3195 3.80105 9.24048 3.99996 9.24048L3.99996 10.7405ZM15.574 10.741L15.5552 10.741L15.556 9.24098L15.575 9.24098L15.574 10.741ZM15.5552 10.741L15.3327 10.741L15.334 9.24098L15.556 9.24098L15.5552 10.741ZM15.3327 10.741L15.1107 10.741L15.1117 9.24098L15.334 9.24098L15.3327 10.741ZM15.1107 10.741L14.8882 10.7407L14.8895 9.24073L15.1117 9.24098L15.1107 10.741ZM14.8882 10.7407L14.6662 10.7405L14.6672 9.24048L14.8895 9.24073L14.8882 10.7407ZM14.6662 10.7405L14.444 10.7405L14.445 9.24048L14.6672 9.24048L14.6662 10.7405ZM14.4445 10.7405L9.42596 10.7405L9.42596 9.24048L14.4445 9.24048L14.4445 10.7405ZM9.41671 10.7405L3.99996 10.7405L3.99996 9.24048L9.41671 9.24048L9.41671 10.7405Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M10.2224 3.77759L15.5164 9.07184C15.6383 9.19372 15.735 9.33841 15.801 9.49766C15.8669 9.65691 15.9009 9.82759 15.9009 9.99996C15.9009 10.1723 15.8669 10.343 15.801 10.5023C15.735 10.6615 15.6383 10.8062 15.5164 10.9281L10.2222 16.2221"
+                    stroke="black"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
+
+            {hasPhoneField && (
+              <p
+                role="note"
+                className="w-full max-w-[680px] rounded-md border border-white/25 bg-black/30 px-3 py-2  text-xs leading-[1.35] text-white/75 md:text-sm text-center"
+              >
+                Al hacer clic en «Siguiente» das tu consentimiento por escrito
+                para que Prestige Growth Partners te contacte por llamada,
+                texto, WhatsApp y correo. Responde STOP para darte de baja.
+              </p>
+            )}
           </article>
         )}
       </div>
