@@ -10,11 +10,12 @@ const contentUS = {
 };
 
 const contentEs = {
-  description: "PARA QUIEN NECESITA CAPITAL Y NO SABE POR DONDE EMPEZAR",
+  description:
+    "PARA QUIEN NECESITA CAPITAL Y NO SABE POR <br class='md:hidden block'/> DONDE EMPEZAR",
   title:
     "Cómo emprendedores y empresarios consiguen <span class='text-secondary'>+100K a 0% de interés en menos de 60 días,</span> sin ser expertos en financimaiento.",
   description2:
-    "Descubre el Prestige Funding System: la metodología que revisa tu caso, prepara tu <br/> negocio y aplica por ti, para que tú te enfoques en hacerlo crecer. Dale play al video y te <br/> mostramos cómo.",
+    "Descubre el Prestige Funding System: la metodología que revisa tu caso, prepara tu <br class='hidden md:block'/> negocio y aplica por ti, para que tú te enfoques en hacerlo crecer. Dale play al video y te <br class='hidden md:block'/> mostramos cómo.",
   buttonLabel: "QUIERO VER si MI NEGOCIO CALIFICA",
   paragraph1: "Llamada gratuita. Sin compromiso, para clientes que califican.",
   paragraph2:
@@ -25,28 +26,28 @@ const content = contentEs;
 ---
 
 <section
-  class="w-full h-auto lg:h-[70vh] xl:h-auto flex flex-col justify-end items-center pt-[132px]"
+  class="w-full h-auto flex flex-col justify-end items-center pt-[58.17px] md:pt-[132px]"
 >
   <div
-    class="flex flex-col justify-center items-center px-4 md:px-0 py-20 w-full border-y border-white/20 gap-9"
+    class="flex flex-col justify-center items-center px-4 md:px-0 py-8 md:py-20 w-full border-y border-white/20 gap-6 md:gap-9"
   >
     <div class="flex flex-col justify-center items-center gap-[29px] w-full">
       <p
-        class="text-[16px] md:text-[20px] lg:text-[19px] font-bold leading-[167%] md:leading-[100%] text-center text-secondary"
+        class="text-[16px] md:text-[20px] lg:text-[19px] font-bold leading-[150%] md:leading-[100%] text-center text-secondary tracking-[0.96px] md:tracking-normal"
         set:html={content.description}
       />
       <h1
-        class="text-[38px] md:text-[36px] lg:text-[44px] font-bold leading-[138%] text-white max-w-[1118px] text-center font-title-libre"
+        class="text-[24px] md:text-[36px] lg:text-[44px] font-bold leading-[140%] md:leading-[138%] text-white max-w-[1118px] text-center font-title-libre"
         set:html={content.title}
       />
     </div>
-    <div class="flex flex-col justify-center items-center gap-[19px]">
+    <div class="flex flex-col justify-center items-center gap-6 md:gap-[19px]">
       <p
-        class="text-[14px] md:text-[16px] lg:text-[19px] font-normal leading-[150%] text-center text-white"
+        class="text-[16px] lg:text-[19px] font-normal leading-[150%] text-center text-white"
         set:html={content.description2}
       />
       <div
-        class="relative w-full h-auto md:w-[530px] lg:w-[631px] max-w-full overflow-hidden rounded-3xl border-2 border-white/20 aspect-47/27 md:aspect-video"
+        class="relative w-full h-auto md:w-[530px] lg:w-[631px] max-w-full overflow-hidden rounded-3xl border-2 border-white/20 aspect-video"
       >
         <VTurbPlayer
           playerId="6a8e1aa1655329ca2a97851c"
@@ -59,7 +60,7 @@ const content = contentEs;
         href="/scheduling/questions"
       >
         <span
-          class="font-medium text-[25px] text-[#0a0a0a] tracking-[1.44px] uppercase text-center"
+          class="font-medium text-[16px] md:text-[25px] text-[#0a0a0a] tracking-[1.44px] uppercase text-center"
         >
           {content.buttonLabel}
         </span>
@@ -73,7 +74,7 @@ const content = contentEs;
       >
         {content.paragraph1}
       </p>
-      <p class="text-[16px] font-normal leading-[168%]">
+      <p class="text-[16px] font-normal leading-[168%] text-center">
         {content.paragraph2}
       </p>
     </div>

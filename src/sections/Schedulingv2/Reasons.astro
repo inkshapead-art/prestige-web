@@ -15,7 +15,7 @@ const content = contentEs;
 ---
 
 <section
-  class="w-full flex flex-col justify-center items-center gap-10 py-20 mx-auto border-y border-white/20 px-4 md:px-0"
+  class="w-full flex flex-col justify-center items-center gap-6 md:gap-10 py-14 md:py-20 mx-auto border-y border-white/20 px-4 md:px-0"
 >
   <p
     class="text-[16px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-center text-secondary uppercase tracking-[0.96px] md:tracking-[1.14px]"
@@ -27,16 +27,19 @@ const content = contentEs;
   >
     {content.title}
   </h2>
-  <ul class="flex flex-col justify-center items-center gap-2 max-w-[766px]">
+  <ul
+    class="flex flex-col justify-center items-center gap-2 md:max-w-[80%] lg:max-w-[766px]"
+  >
     {
       content.items.map((item) => (
         <li class="w-full flex justify-start items-center gap-4 p-4 rounded-lg bg-[#111] border border-white/7">
           <svg
+            xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            class="shrink-0"
           >
             <rect
               x="0.5"
@@ -55,9 +58,16 @@ const content = contentEs;
               rx="11.5"
               stroke="#D3AE6A"
             />
+            <path
+              d="M7.5 12.5L10.5 15.5L16.5 9"
+              stroke="#D3AE6A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
 
-          <p class="text-[16px] md:text-[19px] font-normal leading-[150%] md:leading-[168%] text-start text-white">
+          <p class="flex-1 min-w-0 text-[16px] md:text-[19px] font-normal leading-[150%] md:leading-[168%] text-start text-white">
             {item}
           </p>
         </li>

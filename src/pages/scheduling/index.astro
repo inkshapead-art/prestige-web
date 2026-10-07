@@ -1,14 +1,16 @@
 ---
+import { phoneNumber, phoneNumberLink } from "../../constants/info";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
-import Comunidad from "../../sections/Scheduling/Comunidad.astro";
-import Earnes from "../../sections/Scheduling/Earnes.astro";
+import Call from "../../sections/Schedulingv2/Call.astro";
 
 import Hero from "../../sections/Schedulingv2/Hero.astro";
+import Questions from "../../sections/Schedulingv2/Questions.astro";
 import RealCases from "../../sections/Schedulingv2/RealCases.astro";
 import Reasons from "../../sections/Schedulingv2/Reasons.astro";
 import Stadistic from "../../sections/Schedulingv2/Stadistic.astro";
 import Stories from "../../sections/Schedulingv2/Stories.astro";
 import Videos from "../../sections/Schedulingv2/Videos.astro";
+import What from "../../sections/Schedulingv2/What.astro";
 import WorkTeam from "../../sections/Schedulingv2/WorkTeam.astro";
 ---
 
@@ -28,22 +30,53 @@ import WorkTeam from "../../sections/Schedulingv2/WorkTeam.astro";
       <Videos />
       <RealCases />
       <WorkTeam />
+      <What />
+      <Questions />
+      <Call />
     </div>
   </main>
-  <footer
-    class="flex justify-center items-center w-full bg-[#000700] py-20 px-4 md:px-0"
-  >
-    <p
-      class="text-[16px] md:text-[19px] font-normal leading-[150%] text-white text-center"
+  <footer class="w-full flex flex-col justify-center items-center">
+    <div
+      class="flex justify-center items-center w-full bg-[#000700] py-14 md:py-20 px-4 md:px-0"
     >
-      © 2025 Prestige Growth Partners | Privacidad | Doral, FL | <a
-        href="tel:+17863386177"
-        class="hover:text-secondary transition-all duration-300 ease-in-out"
-        >786-338-6177</a
+      <p
+        class="text-[16px] md:text-[19px] font-normal leading-[150%] text-white text-center"
       >
-      <br />
-      Aviso: Prestige no es prestamista. Resultados no tipicos.
-    </p>
+        © 2025 Prestige Growth Partners | Privacidad | Doral, FL | <a
+          href="tel:+17863386177"
+          class="hover:text-secondary transition-all duration-300 ease-in-out"
+          >786-338-6177</a
+        >
+        <br />
+        Aviso: Prestige no es prestamista. Resultados no tipicos.
+      </p>
+    </div>
+
+    <div
+      class="bg-[#E5E5E5] w-full py-3.5 lg:py-4.5 flex justify-center items-center px-5 xl:px-0"
+    >
+      <div
+        class="w-full max-w-screen lg:max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6"
+      >
+        <a href="https://inkshapegroup.com/en/">
+          <img
+            src="/images/icons/inkshape.svg"
+            alt=" Logo de Inkshape Group"
+            width="208"
+            height="40"
+            class="w-27.5 lg:w-34 h-auto block dark:hidden"
+          />
+        </a>
+        <p
+          class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
+        >
+          Copyright © 2026 by <a href="https://inkshapegroup.com"
+            >Inkshape Group</a
+          > | Privacy | <a href="/">Prestige Growth Partners </a> | Florida, USA |
+          Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
+        </p>
+      </div>
+    </div>
   </footer>
 </LayoutScheduling>
 

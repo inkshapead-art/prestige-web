@@ -1,0 +1,52 @@
+---
+const contentEs = {
+  title: "Qué pasa cuando agendas.",
+  items: [
+    "Eliges un horario que te funcione.",
+    "Revisamos tu caso: qué te frena y qué capital podría estar a tu alcance.",
+    "Si hay encaje, te explicamos cómo trabajaríamos juntos. Si no, te lo decimos con honestidad.",
+  ],
+};
+const content = contentEs;
+---
+
+<section
+  class="w-full flex justify-center items-center border-y border-white/20"
+>
+  <div
+    class="container-full flex flex-col justify-center items-center gap-8 md:gap-16 py-14 md:py-20"
+  >
+    <h2
+      class="text-[24px] md:text-[36px] lg:text-[41px] font-bold leading-[140%] md:leading-[138%] text-white font-title-libre"
+    >
+      {content.title}
+    </h2>
+    <div
+      class="w-full grid grid-cols-1 md:grid-cols-3 justify-center items-stretch gap-10 md:gap-6 lg:gap-4"
+    >
+      {
+        content.items.map((item, index) => (
+          <div class="w-full flex flex-col justify-start items-end bg-[#111] border border-white/7 rounded-lg gap-6 p-6 lg:p-8 ">
+            <img
+              src={`/images/scheduling/what-${index + 1}.svg`}
+              alt={`Icon for item ${index + 1}`}
+              class="w-8 h-auto hidden md:block object-contain"
+              width="32"
+              height="32"
+              decoding="async"
+              loading="lazy"
+            />
+            <div class="flex justify-start items-center md:items-start gap-4 w-full">
+              <p class="text-[40px] font-bold leading-[105%] tracking-[2.4px] text-secondary">
+                {index + 1}
+              </p>
+              <p class="text-[16px] md:text-[19px] font-normal leading-[150%]  text-white text-start">
+                {item}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

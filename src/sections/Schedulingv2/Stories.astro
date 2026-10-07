@@ -31,19 +31,17 @@ const contentEs = {
 const content = contentEs;
 ---
 
-<section
-  class="flex justify-center items-center w-full"
->
+<section class="flex justify-center items-center w-full">
   <div
-    class="container-full flex flex-col justify-center items-center gap-4 md:gap-10 pt-5 pb-8 md:py-20"
+    class="container-full flex flex-col justify-center items-center gap-10 py-14 md:py-20"
   >
     <p
-      class="text-[16px] md:text-[20px] lg:text-[19px] font-bold leading-[100%] md:leading-[100%] text-center text-secondary uppercase tracking-[1.14px]"
+      class="text-[16px] md:text-[20px] lg:text-[19px] font-bold leading-[100%] text-center text-secondary uppercase tracking-[0.96px] md:tracking-[1.14px]"
       set:html={content.success}
     />
 
     <div
-      class="grid grid-cols-4 lg:flex gap-x-10 gap-y-6 md:gap-10 lg:gap-20 items-start justify-center w-full flex-wrap"
+      class="grid grid-cols-4 lg:flex gap-3 md:gap-x-10 md:gap-y-6 md:gap-10 lg:gap-20 items-start justify-center w-full flex-wrap md:max-w-[60%] xl:max-w-none"
     >
       {
         creators.map((creator) => (
@@ -70,7 +68,7 @@ const content = contentEs;
     </div>
     <p
       set:html={content.stories}
-      class="text-[19px] md:text-[31px] text-white font-bold font-title-libre leading-[138%] text-center"
+      class="text-[24px] md:text-[31px] text-white font-bold font-title-libre leading-[140%] md:leading-[138%] text-center"
     />
   </div>
 </section>
