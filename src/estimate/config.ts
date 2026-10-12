@@ -212,7 +212,7 @@ export const estimateStepsEs: EstimateStep[] = [
       {
         id: "monthlyRevenue",
         label: "Ingresos mensuales",
-        placeholder: "$ 0", //[cite: 11]
+        placeholder: "$0.00", //[cite: 11]
         type: "text",
       },
     ],

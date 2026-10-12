@@ -38,7 +38,11 @@ const {
   </div>
   {
     lockDurationSeconds > 0 && (
-      <div class="booking-widget-lock" role="status" aria-live="polite">
+      <div
+        class="booking-widget-lock"
+        role="group"
+        aria-label="Calendario bloqueado temporalmente"
+      >
         <p>Primero, mira el video</p>
         <p>
           El calendario se habilita en
@@ -166,6 +170,11 @@ const {
 </style>
 
 <script>
+  import {
+    appendAttributionToUrl,
+    captureAttribution,
+  } from "../utils/attribution";
+
   // Se ejecuta una sola vez en el cliente, después de la hidratación de Astro
   function initBookingWidgets() {
     const wrappers = document.querySelectorAll<HTMLElement>(
@@ -239,8 +248,16 @@ const {
       if (wrapper.dataset.initialized === "true") return;
       wrapper.dataset.initialized = "true";
 
-      const src = wrapper.dataset.widgetSrc!;
+      const baseSrc = wrapper.dataset.widgetSrc!;
+      const src = appendAttributionToUrl(
+        baseSrc,
+        captureAttribution(window),
+      );
       const id = wrapper.dataset.widgetId!;
+      const fallback = wrapper.querySelector<HTMLAnchorElement>(
+        ".booking-widget-fallback",
+      );
+      if (fallback) fallback.href = src;
 
       const iframe = document.createElement("iframe");
       iframe.src = src;

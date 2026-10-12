@@ -14,20 +14,22 @@ const content = contentEs;
 ---
 
 <LayoutScheduling>
-  <section
-    class="w-full min-h-screen overflow-hidden flex justify-center items-center relative"
-  >
-    <img
-      src="/images/scheduling/fondo-sistema.webp"
-      alt={content.backgroundAlt}
-      class="w-full h-full object-cover inset-0 absolute object-center z-1"
-      width="1456"
-      height="816"
-    />
-    <div
-      class="w-full h-full bg-[linear-gradient(180deg,#002D15_0%,rgba(0,8,0,0)_100%),linear-gradient(0deg,rgba(0,7,0,0.9)_0%,rgba(0,7,0,0.9)_100%)] absolute inset-0 z-2"
+  <main class="w-full flex flex-col justify-center items-center relative z-0">
+    <section
+      class="w-full min-h-screen overflow-hidden flex justify-center items-center relative"
     >
-    </div>
-    <EstimateForm client:load />
-  </section>
+      <img
+        src="/images/scheduling/fondo-sistema.webp"
+        alt={content.backgroundAlt}
+        class="w-full h-full object-cover inset-0 absolute object-center z-1"
+        width="1456"
+        height="816"
+      />
+      <div
+        class="w-full h-full bg-[linear-gradient(180deg,#002D15_0%,rgba(0,8,0,0)_100%),linear-gradient(0deg,rgba(0,7,0,0.9)_0%,rgba(0,7,0,0.9)_100%)] absolute inset-0 z-2"
+      >
+      </div>
+      <EstimateForm client:load />
+    </section>
+  </main>
 </LayoutScheduling>

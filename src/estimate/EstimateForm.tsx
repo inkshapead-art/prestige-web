@@ -1,10 +1,11 @@
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import PhoneInput, {
   isValidPhoneNumber,
   type Country,
 } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import "./estimate-phone-input.css";
+import { captureAttribution } from "../utils/attribution";
 import {
   estimateSteps,
   type EstimateAnswers,
@@ -94,6 +95,83 @@ function validateField(field: EstimateField, value: string | undefined) {
   return undefined;
 }
 
+function getCurrencyDecimalIndex(value: string, previousValue?: string) {
+  const periodIndex = value.indexOf(".");
+  if (periodIndex >= 0) return periodIndex;
+
+  const commaIndex = value.lastIndexOf(",");
+  const digitsAfterComma = value
+    .slice(commaIndex + 1)
+    .replace(/\D/g, "").length;
+  const currentCommaCount = value.match(/,/g)?.length ?? 0;
+  const previousCommaCount = previousValue?.match(/,/g)?.length ?? 0;
+  const commaWasAdded = !previousValue || currentCommaCount > previousCommaCount;
+
+  return commaIndex >= 0 && digitsAfterComma <= 2 && commaWasAdded
+    ? commaIndex
+    : -1;
+}
+
+function formatUsdCurrency(
+  value: string | undefined,
+  complete = false,
+  previousValue?: string,
+) {
+  const input = (value ?? "").trim().replace(/[$\s]/g, "");
+  const decimalIndex = getCurrencyDecimalIndex(input, previousValue);
+  const normalized =
+    decimalIndex < 0
+      ? input.replace(/,/g, "")
+      : `${input.slice(0, decimalIndex).replace(/,/g, "")}.${input
+          .slice(decimalIndex + 1)
+          .replace(/,/g, "")}`;
+  const hasDecimal = normalized.includes(".");
+  if (!/\d/.test(normalized) && !hasDecimal) return "";
+
+  const [integerPart = "", ...fractionParts] = normalized.split(".");
+  const integerDigits = integerPart.replace(/\D/g, "");
+  const integer = integerDigits.replace(/^0+(?=\d)/, "") || "0";
+  const fraction = fractionParts.join("").replace(/\D/g, "").slice(0, 2);
+  const formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const formattedFraction = complete ? fraction.padEnd(2, "0") : fraction;
+
+  return `$${formattedInteger}${complete || hasDecimal ? `.${formattedFraction}` : ""}`;
+}
+
+function getUsdCaretPosition(
+  formatted: string,
+  integerDigitsBefore: number,
+  fractionDigitsBefore: number,
+  commasBefore: number,
+  decimalBefore: boolean,
+) {
+  let integerDigitsSeen = 0;
+  let fractionDigitsSeen = 0;
+  let commasSeen = 0;
+  let decimalSeen = false;
+  const integerTarget = integerDigitsBefore || (decimalBefore ? 1 : 0);
+
+  for (let index = 0; index < formatted.length; index += 1) {
+    const character = formatted[index];
+    if (character === ",") commasSeen += 1;
+    else if (character === ".") decimalSeen = true;
+    else if (/\d/.test(character)) {
+      if (decimalSeen) fractionDigitsSeen += 1;
+      else integerDigitsSeen += 1;
+    }
+
+    const caretMatches = decimalBefore
+      ? decimalSeen &&
+        integerDigitsSeen === integerTarget &&
+        fractionDigitsSeen === fractionDigitsBefore
+      : !decimalSeen && integerDigitsSeen === integerTarget;
+
+    if (caretMatches && commasSeen >= commasBefore) return index + 1;
+  }
+
+  return formatted.length;
+}
+
 export default function EstimateForm() {
   const [answers, setAnswers] = useState<EstimateAnswers>({});
   const [stepIndex, setStepIndex] = useState(0);
@@ -102,6 +180,7 @@ export default function EstimateForm() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const submissionInProgress = useRef(false);
 
   const step = estimateSteps[stepIndex];
   const isFinalStep = stepIndex === estimateSteps.length - 1;
@@ -113,8 +192,16 @@ export default function EstimateForm() {
     const entry = getEntryState();
     const draft = readDraft();
     const initialState = entry.hasEntry ? entry : draft;
+    const initialAnswers = { ...initialState.answers };
 
-    setAnswers(initialState.answers);
+    if (initialAnswers.monthlyRevenue) {
+      initialAnswers.monthlyRevenue = formatUsdCurrency(
+        initialAnswers.monthlyRevenue,
+        true,
+      );
+    }
+
+    setAnswers(initialAnswers);
     setStepIndex(initialState.step ?? 0);
     setIsInitialized(true);
   }, []);
@@ -134,6 +221,8 @@ export default function EstimateForm() {
   }
 
   function selectChoice(id: EstimateField["id"], value: string) {
+    if (isSubmitting || submissionInProgress.current) return;
+
     const nextAnswers = { ...answers, [id]: value };
     const nextStepIndex = isFinalStep
       ? stepIndex
@@ -146,10 +235,14 @@ export default function EstimateForm() {
       JSON.stringify({ answers: nextAnswers, step: nextStepIndex }),
     );
 
-    if (!isFinalStep) setStepIndex(nextStepIndex);
+    if (isFinalStep) {
+      void submitAnswers(nextAnswers);
+    } else {
+      setStepIndex(nextStepIndex);
+    }
   }
 
-  function validateStep() {
+  function validateStep(answersToValidate = answers) {
     if (SHOW_DEVELOPMENT_CONTROLS) {
       setErrors({});
       return true;
@@ -157,7 +250,7 @@ export default function EstimateForm() {
 
     const nextErrors: Partial<Record<string, string>> = {};
     step.fields.forEach((field) => {
-      const error = validateField(field, answers[field.id]);
+      const error = validateField(field, answersToValidate[field.id]);
       if (error) nextErrors[field.id] = error;
     });
     setErrors(nextErrors);
@@ -176,25 +269,42 @@ export default function EstimateForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!validateStep()) return;
 
     if (!isFinalStep) {
       goToNextStep();
       return;
     }
 
-    const payload = {
-      ...answers,
-      submittedAt: new Date().toISOString(),
-    };
+    await submitAnswers(answers);
+  }
 
-    console.log("[EstimateForm] Enviando datos a /api/enviar-leads:", payload);
+  async function submitAnswers(answersToSubmit: EstimateAnswers) {
+    if (submissionInProgress.current || !validateStep(answersToSubmit)) return;
 
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     setSubmitError(null);
 
+    const payloadAnswers = { ...answersToSubmit };
+    if (payloadAnswers.monthlyRevenue) {
+      payloadAnswers.monthlyRevenue = formatUsdCurrency(
+        payloadAnswers.monthlyRevenue,
+        true,
+      );
+    }
+
+    const submittedAt = new Date().toISOString();
+    const payload = {
+      ...payloadAnswers,
+      submittedAt,
+      submitted_at: submittedAt,
+      ...captureAttribution(window),
+    };
+
+    console.log("[EstimateForm] Enviando datos a /api/enviar-lead:", payload);
+
     try {
-      const response = await fetch("/api/enviar-leads.php", {
+      const response = await fetch("/api/enviar-lead.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -211,10 +321,15 @@ export default function EstimateForm() {
           sentPayload: payload,
         });
 
-        window.sessionStorage.removeItem(DRAFT_KEY);
+        try {
+          window.sessionStorage.removeItem(DRAFT_KEY);
+          window.sessionStorage.setItem("prestige-pending-lead-transition", "1");
+        } catch {
+          // The form should still continue if browser storage is unavailable.
+        }
         setSubmitted(true);
 
-        // Redirigir a /scheduling/calendar
+        // Send the user directly to the appointment calendar after a successful submission.
         window.location.href = "/scheduling/calendar";
       } else {
         console.error("[EstimateForm] Error al enviar los datos:", {
@@ -231,6 +346,7 @@ export default function EstimateForm() {
       });
       setSubmitError(content.connectionError);
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   }
@@ -239,10 +355,10 @@ export default function EstimateForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="estimate-form relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-28 text-white md:px-8 md:pb-10 md:pt-30 gap-8"
+      className="estimate-form relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-16 text-white md:px-8 md:pb-10 md:pt-30 gap-6 md:gap-8"
     >
       <div className="container-full flex flex-col justify-center items-end">
-        <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading--[100%] text-white">
+        <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading-[100%] text-white">
           <span className="sr-only">{content.progressLabel}</span>
         </div>
         <div
@@ -273,11 +389,11 @@ export default function EstimateForm() {
         ) : (
           <article className="flex w-full flex-col items-center gap-8">
             <header className=" text-center ">
-              <h1 className="font-georgia text-[24px] md:text-[32px] leading-[183%] md:leading-[137.5%] tracking-[-1.1px] text-secondary text-center font-normal">
+              <h1 className="font-georgia text-[28px] md:text-[32px] leading-[120%] md:leading-[137.5%] tracking-[-1.1px] text-secondary text-center font-normal">
                 {step.title}
               </h1>
               {step.description && (
-                <p className="mt-6 text-center text-[14px] leading-[1.35] text-white">
+                <p className="mt-6 text-center text-[15px] leading-[1.35] text-white">
                   {step.description}
                 </p>
               )}
@@ -293,11 +409,12 @@ export default function EstimateForm() {
                       <button
                         key={option.value}
                         type="button"
+                        disabled={isSubmitting}
                         aria-pressed={selected}
                         onClick={() =>
                           selectChoice(choiceField.id, option.value)
                         }
-                        className={`w-full rounded-lg border-[1.5px] p-6 text-center text-[14px] md:text-[16px] font-normal text-white transition leading-[100%] cursor-pointer ${
+                        className={`w-full rounded-lg border-[1.5px] p-6 text-center text-[18px] md:text-[16px] font-normal text-white transition leading-[100%] cursor-pointer ${
                           selected
                             ? "border-secondary bg-black/80 shadow-[0_18px_5px_0_rgba(0, 0, 0, 0.00), 0_11px_5px_0_rgba(0, 0, 0, 0.02), 0_6px_4px_0_rgba(0, 0, 0, 0.08), 0_3px_3px_0_rgba(0, 0, 0, 0.13), 0_1px_2px_0 rgba(0, 0, 0, 0.15)]"
                             : "border-white/20 bg-black/40 hover:border-white/60"
@@ -360,18 +477,89 @@ export default function EstimateForm() {
                       <input
                         id={field.id}
                         name={field.id}
-                        type={field.type}
+                        type={
+                          field.id === "monthlyRevenue" ? "text" : field.type
+                        }
+                        inputMode={
+                          field.id === "monthlyRevenue" ? "decimal" : undefined
+                        }
                         placeholder={field.placeholder}
                         autoComplete={field.autocomplete}
-                        value={answers[field.id] ?? ""}
-                        onChange={(event) =>
-                          setAnswer(field.id, event.target.value)
+                        value={
+                          field.id === "monthlyRevenue"
+                            ? formatUsdCurrency(answers[field.id])
+                            : answers[field.id] ?? ""
                         }
+                        onChange={(event) => {
+                          if (field.id !== "monthlyRevenue") {
+                            setAnswer(field.id, event.target.value);
+                            return;
+                          }
+
+                          const input = event.currentTarget;
+                          const cursor =
+                            input.selectionStart ?? input.value.length;
+                          const textBeforeCursor = input.value.slice(0, cursor);
+                          const previousRevenue = answers.monthlyRevenue;
+                          const decimalIndex = getCurrencyDecimalIndex(
+                            input.value,
+                            previousRevenue,
+                          );
+                          const decimalBefore =
+                            decimalIndex >= 0 && cursor > decimalIndex;
+                          const integerPart = input.value.slice(
+                            0,
+                            decimalIndex >= 0 && decimalBefore
+                              ? decimalIndex
+                              : cursor,
+                          );
+                          const integerDigitsBefore =
+                            integerPart.replace(/\D/g, "").length;
+                          const fractionDigitsBefore =
+                            decimalBefore
+                              ? input.value
+                                  .slice(decimalIndex + 1, cursor)
+                                  .replace(/\D/g, "").length
+                              : 0;
+                          const commasBefore = Math.max(
+                            0,
+                            (textBeforeCursor.match(/,/g)?.length ?? 0) -
+                              (decimalBefore &&
+                              input.value[decimalIndex] === ","
+                                ? 1
+                                : 0),
+                          );
+                          const formatted = formatUsdCurrency(
+                            input.value,
+                            false,
+                            previousRevenue,
+                          );
+
+                          setAnswer(field.id, formatted);
+                          requestAnimationFrame(() => {
+                            const nextCursor = getUsdCaretPosition(
+                              formatted,
+                              integerDigitsBefore,
+                              fractionDigitsBefore,
+                              commasBefore,
+                              decimalBefore,
+                            );
+                            input.setSelectionRange(nextCursor, nextCursor);
+                          });
+                        }}
+                        onBlur={(event) => {
+                          if (field.id === "monthlyRevenue") {
+                            setAnswer(
+                              field.id,
+                              formatUsdCurrency(event.currentTarget.value, true),
+                            );
+                          }
+                        }}
                         aria-invalid={Boolean(errors[field.id])}
                         aria-describedby={
                           errors[field.id] ? `${field.id}-error` : undefined
                         }
-                        className="w-[calc(100vw-2rem)] md:w-[400px] rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[15px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-normal"
+                        className="w-[calc(100vw-2rem)] md:w-[400px] rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[16px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-normal"
                       />
                       {errors[field.id] && (
                         <span
@@ -397,8 +585,7 @@ export default function EstimateForm() {
               </p>
             )}
 
-            {(!choiceField || isFinalStep) && (
-              <button
+            <button
                 type="submit"
                 disabled={isSubmitting}
                 className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
@@ -427,8 +614,7 @@ export default function EstimateForm() {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </button>
-            )}
+            </button>
 
             {hasPhoneField && (
               <p

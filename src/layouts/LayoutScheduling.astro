@@ -119,6 +119,19 @@ const {
     </header>
 
     <slot />
+
+    <script>
+      import { captureAttribution } from "../utils/attribution";
+
+      const captureSchedulingAttribution = () =>
+        captureAttribution(window);
+
+      document.addEventListener(
+        "astro:page-load",
+        captureSchedulingAttribution,
+      );
+      captureSchedulingAttribution();
+    </script>
   </body>
 
   <script is:inline>

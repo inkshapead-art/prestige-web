@@ -11,7 +11,7 @@ const content = contentEs;
 ---
 
 <section
-  class="w-full flex justify-center items-center border-y border-white/20"
+  class="w-full flex justify-center items-center"
 >
   <div
     class="container-full flex flex-col justify-center items-center gap-8 md:gap-16 py-14 md:py-20"
@@ -26,7 +26,7 @@ const content = contentEs;
     >
       {
         content.items.map((item, index) => (
-          <div class="w-full flex flex-col justify-start items-end bg-[#111] border border-white/7 rounded-lg gap-6 p-6 lg:p-8 ">
+          <div class="w-full flex flex-col justify-start items-end bg-[#111] rounded-lg gap-6 p-6 lg:p-8 ">
             <img
               src={`/images/scheduling/what-${index + 1}.svg`}
               alt={`Icon for item ${index + 1}`}

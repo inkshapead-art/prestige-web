@@ -16,7 +16,7 @@ const contentEs = {
   badge: "Tu llamada está confirmada. Revisa tu email.",
   title:
     'Antes de que hablemos, <br /> <span class="text-secondary font-title-libre">necesitas ver esto. </span>',
-  subtitle: "Afecta directamente a tu negocio. 8 minutos.",
+  subtitle: "Afecta directamente a tu negocio, solo toma 8 minutos.",
 };
 
 const content = contentEs;
@@ -25,16 +25,36 @@ const content = contentEs;
 <LayoutScheduling>
   <main class="w-full flex flex-col justify-center items-center relative z-0">
     <script is:inline>
-      fbq("track", "Schedule");
+      try {
+        const hasPendingCalendarTransition =
+          window.sessionStorage.getItem("prestige-pending-schedule-transition") === "1";
+        window.sessionStorage.removeItem("prestige-pending-schedule-transition");
+
+        const referrer = document.referrer ? new URL(document.referrer) : null;
+        const cameFromCalendar =
+          referrer?.origin === window.location.origin &&
+          referrer.pathname.replace(/\/$/, "") === "/scheduling/calendar";
+        const cameFromBookingWidget =
+          referrer?.origin === "https://link.inkshapecrm.com";
+
+        if (
+          hasPendingCalendarTransition &&
+          (cameFromCalendar || cameFromBookingWidget)
+        ) {
+          fbq("track", "Schedule");
+        }
+      } catch {
+        // Direct visits and unavailable session storage should not count a schedule.
+      }
     </script>
     <section
       class="w-full h-auto flex flex-col justify-center items-center bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0 pt-[64px] md:pt-[132px]"
     >
       <div
-        class="w-full px-4 lg:px-0 flex flex-col justify-end md:justify-center xl:justify-center items-center gap-5 md:gap-6 text-white h-full py-[45px] border-y border-white/20"
+        class="w-full px-4 lg:px-0 flex flex-col justify-end md:justify-center xl:justify-center items-center gap-5 md:gap-6 text-white h-full py-[45px] "
       >
         <div
-          class="flex justify-center items-center gap-[9px] border border-secondary rounded-full py-[10px] md:px-[30px] w-full md:w-auto"
+          class="flex justify-center items-center gap-[9px] border border-secondary rounded-full py-[10px] px-4 md:px-[30px] w-full md:w-auto"
         >
           <div
             class="w-4 h-4 rounded-full bg-secondary flex justify-center items-center"
@@ -53,7 +73,7 @@ const content = contentEs;
             </svg>
           </div>
           <p
-            class="text-[16px] leading-[100%] tracking-[0.96px] text-white font-normal"
+            class="text-[16px] leading-[100%] tracking-[0.96px] text-white font-normal text-center"
           >
             {content.badge}
           </p>
@@ -79,7 +99,7 @@ const content = contentEs;
         </div>
       </div>
     </section>
-    <Doit />
+    {/*<Doit /> */}
     <Instrucctions />
   </main>
   <footer class="w-full flex flex-col justify-center items-center">
@@ -104,15 +124,6 @@ const content = contentEs;
       <div
         class="w-full max-w-screen lg:max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6"
       >
-        <a href="https://inkshapegroup.com/en/">
-          <img
-            src="/images/icons/inkshape.svg"
-            alt=" Logo de Inkshape Group"
-            width="208"
-            height="40"
-            class="w-27.5 lg:w-34 h-auto block dark:hidden"
-          />
-        </a>
         <p
           class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
         >
