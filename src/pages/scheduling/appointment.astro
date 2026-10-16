@@ -39,7 +39,7 @@ const calendarLockDurationSeconds = 60; // Cambiar a 60 al terminar la prueba.
       <div
         class="relative z-10 container-full flex justify-center items-center h-full py-14 md:py-20"
       >
-        <BookingWidget lockDurationSeconds={calendarLockDurationSeconds} />
+        <BookingWidget />
       </div>
     </section>
   </main>
@@ -58,8 +58,8 @@ const calendarLockDurationSeconds = 60; // Cambiar a 60 al terminar la prueba.
         Si necesitas reagendar, usa el enlace de tu correo de confirmación.
       </p>
     </div>
-
-    <div
+    {
+      /* <div
       class="bg-[#E5E5E5] w-full py-3.5 lg:py-4.5 flex justify-center items-center px-5 xl:px-0"
     >
       <div
@@ -74,6 +74,7 @@ const calendarLockDurationSeconds = 60; // Cambiar a 60 al terminar la prueba.
           Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
         </p>
       </div>
-    </div>
+    </div>*/
+    }
   </footer>
 </LayoutScheduling>

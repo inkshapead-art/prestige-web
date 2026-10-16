@@ -51,43 +51,6 @@ const {
 
 <!doctype html>
 <html lang={lang} class="overflow-x-clip">
-  <!-- Meta Pixel Code -->
-  <script is:inline>
-    !(function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(
-      window,
-      document,
-      "script",
-      "https://connect.facebook.net/en_US/fbevents.js",
-    );
-    fbq("init", "1746388196479206");
-    fbq("track", "PageView");
-  </script>
-  <noscript>
-    <img
-      height="1"
-      width="1"
-      style="display:none"
-      src="https://www.facebook.com/tr?id=1746388196479206&ev=PageView&noscript=1"
-    />
-  </noscript>
-  <!-- End Meta Pixel Code -->
   <head>
     <SEOHead
       lang={lang}
@@ -97,6 +60,43 @@ const {
       image={image}
       canonicalPath={canonicalPath}
     />
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1746388196479206");
+      fbq("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1746388196479206&ev=PageView&noscript=1"
+      />
+    </noscript>
+    <!-- End Meta Pixel Code -->
   </head>
 
   <body
@@ -123,8 +123,7 @@ const {
     <script>
       import { captureAttribution } from "../utils/attribution";
 
-      const captureSchedulingAttribution = () =>
-        captureAttribution(window);
+      const captureSchedulingAttribution = () => captureAttribution(window);
 
       document.addEventListener(
         "astro:page-load",
@@ -132,9 +131,7 @@ const {
       );
       captureSchedulingAttribution();
     </script>
-  </body>
-
-  <script is:inline>
+  </body><script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       const animationElements = document.querySelectorAll(
         ".animation-up-fast, .animation-fade-down, .animation-fade-left, .animation-fade-right",
@@ -157,6 +154,4 @@ const {
       });
     });
   </script>
-
-
 </html>

@@ -1,4 +1,4 @@
-export type FieldType = "choice" | "text" | "email" | "tel";
+export type FieldType = "choice" | "select" | "text" | "email" | "tel";
 export type StepLayout = "list" | "grid" | "form";
 
 export type EstimateOption = {
@@ -15,6 +15,8 @@ export type EstimateField = {
     | "email"
     | "phone"
     | "businessAge"
+    | "businessRegistration"
+    | "capitalPurpose"
     | "firstName"
     | "lastName"
     | "capitalNeeded"
@@ -109,8 +111,56 @@ export const estimateStepsUS: EstimateStep[] = [
 
 export const estimateStepsEs: EstimateStep[] = [
   {
-    id: "step-1",
-    title: "¿Cuándo comenzó tu negocio?", //[cite: 9]
+    id: "contact-registration",
+    title: "Completa tus datos",
+    layout: "form",
+    fields: [
+      {
+        id: "name",
+        label: "Nombre completo",
+        placeholder: "Tu nombre y apellido",
+        type: "text",
+        autocomplete: "name",
+      },
+      {
+        id: "phone",
+        label: "Teléfono / WhatsApp",
+        placeholder: "Teléfono / WhatsApp",
+        type: "tel",
+        autocomplete: "tel",
+      },
+      {
+        id: "email",
+        label: "Correo electrónico",
+        placeholder: "tu@correo.com",
+        type: "email",
+        autocomplete: "email",
+      },
+      {
+        id: "businessRegistration",
+        label: "¿Tu negocio está registrado?",
+        type: "select",
+        options: [
+          { label: "Sí, tengo una LLC", value: "Sí, tengo una LLC" },
+          {
+            label: "Sí, Corporación (S-Corp / C-Corp)",
+            value: "Sí, Corporación (S-Corp / C-Corp)",
+          },
+          {
+            label: "Sí, propietario único",
+            value: "Sí, propietario único",
+          },
+          {
+            label: "Todavía no tengo negocio",
+            value: "Todavía no tengo negocio",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "business-age",
+    title: "¿Hace cuánto opera tu negocio?",
     layout: "list",
     fields: [
       {
@@ -118,72 +168,17 @@ export const estimateStepsEs: EstimateStep[] = [
         label: "Antigüedad del negocio",
         type: "choice",
         options: [
-          {
-            label: "Actualmente no tengo un negocio",
-            value: "Actualmente no tengo un negocio",
-          }, //[cite: 9]
-          { label: "Menos de 6 meses", value: "Menos de 6 meses" }, //[cite: 9]
-          { label: "6 a 12 meses", value: "6 a 12 meses" }, //[cite: 9]
-          { label: "1 a 2 años", value: "1 a 2 años" }, //[cite: 9]
-          { label: "2 a 5 años", value: "2 a 5 años" }, //[cite: 9]
-          { label: "5 a 10 años", value: "5 a 10 años" }, //[cite: 9]
-          { label: "Más de 10 años", value: "Más de 10 años" }, //[cite: 9]
+          { label: "Menos de 6 meses", value: "Menos de 6 meses" },
+          { label: "6 a 12 meses", value: "6 a 12 meses" },
+          { label: "1 a 2 años", value: "1 a 2 años" },
+          { label: "Más de 2 años", value: "Más de 2 años" },
         ],
       },
     ],
   },
   {
-    id: "step-2",
-    title: "¿Cuál es tu nombre?", //[cite: 9]
-    layout: "form",
-    fields: [
-      {
-        id: "firstName",
-        label: "Nombre",
-        placeholder: "Nombre", //[cite: 9]
-        type: "text",
-        autocomplete: "given-name",
-      },
-      {
-        id: "lastName",
-        label: "Apellido",
-        placeholder: "Apellido", //[cite: 9]
-        type: "text",
-        autocomplete: "family-name",
-      },
-    ],
-  },
-  {
-    id: "step-3",
-    title: "¿Cuál es tu correo electrónico?", //[cite: 9]
-    layout: "form",
-    fields: [
-      {
-        id: "email",
-        label: "Correo electrónico",
-        placeholder: "nombre@correo.com", //[cite: 9]
-        type: "email",
-        autocomplete: "email",
-      },
-    ],
-  },
-  {
-    id: "step-4",
-    title: "¿Cuál es el mejor número para comunicarnos contigo?", //[cite: 11]
-    layout: "form",
-    fields: [
-      {
-        id: "phone",
-        label: "Número telefónico",
-        placeholder: "US 000 000 0000", //[cite: 11]
-        type: "tel",
-        autocomplete: "tel",
-      },
-    ],
-  },
-  {
-    id: "step-5",
-    title: "¿Cuánto capital necesitas?", //[cite: 11]
+    id: "capital-needed",
+    title: "¿Cuánto capital necesitas?",
     layout: "list",
     fields: [
       {
@@ -191,94 +186,17 @@ export const estimateStepsEs: EstimateStep[] = [
         label: "Capital necesario",
         type: "choice",
         options: [
-          { label: "Aún no lo sé", value: "Aún no lo sé" }, //[cite: 11]
-          { label: "$10,000 a $24,999", value: "$10,000 a $24,999" }, //[cite: 11]
-          { label: "$25,000 a $49,999", value: "$25,000 a $49,999" }, //[cite: 11]
-          { label: "$50,000 a $99,999", value: "$50,000 a $99,999" }, //[cite: 11]
-          { label: "$100,000 a $249,999", value: "$100,000 a $249,999" }, //[cite: 11]
-          { label: "$250,000 a $499,999", value: "$250,000 a $499,999" }, //[cite: 11]
-          { label: "$500,000 o más", value: "$500,000 o más" }, //[cite: 11]
+          { label: "Menos de $50,000", value: "Menos de $50,000" },
+          { label: "$50,000 - $100,000", value: "$50,000 - $100,000" },
+          { label: "$100,000 - $150,000", value: "$100,000 - $150,000" },
+          { label: "Más de $150,000", value: "Más de $150,000" },
         ],
       },
     ],
   },
   {
-    id: "step-6",
-    title: "¿Cuáles son tus ingresos mensuales?", //[cite: 11]
-    description:
-      "Si no estás seguro del número exacto, tu mejor estimación está bien.", //[cite: 11]
-    layout: "form",
-    fields: [
-      {
-        id: "monthlyRevenue",
-        label: "Ingresos mensuales",
-        placeholder: "$0.00", //[cite: 11]
-        type: "text",
-      },
-    ],
-  },
-  {
-    id: "step-7",
-    title: "¿Operas desde una cuenta bancaria comercial?", //[cite: 13]
-    layout: "list",
-    fields: [
-      {
-        id: "businessBankAccount",
-        label: "Cuenta bancaria comercial",
-        type: "choice",
-        options: [
-          { label: "Sí", value: "Sí" }, //[cite: 13]
-          { label: "No", value: "No" }, //[cite: 13]
-        ],
-      },
-    ],
-  },
-  {
-    id: "step-8",
-    title: "¿A qué se dedica tu negocio?", //[cite: 13]
-    layout: "list",
-    fields: [
-      {
-        id: "businessIndustry",
-        label: "Industria del negocio",
-        type: "choice",
-        options: [
-          { label: "Construcción", value: "Construcción" }, //[cite: 13]
-          {
-            label: "Restaurante o alimentos",
-            value: "Restaurante o alimentos",
-          }, //[cite: 13]
-          {
-            label: "Flipping o bienes raíces",
-            value: "Flipping o bienes raíces",
-          }, //[cite: 13]
-          { label: "Retail o e-commerce", value: "Retail o e-commerce" }, //[cite: 13]
-          {
-            label: "Servicios profesionales",
-            value: "Servicios profesionales",
-          }, //[cite: 13]
-          { label: "Salud o bienestar", value: "Salud o bienestar" }, //[cite: 13]
-          { label: "Otro", value: "Otro" }, //[cite: 13]
-        ],
-      },
-    ],
-  },
-  {
-    id: "step-9",
-    title: "¿Cuál es el nombre de tu negocio?", //[cite: 13]
-    layout: "form",
-    fields: [
-      {
-        id: "businessName",
-        label: "Nombre de tu negocio",
-        placeholder: "Nombre de tu negocio", //[cite: 13]
-        type: "text",
-      },
-    ],
-  },
-  {
-    id: "step-10",
-    title: "¿Cuál es tu puntaje de crédito personal?", //[cite: 15]
+    id: "credit-score",
+    title: "¿Cómo está tu crédito personal?",
     layout: "list",
     fields: [
       {
@@ -286,18 +204,39 @@ export const estimateStepsEs: EstimateStep[] = [
         label: "Puntaje de crédito personal",
         type: "choice",
         options: [
-          { label: "Menos de 580", value: "Menos de 580" }, //[cite: 15]
-          { label: "580 a 649", value: "580 a 649" }, //[cite: 15]
-          { label: "650 a 699", value: "650 a 699" }, //[cite: 15]
-          { label: "700 a 749", value: "700 a 749" }, //[cite: 15]
-          { label: "750 o más", value: "750 o más" }, //[cite: 15]
-          { label: "No estoy seguro", value: "No estoy seguro" }, //[cite: 15]
+          { label: "Excelente (720+)", value: "Excelente (720+)" },
+          { label: "Bueno (680-719)", value: "Bueno (680-719)" },
+          { label: "Regular (620-679)", value: "Regular (620-679)" },
+          { label: "Por debajo de 620", value: "Por debajo de 620" },
+          { label: "No lo sé", value: "No lo sé" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "capital-purpose",
+    title: "¿Para qué usarías el capital?",
+    layout: "list",
+    fields: [
+      {
+        id: "capitalPurpose",
+        label: "Uso del capital",
+        type: "choice",
+        options: [
+          { label: "Expansión", value: "Expansión" },
+          { label: "Inventario o equipos", value: "Inventario o equipos" },
+          { label: "Marketing", value: "Marketing" },
+          {
+            label: "Flujo de efectivo / nómina",
+            value: "Flujo de efectivo / nómina",
+          },
+          { label: "Refinanciar deudas", value: "Refinanciar deudas" },
+          { label: "Otro", value: "Otro" },
         ],
       },
     ],
   },
 ];
-
 export const estimateSteps: EstimateStep[] = estimateStepsEs;
 
 export type EstimateAnswers = Partial<

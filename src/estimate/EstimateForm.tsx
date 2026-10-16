@@ -12,7 +12,8 @@ import {
   type EstimateField,
 } from "./config";
 
-const DRAFT_KEY = "prestige-questions-draft";
+const DRAFT_KEY = "prestige-questions-draft-v2";
+const LEGACY_DRAFT_KEY = "prestige-questions-draft";
 
 // País que se muestra seleccionado por defecto en el selector de banderas.
 // El usuario puede cambiarlo libremente antes de escribir su número.
@@ -38,6 +39,7 @@ const contentUS = {
 
 const contentEs = {
   required: "Este campo es obligatorio.",
+  invalidName: "Ingresa tu nombre y apellido.",
   invalidEmail: "Ingresa un correo electrónico válido.",
   invalidPhone: "Ingresa un número de teléfono válido.",
   progressLabel: "Progreso del formulario",
@@ -45,7 +47,8 @@ const contentEs = {
     `Progreso: paso ${current} de ${total}`,
   thankYou: "Gracias",
   sending: "Enviando...",
-  submit: "Ver Calendario",
+  start: "Quiero ver si mi negocio califica",
+  submit: "Evaluar",
   next: "Siguiente",
   sendError: "Error al enviar la información. Intente nuevamente.",
   connectionError: "Error de conexión al enviar el formulario.",
@@ -69,7 +72,7 @@ function getEntryState(): {
 
   return {
     answers: { servicesType: project, area, zip },
-    step: project ? 1 : 0,
+    step: 0,
     hasEntry: params.has("project") || params.has("area") || params.has("zip"),
   };
 }
@@ -78,7 +81,43 @@ function readDraft(): { answers: EstimateAnswers; step: number } {
   if (typeof window === "undefined") return { answers: {}, step: 0 };
   try {
     const saved = window.sessionStorage.getItem(DRAFT_KEY);
-    return saved ? JSON.parse(saved) : { answers: {}, step: 0 };
+    if (saved) {
+      const parsed = JSON.parse(saved) as {
+        answers?: EstimateAnswers;
+        step?: number;
+        version?: number;
+      };
+      const step = Number.isInteger(parsed.step) ? (parsed.step ?? 0) : 0;
+
+      return {
+        answers: parsed.answers ?? {},
+        step: Math.min(Math.max(step, 0), estimateSteps.length - 1),
+      };
+    }
+
+    const legacySaved = window.sessionStorage.getItem(LEGACY_DRAFT_KEY);
+    if (!legacySaved) return { answers: {}, step: 0 };
+
+    const legacyAnswers =
+      (JSON.parse(legacySaved) as { answers?: EstimateAnswers }).answers ?? {};
+    const legacyName = [legacyAnswers.firstName, legacyAnswers.lastName]
+      .filter(Boolean)
+      .join(" ");
+    const answers: EstimateAnswers = {
+      name: legacyAnswers.name || legacyName,
+      email: legacyAnswers.email,
+      phone: legacyAnswers.phone,
+      servicesType: legacyAnswers.servicesType,
+      area: legacyAnswers.area,
+      zip: legacyAnswers.zip,
+    };
+
+    window.sessionStorage.setItem(
+      DRAFT_KEY,
+      JSON.stringify({ version: 2, answers, step: 0 }),
+    );
+    window.sessionStorage.removeItem(LEGACY_DRAFT_KEY);
+    return { answers, step: 0 };
   } catch {
     return { answers: {}, step: 0 };
   }
@@ -86,6 +125,9 @@ function readDraft(): { answers: EstimateAnswers; step: number } {
 
 function validateField(field: EstimateField, value: string | undefined) {
   if (!value?.trim()) return content.required;
+  if (field.id === "name" && value.trim().split(/\s+/).length < 2) {
+    return content.invalidName;
+  }
   if (field.type === "email" && !/^\S+@\S+\.\S+$/.test(value)) {
     return content.invalidEmail;
   }
@@ -105,7 +147,8 @@ function getCurrencyDecimalIndex(value: string, previousValue?: string) {
     .replace(/\D/g, "").length;
   const currentCommaCount = value.match(/,/g)?.length ?? 0;
   const previousCommaCount = previousValue?.match(/,/g)?.length ?? 0;
-  const commaWasAdded = !previousValue || currentCommaCount > previousCommaCount;
+  const commaWasAdded =
+    !previousValue || currentCommaCount > previousCommaCount;
 
   return commaIndex >= 0 && digitsAfterComma <= 2 && commaWasAdded
     ? commaIndex
@@ -184,8 +227,8 @@ export default function EstimateForm() {
 
   const step = estimateSteps[stepIndex];
   const isFinalStep = stepIndex === estimateSteps.length - 1;
-  const progressPercentage = ((stepIndex + 1) / estimateSteps.length) * 100;
-  const choiceField = step.fields.find((field) => field.type === "choice");
+  const progressStepTotal = estimateSteps.length - 1;
+  const progressPercentage = (stepIndex / progressStepTotal) * 100;
   const hasPhoneField = step.fields.some((field) => field.type === "tel");
 
   useEffect(() => {
@@ -211,7 +254,7 @@ export default function EstimateForm() {
 
     window.sessionStorage.setItem(
       DRAFT_KEY,
-      JSON.stringify({ answers, step: stepIndex }),
+      JSON.stringify({ version: 2, answers, step: stepIndex }),
     );
   }, [answers, stepIndex, isInitialized]);
 
@@ -232,12 +275,10 @@ export default function EstimateForm() {
     setErrors((current) => ({ ...current, [id]: undefined }));
     window.sessionStorage.setItem(
       DRAFT_KEY,
-      JSON.stringify({ answers: nextAnswers, step: nextStepIndex }),
+      JSON.stringify({ version: 2, answers: nextAnswers, step: nextStepIndex }),
     );
 
-    if (isFinalStep) {
-      void submitAnswers(nextAnswers);
-    } else {
+    if (!isFinalStep) {
       setStepIndex(nextStepIndex);
     }
   }
@@ -323,7 +364,11 @@ export default function EstimateForm() {
 
         try {
           window.sessionStorage.removeItem(DRAFT_KEY);
-          window.sessionStorage.setItem("prestige-pending-lead-transition", "1");
+          window.sessionStorage.removeItem(LEGACY_DRAFT_KEY);
+          window.sessionStorage.setItem(
+            "prestige-pending-lead-transition",
+            "1",
+          );
         } catch {
           // The form should still continue if browser storage is unavailable.
         }
@@ -357,27 +402,26 @@ export default function EstimateForm() {
       noValidate
       className="estimate-form relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-16 text-white md:px-8 md:pb-10 md:pt-30 gap-6 md:gap-8"
     >
-      <div className="container-full flex flex-col justify-center items-end">
-        <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading-[100%] text-white">
-          <span className="sr-only">{content.progressLabel}</span>
-        </div>
-        <div
-          className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
-          role="progressbar"
-          aria-label={content.progressValue(
-            stepIndex + 1,
-            estimateSteps.length,
-          )}
-          aria-valuemin={1}
-          aria-valuemax={estimateSteps.length}
-          aria-valuenow={stepIndex + 1}
-        >
+      {stepIndex > 0 && (
+        <div className="container-full flex flex-col justify-center items-end">
+          <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading-[100%] text-white">
+            <span className="sr-only">{content.progressLabel}</span>
+          </div>
           <div
-            className="h-full rounded-full bg-secondary transition-[width] duration-500 ease-out"
-            style={{ width: `${progressPercentage}%` }}
-          />
+            className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
+            role="progressbar"
+            aria-label={content.progressValue(stepIndex, progressStepTotal)}
+            aria-valuemin={1}
+            aria-valuemax={progressStepTotal}
+            aria-valuenow={stepIndex}
+          >
+            <div
+              className="h-full rounded-full bg-secondary transition-[width] duration-500 ease-out"
+              style={{ width: `${progressPercentage}%` }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="flex items-center justify-center w-full md:w-auto">
         {submitted ? (
@@ -399,50 +443,112 @@ export default function EstimateForm() {
               )}
             </header>
 
-            {choiceField ? (
-              <fieldset className="w-full md:w-[380px]">
-                <legend className="sr-only">{choiceField.label}</legend>
-                <div className="grid gap-1.5 md:gap-2 w-full md:w-auto">
-                  {choiceField.options?.map((option) => {
-                    const selected = answers[choiceField.id] === option.value;
-                    return (
-                      <button
-                        key={option.value}
-                        type="button"
-                        disabled={isSubmitting}
-                        aria-pressed={selected}
-                        onClick={() =>
-                          selectChoice(choiceField.id, option.value)
-                        }
-                        className={`w-full rounded-lg border-[1.5px] p-6 text-center text-[18px] md:text-[16px] font-normal text-white transition leading-[100%] cursor-pointer ${
-                          selected
-                            ? "border-secondary bg-black/80 shadow-[0_18px_5px_0_rgba(0, 0, 0, 0.00), 0_11px_5px_0_rgba(0, 0, 0, 0.02), 0_6px_4px_0_rgba(0, 0, 0, 0.08), 0_3px_3px_0_rgba(0, 0, 0, 0.13), 0_1px_2px_0 rgba(0, 0, 0, 0.15)]"
-                            : "border-white/20 bg-black/40 hover:border-white/60"
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    );
-                  })}
-                </div>
-                {errors[choiceField.id] && (
-                  <p
-                    role="alert"
-                    className="mt-2 text-center text-xs text-secondary"
-                  >
-                    {errors[choiceField.id]}
-                  </p>
-                )}
-              </fieldset>
-            ) : (
-              <div className="grid w-full gap-3 justify-center">
-                {step.fields.map((field) =>
-                  field.type === "tel" ? (
+            <div
+              className={`grid w-full justify-center ${stepIndex === 0 ? "gap-5" : "gap-3"}`}
+            >
+              {step.fields.map((field) => {
+                if (field.type === "choice") {
+                  return (
+                    <fieldset key={field.id} className="w-full md:w-[380px]">
+                      <legend className="sr-only">{field.label}</legend>
+                      <div className="grid gap-1.5 md:gap-2 w-full md:w-auto">
+                        {field.options?.map((option) => {
+                          const selected = answers[field.id] === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              disabled={isSubmitting}
+                              aria-pressed={selected}
+                              onClick={() =>
+                                selectChoice(field.id, option.value)
+                              }
+                              className={`w-full rounded-lg border-[1.5px] p-6 text-center text-[18px] md:text-[16px] font-normal text-white transition leading-[100%] cursor-pointer ${
+                                selected
+                                  ? "border-secondary bg-black/80 shadow-[0_18px_5px_0_rgba(0, 0, 0, 0.00), 0_11px_5px_0_rgba(0, 0, 0, 0.02), 0_6px_4px_0_rgba(0, 0, 0, 0.08), 0_3px_3px_0_rgba(0, 0, 0, 0.13), 0_1px_2px_0 rgba(0, 0, 0, 0.15)]"
+                                  : "border-white/20 bg-black/40 hover:border-white/60"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {errors[field.id] && (
+                        <p
+                          role="alert"
+                          className="mt-2 text-center text-xs text-secondary"
+                        >
+                          {errors[field.id]}
+                        </p>
+                      )}
+                    </fieldset>
+                  );
+                }
+
+                if (field.type === "select") {
+                  return (
                     <label
                       key={field.id}
-                      className="grid gap-1 w-auto md:w-[400px]"
+                      className={`grid ${stepIndex === 0 ? "gap-2" : "gap-1"} w-[calc(100vw-2rem)] md:w-[400px]`}
                     >
-                      <span className="sr-only">{field.label}</span>
+                      <span className="text-[14px] leading-[1.2] text-white">
+                        {field.label}
+                      </span>
+                      <select
+                        id={field.id}
+                        name={field.id}
+                        value={answers[field.id] ?? ""}
+                        onChange={(event) =>
+                          setAnswer(field.id, event.target.value)
+                        }
+                        aria-invalid={Boolean(errors[field.id])}
+                        aria-describedby={
+                          errors[field.id] ? `${field.id}-error` : undefined
+                        }
+                        className="w-full rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[16px] text-white outline-none focus:border-secondary font-normal leading-normal"
+                      >
+                        <option value="" disabled>
+                          Selecciona una opción
+                        </option>
+                        {field.options?.map((option) => (
+                          <option
+                            key={option.value}
+                            value={option.value}
+                            className="bg-[#0A0A0A] text-white"
+                          >
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                      {errors[field.id] && (
+                        <span
+                          id={`${field.id}-error`}
+                          role="alert"
+                          className="text-xs text-secondary"
+                        >
+                          {errors[field.id]}
+                        </span>
+                      )}
+                    </label>
+                  );
+                }
+
+                if (field.type === "tel") {
+                  return (
+                    <label
+                      key={field.id}
+                      className={`grid ${stepIndex === 0 ? "gap-3" : "gap-1"} w-[calc(100vw-2rem)] md:w-[400px]`}
+                    >
+                      <span
+                        className={
+                          stepIndex === 0
+                            ? "text-[16px] leading-[1.2] text-white"
+                            : "sr-only"
+                        }
+                      >
+                        {field.label}
+                      </span>
                       <PhoneInput
                         id={field.id}
                         name={field.id}
@@ -468,113 +574,121 @@ export default function EstimateForm() {
                         </span>
                       )}
                     </label>
-                  ) : (
-                    <label
-                      key={field.id}
-                      className="grid gap-1 w-full md:w-auto"
+                  );
+                }
+
+                return (
+                  <label
+                    key={field.id}
+                    className={`grid ${stepIndex === 0 ? "gap-3" : "gap-1"} w-full md:w-auto`}
+                  >
+                    <span
+                      className={
+                        stepIndex === 0
+                          ? "text-[16px] leading-[1.2] text-white"
+                          : "sr-only"
+                      }
                     >
-                      <span className="sr-only">{field.label}</span>
-                      <input
-                        id={field.id}
-                        name={field.id}
-                        type={
-                          field.id === "monthlyRevenue" ? "text" : field.type
+                      {field.label}
+                    </span>
+                    <input
+                      id={field.id}
+                      name={field.id}
+                      type={field.id === "monthlyRevenue" ? "text" : field.type}
+                      inputMode={
+                        field.id === "monthlyRevenue" ? "decimal" : undefined
+                      }
+                      placeholder={field.placeholder}
+                      autoComplete={field.autocomplete}
+                      value={
+                        field.id === "monthlyRevenue"
+                          ? formatUsdCurrency(answers[field.id])
+                          : (answers[field.id] ?? "")
+                      }
+                      onChange={(event) => {
+                        if (field.id !== "monthlyRevenue") {
+                          setAnswer(field.id, event.target.value);
+                          return;
                         }
-                        inputMode={
-                          field.id === "monthlyRevenue" ? "decimal" : undefined
-                        }
-                        placeholder={field.placeholder}
-                        autoComplete={field.autocomplete}
-                        value={
-                          field.id === "monthlyRevenue"
-                            ? formatUsdCurrency(answers[field.id])
-                            : answers[field.id] ?? ""
-                        }
-                        onChange={(event) => {
-                          if (field.id !== "monthlyRevenue") {
-                            setAnswer(field.id, event.target.value);
-                            return;
-                          }
 
-                          const input = event.currentTarget;
-                          const cursor =
-                            input.selectionStart ?? input.value.length;
-                          const textBeforeCursor = input.value.slice(0, cursor);
-                          const previousRevenue = answers.monthlyRevenue;
-                          const decimalIndex = getCurrencyDecimalIndex(
-                            input.value,
-                            previousRevenue,
-                          );
-                          const decimalBefore =
-                            decimalIndex >= 0 && cursor > decimalIndex;
-                          const integerPart = input.value.slice(
-                            0,
-                            decimalIndex >= 0 && decimalBefore
-                              ? decimalIndex
-                              : cursor,
-                          );
-                          const integerDigitsBefore =
-                            integerPart.replace(/\D/g, "").length;
-                          const fractionDigitsBefore =
-                            decimalBefore
-                              ? input.value
-                                  .slice(decimalIndex + 1, cursor)
-                                  .replace(/\D/g, "").length
-                              : 0;
-                          const commasBefore = Math.max(
-                            0,
-                            (textBeforeCursor.match(/,/g)?.length ?? 0) -
-                              (decimalBefore &&
-                              input.value[decimalIndex] === ","
-                                ? 1
-                                : 0),
-                          );
-                          const formatted = formatUsdCurrency(
-                            input.value,
-                            false,
-                            previousRevenue,
-                          );
+                        const input = event.currentTarget;
+                        const cursor =
+                          input.selectionStart ?? input.value.length;
+                        const textBeforeCursor = input.value.slice(0, cursor);
+                        const previousRevenue = answers.monthlyRevenue;
+                        const decimalIndex = getCurrencyDecimalIndex(
+                          input.value,
+                          previousRevenue,
+                        );
+                        const decimalBefore =
+                          decimalIndex >= 0 && cursor > decimalIndex;
+                        const integerPart = input.value.slice(
+                          0,
+                          decimalIndex >= 0 && decimalBefore
+                            ? decimalIndex
+                            : cursor,
+                        );
+                        const integerDigitsBefore = integerPart.replace(
+                          /\D/g,
+                          "",
+                        ).length;
+                        const fractionDigitsBefore = decimalBefore
+                          ? input.value
+                              .slice(decimalIndex + 1, cursor)
+                              .replace(/\D/g, "").length
+                          : 0;
+                        const commasBefore = Math.max(
+                          0,
+                          (textBeforeCursor.match(/,/g)?.length ?? 0) -
+                            (decimalBefore && input.value[decimalIndex] === ","
+                              ? 1
+                              : 0),
+                        );
+                        const formatted = formatUsdCurrency(
+                          input.value,
+                          false,
+                          previousRevenue,
+                        );
 
-                          setAnswer(field.id, formatted);
-                          requestAnimationFrame(() => {
-                            const nextCursor = getUsdCaretPosition(
-                              formatted,
-                              integerDigitsBefore,
-                              fractionDigitsBefore,
-                              commasBefore,
-                              decimalBefore,
-                            );
-                            input.setSelectionRange(nextCursor, nextCursor);
-                          });
-                        }}
-                        onBlur={(event) => {
-                          if (field.id === "monthlyRevenue") {
-                            setAnswer(
-                              field.id,
-                              formatUsdCurrency(event.currentTarget.value, true),
-                            );
-                          }
-                        }}
-                        aria-invalid={Boolean(errors[field.id])}
-                        aria-describedby={
-                          errors[field.id] ? `${field.id}-error` : undefined
+                        setAnswer(field.id, formatted);
+                        requestAnimationFrame(() => {
+                          const nextCursor = getUsdCaretPosition(
+                            formatted,
+                            integerDigitsBefore,
+                            fractionDigitsBefore,
+                            commasBefore,
+                            decimalBefore,
+                          );
+                          input.setSelectionRange(nextCursor, nextCursor);
+                        });
+                      }}
+                      onBlur={(event) => {
+                        if (field.id === "monthlyRevenue") {
+                          setAnswer(
+                            field.id,
+                            formatUsdCurrency(event.currentTarget.value, true),
+                          );
                         }
-                        className="w-[calc(100vw-2rem)] md:w-[400px] rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[16px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-normal"
-                      />
-                      {errors[field.id] && (
-                        <span
-                          id={`${field.id}-error`}
-                          role="alert"
-                          className="text-xs text-secondary"
-                        >
-                          {errors[field.id]}
-                        </span>
-                      )}
-                    </label>
-                  ),
-                )}
-              </div>
-            )}
+                      }}
+                      aria-invalid={Boolean(errors[field.id])}
+                      aria-describedby={
+                        errors[field.id] ? `${field.id}-error` : undefined
+                      }
+                      className="w-[calc(100vw-2rem)] md:w-[400px] rounded-lg border border-[#E3E3E3] bg-black/50 px-4 py-4 text-[16px] text-white outline-none placeholder:text-white/45 focus:border-secondary font-normal leading-normal"
+                    />
+                    {errors[field.id] && (
+                      <span
+                        id={`${field.id}-error`}
+                        role="alert"
+                        className="text-xs text-secondary"
+                      >
+                        {errors[field.id]}
+                      </span>
+                    )}
+                  </label>
+                );
+              })}
+            </div>
 
             {submitError && (
               <p
@@ -585,16 +699,17 @@ export default function EstimateForm() {
               </p>
             )}
 
-            <button
+            {(stepIndex === 0 || isFinalStep) && (
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="py-[18px] px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                className="py-[18px] w-full md:w-auto md:px-12 bg-secondary rounded-[14px] flex justify-center items-center gap-2 text-[16px] leading-[100%] tracking-[1.44px] uppercase text-[#0A0A0A] font-medium transition-all duration-300 ease-in-out hover:translate-y-[-3px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSubmitting
                   ? content.sending
-                  : isFinalStep
-                    ? content.submit
-                    : content.next}
+                  : stepIndex === 0
+                    ? content.start
+                    : content.submit}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -614,16 +729,18 @@ export default function EstimateForm() {
                     stroke-linejoin="round"
                   />
                 </svg>
-            </button>
+              </button>
+            )}
 
             {hasPhoneField && (
               <p
                 role="note"
                 className="w-full max-w-[680px] rounded-md border border-white/25 bg-black/30 px-3 py-2  text-xs leading-[1.35] text-white/75 md:text-sm text-center"
               >
-                Al hacer clic en «Siguiente» das tu consentimiento por escrito
-                para que Prestige Growth Partners te contacte por llamada,
-                texto, WhatsApp y correo. Responde STOP para darte de baja.
+                Al hacer clic en «Quiero ver si mi negocio califica» das tu
+                consentimiento por escrito para que Prestige Growth Partners te
+                contacte por llamada, texto, WhatsApp y correo. Responde STOP
+                para darte de baja.
               </p>
             )}
           </article>

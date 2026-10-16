@@ -59,11 +59,13 @@ $answerFields = [
     'area',
     'zip',
     'name',
+    'businessRegistration',
     'businessAge',
     'businessBankAccount',
     'businessIndustry',
     'businessName',
     'capitalNeeded',
+    'capitalPurpose',
     'creditScore',
     'email',
     'firstName',
@@ -74,8 +76,31 @@ $answerFields = [
 
 $payload = [];
 foreach ($answerFields as $field) {
-    $payload[$field] = clean($data[$field] ?? '');
+    if (array_key_exists($field, $data)) {
+        $payload[$field] = clean($data[$field]);
+    }
 }
+
+// Conserva el nombre completo y deriva nombre y apellido para los campos del CRM.
+$fullName = clean($data['name'] ?? '');
+$firstName = clean($data['firstName'] ?? '');
+$lastName = clean($data['lastName'] ?? '');
+
+if ($fullName === '') {
+    $fullName = trim($firstName . ' ' . $lastName);
+}
+
+$nameParts = preg_split('/\s+/', $fullName, 2);
+if ($firstName === '') {
+    $firstName = $nameParts[0] ?? '';
+}
+if ($lastName === '') {
+    $lastName = $nameParts[1] ?? '';
+}
+
+$payload['name'] = $fullName;
+$payload['firstName'] = $firstName;
+$payload['lastName'] = $lastName;
 
 $utmSource = clean($data['utm_source'] ?? '');
 $utmMedium = clean($data['utm_medium'] ?? '');
@@ -98,22 +123,25 @@ $payload += [
 ];
 
 // ---- Validación mínima en servidor (no confíes solo en la del cliente) ----
-if (
-    $payload['businessAge'] === '' ||
-    $payload['businessBankAccount'] === '' ||
-    $payload['businessIndustry'] === '' ||
-    $payload['businessName'] === '' ||
-    $payload['capitalNeeded'] === '' ||
-    $payload['creditScore'] === '' ||
-    $payload['email'] === '' ||
-    $payload['firstName'] === '' ||
-    $payload['lastName'] === '' ||
-    $payload['monthlyRevenue'] === '' ||
-    $payload['phone'] === ''
-) {
-    http_response_code(422);
-    echo json_encode(['error' => 'Faltan campos requeridos']);
-    exit;
+$requiredFields = [
+    'businessRegistration',
+    'businessAge',
+    'capitalNeeded',
+    'capitalPurpose',
+    'creditScore',
+    'email',
+    'name',
+    'firstName',
+    'lastName',
+    'phone',
+];
+
+foreach ($requiredFields as $field) {
+    if (($payload[$field] ?? '') === '') {
+        http_response_code(422);
+        echo json_encode(['error' => 'Faltan campos requeridos']);
+        exit;
+    }
 }
 
 if (!filter_var($payload['email'], FILTER_VALIDATE_EMAIL)) {
