@@ -26,9 +26,13 @@ const content = contentEs;
   <main class="w-full flex flex-col justify-center items-center relative z-0">
     <script is:inline>
       try {
-        const hasPendingCalendarTransition =
-          window.sessionStorage.getItem("prestige-pending-schedule-transition") === "1";
-        window.sessionStorage.removeItem("prestige-pending-schedule-transition");
+        const hasPendingScheduleTransition =
+          window.sessionStorage.getItem(
+            "prestige-pending-schedule-transition",
+          ) === "1";
+        window.sessionStorage.removeItem(
+          "prestige-pending-schedule-transition",
+        );
 
         const referrer = document.referrer ? new URL(document.referrer) : null;
         const cameFromCalendar =
@@ -36,10 +40,13 @@ const content = contentEs;
           referrer.pathname.replace(/\/$/, "") === "/scheduling/calendar";
         const cameFromBookingWidget =
           referrer?.origin === "https://link.inkshapecrm.com";
+        const cameFromEvaluate =
+          referrer?.origin === window.location.origin &&
+          referrer.pathname.replace(/\/$/, "") === "/scheduling/evaluate";
 
         if (
-          hasPendingCalendarTransition &&
-          (cameFromCalendar || cameFromBookingWidget)
+          hasPendingScheduleTransition &&
+          (cameFromCalendar || cameFromEvaluate || cameFromBookingWidget)
         ) {
           fbq("track", "Schedule");
         }
@@ -51,7 +58,7 @@ const content = contentEs;
       class="w-full h-auto flex flex-col justify-center items-center bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0 pt-[64px] md:pt-[132px]"
     >
       <div
-        class="w-full px-4 lg:px-0 flex flex-col justify-end md:justify-center xl:justify-center items-center gap-5 md:gap-6 text-white h-full py-[45px] "
+        class="w-full px-4 lg:px-0 flex flex-col justify-end md:justify-center xl:justify-center items-center gap-5 md:gap-6 text-white h-full py-[45px]"
       >
         <div
           class="flex justify-center items-center gap-[9px] border border-secondary rounded-full py-[10px] px-4 md:px-[30px] w-full md:w-auto"

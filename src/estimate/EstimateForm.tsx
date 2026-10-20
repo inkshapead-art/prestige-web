@@ -215,7 +215,11 @@ function getUsdCaretPosition(
   return formatted.length;
 }
 
-export default function EstimateForm() {
+export default function EstimateForm({
+  fullScreen = true,
+}: {
+  fullScreen?: boolean;
+}) {
   const [answers, setAnswers] = useState<EstimateAnswers>({});
   const [stepIndex, setStepIndex] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -227,9 +231,12 @@ export default function EstimateForm() {
 
   const step = estimateSteps[stepIndex];
   const isFinalStep = stepIndex === estimateSteps.length - 1;
-  const progressStepTotal = estimateSteps.length - 1;
-  const progressPercentage = (stepIndex / progressStepTotal) * 100;
-  const hasPhoneField = step.fields.some((field) => field.type === "tel");
+  const isChoiceOnlyStep =
+    step.fields.length > 0 &&
+    step.fields.every((field) => field.type === "choice");
+  const progressStepTotal = estimateSteps.length;
+  const currentProgressStep = stepIndex + 1;
+  const progressPercentage = (currentProgressStep / progressStepTotal) * 100;
 
   useEffect(() => {
     const entry = getEntryState();
@@ -278,7 +285,14 @@ export default function EstimateForm() {
       JSON.stringify({ version: 2, answers: nextAnswers, step: nextStepIndex }),
     );
 
-    if (!isFinalStep) {
+    const allChoiceFieldsAnswered = step.fields.every(
+      (field) => Boolean(nextAnswers[field.id]),
+    );
+    if (!isChoiceOnlyStep || !allChoiceFieldsAnswered) return;
+
+    if (isFinalStep) {
+      void submitAnswers(nextAnswers);
+    } else {
       setStepIndex(nextStepIndex);
     }
   }
@@ -400,28 +414,29 @@ export default function EstimateForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="estimate-form relative z-[3] flex min-h-screen w-full flex-col items-center px-5 pb-8 pt-16 text-white md:px-8 md:pb-10 md:pt-30 gap-6 md:gap-8"
+      className={`estimate-form relative z-[3] flex w-full flex-col items-center pb-8 pt-16 text-white md:pb-10 md:pt-30 gap-6 md:gap-8 ${fullScreen ? "min-h-screen px-5 md:px-8" : "px-0"}`}
     >
-      {stepIndex > 0 && (
-        <div className="container-full flex flex-col justify-center items-end">
-          <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading-[100%] text-white">
-            <span className="sr-only">{content.progressLabel}</span>
-          </div>
-          <div
-            className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
-            role="progressbar"
-            aria-label={content.progressValue(stepIndex, progressStepTotal)}
-            aria-valuemin={1}
-            aria-valuemax={progressStepTotal}
-            aria-valuenow={stepIndex}
-          >
-            <div
-              className="h-full rounded-full bg-secondary transition-[width] duration-500 ease-out"
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
+      <div className="container-full flex flex-col justify-center items-end">
+        <div className="mb-2.25 flex items-center justify-start text-[16px] font-normal leading-[100%] text-white">
+          <span className="sr-only">{content.progressLabel}</span>
         </div>
-      )}
+        <div
+          className="h-[9px] w-full overflow-hidden rounded-full bg-white/10"
+          role="progressbar"
+          aria-label={content.progressValue(
+            currentProgressStep,
+            progressStepTotal,
+          )}
+          aria-valuemin={1}
+          aria-valuemax={progressStepTotal}
+          aria-valuenow={currentProgressStep}
+        >
+          <div
+            className="h-full rounded-full bg-secondary transition-[width] duration-500 ease-out"
+            style={{ width: `${progressPercentage}%` }}
+          />
+        </div>
+      </div>
 
       <div className="flex items-center justify-center w-full md:w-auto">
         {submitted ? (
@@ -699,7 +714,7 @@ export default function EstimateForm() {
               </p>
             )}
 
-            {(stepIndex === 0 || isFinalStep) && (
+            {(!isChoiceOnlyStep || isFinalStep) && (
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -707,9 +722,9 @@ export default function EstimateForm() {
               >
                 {isSubmitting
                   ? content.sending
-                  : stepIndex === 0
-                    ? content.start
-                    : content.submit}
+                  : isFinalStep
+                    ? content.submit
+                    : content.next}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -732,17 +747,6 @@ export default function EstimateForm() {
               </button>
             )}
 
-            {hasPhoneField && (
-              <p
-                role="note"
-                className="w-full max-w-[680px] rounded-md border border-white/25 bg-black/30 px-3 py-2  text-xs leading-[1.35] text-white/75 md:text-sm text-center"
-              >
-                Al hacer clic en «Quiero ver si mi negocio califica» das tu
-                consentimiento por escrito para que Prestige Growth Partners te
-                contacte por llamada, texto, WhatsApp y correo. Responde STOP
-                para darte de baja.
-              </p>
-            )}
           </article>
         )}
       </div>

@@ -1,0 +1,76 @@
+---
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+import Hero from "../../sections/Schedulingv2/Hero.astro";
+import EstimateForm from "../../estimate/EstimateForm";
+
+const contentUS = {
+  badge: "Your call is confirmed — check your email",
+  title:
+    'Before we talk, <br /> <span class="text-secondary font-georgia">you need to see this.</span>',
+  subtitle: "Directly impacts your business. 8 minutes.",
+};
+
+const contentEs = {
+  badge: "Tu llamada está confirmada. Revisa tu email.",
+  title:
+    'Antes de que hablemos, <br /> <span class="text-secondary font-title-libre">necesitas ver esto. </span>',
+  subtitle: "Afecta directamente a tu negocio. 8 minutos.",
+};
+
+const content = contentEs;
+const calendarLockDurationSeconds = 60; // Cambiar a 60 al terminar la prueba.
+---
+
+<LayoutScheduling>
+  <main class="w-full flex flex-col justify-center items-center relative z-0">
+    <div
+      class="w-full flex flex-col justify-center items-center bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0"
+    >
+      <Hero changeButton="4" />
+    </div>
+    <section
+      class="w-full flex justify-center items-center bg-[#000700]"
+      id="form"
+    >
+      <div
+        class="relative z-10 container-full flex justify-center items-center h-full"
+      >
+        <EstimateForm client:load fullScreen={false} />
+      </div>
+    </section>
+  </main>
+  <footer class="w-full flex flex-col justify-center items-center">
+    <div
+      class="flex flex-col justify-center items-center w-full bg-[#000700] py-14 md:py-20 px-4 md:px-0 gap-[23px]"
+    >
+      <p
+        class="text-[24px] md:text-[36px] lg:text-[41px] font-bold leading-[140%] md:leading-[138%] text-white font-title-libre text-center"
+      >
+        Nos vemos en tu llamada.
+      </p>
+      <p
+        class="text-[16px] lg:text-[19px] font-normal leading-[150%] text-center text-white"
+      >
+        Si necesitas reagendar, usa el enlace de tu correo de confirmación.
+      </p>
+    </div>
+    {
+      /* <div
+      class="bg-[#E5E5E5] w-full py-3.5 lg:py-4.5 flex justify-center items-center px-5 xl:px-0"
+    >
+      <div
+        class="w-full max-w-screen lg:max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6"
+      >
+        <p
+          class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
+        >
+          Copyright © 2026 by <a href="https://inkshapegroup.com"
+            >Inkshape Group</a
+          > | Privacy | <a href="/">Prestige Growth Partners </a> | Florida, USA |
+          Call Now: <a href={phoneNumberLink}>{phoneNumber}</a>
+        </p>
+      </div>
+    </div>*/
+    }
+  </footer>
+</LayoutScheduling>

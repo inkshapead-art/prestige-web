@@ -1,5 +1,6 @@
 ---
 import BookingWidget from "../../components/BookingWidget.astro";
+import FormContact from "../../components/FormContact.astro";
 import VTurbPlayer from "../../components/VTurbPlayer.astro";
 import { phoneNumber, phoneNumberLink } from "../../constants/info";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
@@ -22,20 +23,47 @@ const contentEs = {
 };
 
 const content = contentEs;
-const calendarLockDurationSeconds = 60; // Cambiar a 60 al terminar la prueba.
 ---
 
 <LayoutScheduling>
   <main class="w-full flex flex-col justify-center items-center relative z-0">
+    <script is:inline>
+      try {
+        window.sessionStorage.setItem(
+          "prestige-pending-schedule-transition",
+          "1",
+        );
+      } catch {
+        // Keep the evaluation page working if browser storage is unavailable.
+      }
+    </script>
     <div
       class="w-full flex flex-col justify-center items-center bg-[#000700] bg-gradient-to-b from-[#002D15] to-[#000800]/0"
     >
-      <Hero changeButton={true} />
+      <Hero changeButton="3" />
     </div>
-    <section class="w-full flex justify-center items-center bg-[#000700]">
+    <section
+      class="w-full flex justify-center items-center bg-[#000700]"
+      id="form"
+    >
       <div
-        class="relative z-10 container-full flex justify-center items-center h-full py-14 md:py-20"
+        class="relative z-10 container-full flex flex-col justify-center items-center h-full py-10 md:py-0 gap-10 md:gap-0"
       >
+        <div class="flex flex-col justify-center items-center gap-6">
+          <h2
+            class="text-[16px] lg:text-[24px] font-semibold leading-[150%] text-center text-white my-0 md:my-4"
+          >
+            <span class="text-secondary underline">PASO 2:</span> Agenda tu llamada
+            de calidad
+          </h2>
+          <p class="text-white text-[14px] md:text-[16px] font-regular">
+            Si no encuentras espacio en el calendario haz <a
+              href="https://wa.me/17863966071"
+              class="hover:text-secondary">click aqui</a
+            >
+          </p>
+        </div>
+        <FormContact />
       </div>
     </section>
   </main>
