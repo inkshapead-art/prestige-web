@@ -170,11 +170,13 @@ import BookingWidget from "../../components/BookingWidget.astro";
       window.sessionStorage.removeItem("prestige-pending-lead-transition");
 
       const referrer = document.referrer ? new URL(document.referrer) : null;
-      const cameFromQuestions =
+      const cameFromEstimateForm =
         referrer?.origin === window.location.origin &&
-        referrer.pathname.replace(/\/$/, "") === "/scheduling/questions";
+        ["/scheduling/questions", "/scheduling/questionnaire"].includes(
+          referrer.pathname.replace(/\/$/, ""),
+        );
 
-      if (hasPendingLeadTransition && cameFromQuestions) {
+      if (hasPendingLeadTransition && cameFromEstimateForm) {
         fbq("track", "Lead");
 
         const toast = document.getElementById("lead-received-toast");
