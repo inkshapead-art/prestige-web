@@ -37,11 +37,13 @@ const differentFunnel = changeButton === "3" ? true : false;
 const content = differentFunnel ? contentEs2 : contentEs;
 const changeButtonValue = String(changeButton);
 const buttonHref =
-  changeButtonValue === "2"
-    ? "#calendar"
-    : changeButtonValue === "3" || changeButtonValue === "4"
-      ? "#form"
-      : "/scheduling/questions";
+  changeButtonValue === "4"
+    ? "/scheduling/calendar"
+    : changeButtonValue === "2"
+      ? "#calendar"
+      : changeButtonValue === "3" || changeButtonValue === "4"
+        ? "#form"
+        : "/scheduling/questions";
 ---
 
 <section

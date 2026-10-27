@@ -172,9 +172,11 @@ import BookingWidget from "../../components/BookingWidget.astro";
       const referrer = document.referrer ? new URL(document.referrer) : null;
       const cameFromEstimateForm =
         referrer?.origin === window.location.origin &&
-        ["/scheduling/questions", "/scheduling/questionnaire"].includes(
-          referrer.pathname.replace(/\/$/, ""),
-        );
+        [
+          "/scheduling/questions",
+          "/scheduling/questionnaire",
+          "/scheduling/banner",
+        ].includes(referrer.pathname.replace(/\/$/, ""));
 
       if (hasPendingLeadTransition && cameFromEstimateForm) {
         fbq("track", "Lead");
